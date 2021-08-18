@@ -3,7 +3,7 @@
 //  * Date: 2021-04-26 22:50:56
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2021-04-26 22:52:20
+//  * LastEditTime: 2021-08-18 21:50:39
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -27,6 +27,7 @@ void socketTest(unsigned short usPort)
 	bind(s, (LPSOCKADDR)&addr, sizeof(addr));
 	if (WSAGetLastError() == WSAEADDRINUSE)
 	{
+		closesocket(s);
 		std::cout << usPort << ":\tUsed" << std::endl;
 	}
 	else

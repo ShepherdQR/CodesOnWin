@@ -1,3 +1,11 @@
+/* ===========
+//  * Author: Shepherd Qirong
+//  * Date: 2021-01-10 10:59:00
+//  * Github: https://github.com/ShepherdQR
+//  * LastEditors: Shepherd Qirong
+//  * LastEditTime: 2021-08-18 23:01:58
+//  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
+*/
 #pragma once
 
 #include<iostream>
@@ -16,15 +24,11 @@ public:
 
 	T& data(){return _data;}
 
-
-
 private:
 	T _data;
 	BinaryTreeNode<T> *_pChildL;
 	BinaryTreeNode<T> *_pChildR;
 };
-
-
 
 template<class T>
 class MyBinaryTree {
@@ -40,8 +44,6 @@ public:
 			_pStack = NULL;
 		}
 	}
-
-
 
 	BinaryTreeNode<T>* ChildLeft(BinaryTreeNode<T>* &iNoodCurrent){
 		return (iNoodCurrent!=NULL) ? (iNoodCurrent->childLeft()) : NULL;
@@ -73,19 +75,10 @@ public:
 
 private:
 
-	
-
-
 	BinaryTreeNode<T> *_pRoot;
 
 	int _top;
 	T* _pStack;
 
-
 	BinaryTreeNode<T>* createNode();
-
-
-
-
-
 };

@@ -1,6 +1,12 @@
-
+/* ===========
+//  * Author: Shepherd Qirong
+//  * Date: 2021-01-10 10:59:00
+//  * Github: https://github.com/ShepherdQR
+//  * LastEditors: Shepherd Qirong
+//  * LastEditTime: 2021-08-18 23:01:42
+//  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
+*/
 #include"ClassMyBinaryTree.h"
-
 
 template class MyBinaryTree<char>;
 template class BinaryTreeNode<char>;
@@ -12,16 +18,12 @@ BinaryTreeNode<T>::BinaryTreeNode():_pChildL(NULL), _pChildR(NULL){
 //template BinaryTreeNode<char>::BinaryTreeNode();
 
 
-
 // BinaryTreeNode
 template<class T>
 BinaryTreeNode<T>::BinaryTreeNode(T iData,
 	BinaryTreeNode<T> *iChildL,
 	BinaryTreeNode<T> *iChildR): _data(iData),_pChildL(iChildL), _pChildR(iChildR) {
 }
-
-
-
 
 
 template<class T>
@@ -203,4 +205,3 @@ void MyBinaryTree<T>::ExchangeLR(BinaryTreeNode<T>* &ipNood){
 	ExchangeLR(ipNood->childLeft());
 	ExchangeLR(ipNood->childRight());
 }
-

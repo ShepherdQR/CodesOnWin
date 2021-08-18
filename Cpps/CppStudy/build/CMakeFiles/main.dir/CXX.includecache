@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/ClassCollections/StudyCollection_01.hpp
+numeric
+-
+vector
+-
+ctime
+-
+thread
+-
+
+E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/ClassCollections/TestPortAvailable.hpp
+iostream
+-
+WinSock2.h
+-
+
+E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/MainCppStudy.cpp
+iostream
+-
+./ClassCollections/StudyCollection_01.hpp
+E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/ClassCollections/StudyCollection_01.hpp
+./ClassCollections/TestPortAvailable.hpp
+E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/ClassCollections/TestPortAvailable.hpp
+vector
+-
+cstring
+-
+stdio.h
+-
+cmath
+-
+

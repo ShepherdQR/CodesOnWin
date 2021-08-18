@@ -3,19 +3,17 @@
 //  * Date: 2021-01-10 10:59:00
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2021-01-10 21:07:32
+//  * LastEditTime: 2021-08-18 23:02:58
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
-
-
 #include <iostream>
-#include"./ClassCollections/ClassMyBinaryTree.h"
+#include "ClassMyBinaryTree.h"
 
 #include <cstring>
 #include <stdio.h>
 
 using namespace std;
-int main() {
+int testFuncClassMyBinaryTree() {
 
 	/*
 	 *					A
@@ -76,6 +74,6 @@ int main() {
 	}
 
     cout << "\nProgram ends." << endl;
-	//system("pause");
+
 	return 0;
 }
