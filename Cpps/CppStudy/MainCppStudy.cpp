@@ -3,12 +3,13 @@
 //  * Date: 2021-01-10 10:59:00
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2021-08-18 23:08:27
+//  * LastEditTime: 2021-08-24 23:31:57
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
 #include <iostream>
 #include"./ClassCollections/StudyCollection_01.hpp"
+#include"./ClassCollections/StudyCollection_STL_01.hpp"
 
 
 #include <vector>
@@ -29,6 +30,10 @@ int main() {
 	// std::cout <<__cplusplus <<std::endl;
 
 
+
+stlSort20210824();
+	//stlIO20210824();
+	//stl20210824();
 
 
 

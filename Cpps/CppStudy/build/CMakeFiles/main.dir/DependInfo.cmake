@@ -5,6 +5,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/ClassCollections/ClassMyBinaryTree.cpp" "E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/build/CMakeFiles/main.dir/ClassCollections/ClassMyBinaryTree.cpp.obj"
+  "E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/ClassCollections/ClassMyComplex.cpp" "E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/build/CMakeFiles/main.dir/ClassCollections/ClassMyComplex.cpp.obj"
+  "E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/ClassCollections/ClassMyString.cpp" "E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/build/CMakeFiles/main.dir/ClassCollections/ClassMyString.cpp.obj"
   "E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/MainCppStudy.cpp" "E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/build/CMakeFiles/main.dir/MainCppStudy.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

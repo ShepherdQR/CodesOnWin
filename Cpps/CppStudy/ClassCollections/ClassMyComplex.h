@@ -3,7 +3,7 @@
 //  * Date: 2021-08-20 21:33:02
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2021-08-23 22:11:41
+//  * LastEditTime: 2021-08-24 23:11:35
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 #pragma once
@@ -26,9 +26,14 @@ public:
     ClassMyComplex operator +(const ClassMyComplex& other);
     ClassMyComplex operator -(const ClassMyComplex& other);
 
-    friend ClassMyComplex operator +(const T& iReal, const ClassMyComplex& other);
-    friend ClassMyComplex operator -(const T& iReal, const ClassMyComplex& other);
-    friend std::ostream& operator <<(std::ostream& out, const ClassMyComplex& other);
+    template<class U>
+    friend ClassMyComplex<U> operator +(const U & iReal, const ClassMyComplex<U> & other);
+
+    template<class U>
+    friend ClassMyComplex<U> operator -(const U & iReal, const ClassMyComplex<U> & other);
+
+    template<class U>
+    friend std::ostream& operator <<(std::ostream& out, const ClassMyComplex<U>& other);
 
 
     ClassMyComplex& operator ++();
@@ -38,7 +43,7 @@ public:
     相同class的各个objects互为friends
     */
     int func1(const ClassMyComplex& iParm)
-    {return iparm._real + iparm._imag;}
+    {return iParm._real + iParm._image;}
 
     T real() const { return _real;}
     T image() const;
@@ -48,7 +53,8 @@ private:
     T _image;
 
     // The first parm will be changed, while the second one will not.
-    friend ClassMyComplex& __doapl (ClassMyComplex*, const ClassMyComplex&);//do assignment plus
+    template<class U>
+    friend ClassMyComplex<U>& __doapl (ClassMyComplex<U>*, const ClassMyComplex<U>&);//do assignment plus
 
 };
 
@@ -58,81 +64,87 @@ when we use like this:
 const A a; a.get();
 this makes error.
 */
-inline T ClassMyComplex::image() const { return _image;}
+template<class T>
+inline T ClassMyComplex<T>::image() const { return _image;}
 
-inline ClassMyComplex& 
-__doapl (ClassMyComplex* ths, const ClassMyComplex& r)
+template<class U>
+inline ClassMyComplex<U>& 
+__doapl (ClassMyComplex<U>* ths, const ClassMyComplex<U>& r)
 {
     ths->_real += r._real;
     ths->_image += r._image;
     return *ths;
 }
 
-inline T real(const ClassMyComplex& other)
+template<class U>
+inline U real(const ClassMyComplex<U>& other)
 {return other._real;}
 
-inline T image(const ClassMyComplex& other)
+template<class U>
+inline U image(const ClassMyComplex<U>& other)
 {return other._image;}
 
-inline ClassMyComplex
-operator + (const ClassMyComplex& x, const ClassMyComplex& y)
+template<class U>
+inline ClassMyComplex<U>
+operator + (const ClassMyComplex<U>& x, const ClassMyComplex<U>& y)
 {
-    return ClassMyComplex(real(x)+ real(y),
+    return ClassMyComplex<U>(real(x)+ real(y),
     image(x)+ image(y)
     );
 }
 
-
-inline ClassMyComplex
-operator + (const ClassMyComplex& x, const double& y)
+template<class U>
+inline ClassMyComplex<U>
+operator + (const ClassMyComplex<U>& x, const double& y)
 {
-    return ClassMyComplex(real(x)+ y,
+    return ClassMyComplex<U>(real(x)+ y,
     image(x) 
     );
 }
 
-inline ClassMyComplex
-operator + (const double& y,const ClassMyComplex& x)
+template<class U>
+inline ClassMyComplex<U>
+operator + (const double& y,const ClassMyComplex<U>& x)
 {
-    return ClassMyComplex(real(x)+ y,
+    return ClassMyComplex<U>(real(x)+ y,
     image(x) 
     );
 }
-
-inline ClassMyComplex
-operator + (const ClassMyComplex& x)
+template<class U>
+inline ClassMyComplex<U>
+operator + (const ClassMyComplex<U>& x)
 {
     return x;
 }
-
-inline ClassMyComplex
-operator - (const ClassMyComplex& x)
+template<class U>
+inline ClassMyComplex<U>
+operator - (const ClassMyComplex<U>& x)
 {
-    return ClassMyComplex(-real(x), -image(x) );
+    return ClassMyComplex<U>(-real(x), -image(x) );
+}
+template<class U>
+inline ClassMyComplex<U>
+conj (const ClassMyComplex<U>& x)
+{
+    return ClassMyComplex<U>(real(x), -image(x) );
 }
 
-inline ClassMyComplex
-conj (const ClassMyComplex& x)
-{
-    return ClassMyComplex(real(x), -image(x) );
-}
-
-
+template<class U>
 inline bool
-operator == (const ClassMyComplex& x,const ClassMyComplex& y)
+operator == (const ClassMyComplex<U>& x,const ClassMyComplex<U>& y)
 {
     return real(x) == real(y)
-        && image(x) == image(y;)
+        && image(x) == image(y);
 }
-
+template<class U>
 inline bool
-operator == (const ClassMyComplex& x, double y)
+operator == (const ClassMyComplex<U>& x, double y)
 {
     return real(x) == y && image(x) == 0;
 }
-
+template<class U>
 inline bool
-operator == (double y,const ClassMyComplex& x)
+operator == (double y,const ClassMyComplex<U>& x)
 {
     return real(x) == y && image(x) == 0;
 }

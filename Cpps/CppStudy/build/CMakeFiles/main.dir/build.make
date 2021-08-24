@@ -103,21 +103,53 @@ CMakeFiles/main.dir/ClassCollections/ClassMyBinaryTree.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/ClassCollections/ClassMyBinaryTree.cpp.s"
 	C:\Softwares\Strawberry\c\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S E:\Codes\CodesOnWin\CodesOnWin\Cpps\CppStudy\ClassCollections\ClassMyBinaryTree.cpp -o CMakeFiles\main.dir\ClassCollections\ClassMyBinaryTree.cpp.s
 
+CMakeFiles/main.dir/ClassCollections/ClassMyComplex.cpp.obj: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/ClassCollections/ClassMyComplex.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
+CMakeFiles/main.dir/ClassCollections/ClassMyComplex.cpp.obj: ../ClassCollections/ClassMyComplex.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=E:\Codes\CodesOnWin\CodesOnWin\Cpps\CppStudy\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/main.dir/ClassCollections/ClassMyComplex.cpp.obj"
+	C:\Softwares\Strawberry\c\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\main.dir\ClassCollections\ClassMyComplex.cpp.obj -c E:\Codes\CodesOnWin\CodesOnWin\Cpps\CppStudy\ClassCollections\ClassMyComplex.cpp
+
+CMakeFiles/main.dir/ClassCollections/ClassMyComplex.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/ClassCollections/ClassMyComplex.cpp.i"
+	C:\Softwares\Strawberry\c\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E E:\Codes\CodesOnWin\CodesOnWin\Cpps\CppStudy\ClassCollections\ClassMyComplex.cpp > CMakeFiles\main.dir\ClassCollections\ClassMyComplex.cpp.i
+
+CMakeFiles/main.dir/ClassCollections/ClassMyComplex.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/ClassCollections/ClassMyComplex.cpp.s"
+	C:\Softwares\Strawberry\c\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S E:\Codes\CodesOnWin\CodesOnWin\Cpps\CppStudy\ClassCollections\ClassMyComplex.cpp -o CMakeFiles\main.dir\ClassCollections\ClassMyComplex.cpp.s
+
+CMakeFiles/main.dir/ClassCollections/ClassMyString.cpp.obj: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/ClassCollections/ClassMyString.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
+CMakeFiles/main.dir/ClassCollections/ClassMyString.cpp.obj: ../ClassCollections/ClassMyString.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=E:\Codes\CodesOnWin\CodesOnWin\Cpps\CppStudy\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/main.dir/ClassCollections/ClassMyString.cpp.obj"
+	C:\Softwares\Strawberry\c\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\main.dir\ClassCollections\ClassMyString.cpp.obj -c E:\Codes\CodesOnWin\CodesOnWin\Cpps\CppStudy\ClassCollections\ClassMyString.cpp
+
+CMakeFiles/main.dir/ClassCollections/ClassMyString.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/ClassCollections/ClassMyString.cpp.i"
+	C:\Softwares\Strawberry\c\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E E:\Codes\CodesOnWin\CodesOnWin\Cpps\CppStudy\ClassCollections\ClassMyString.cpp > CMakeFiles\main.dir\ClassCollections\ClassMyString.cpp.i
+
+CMakeFiles/main.dir/ClassCollections/ClassMyString.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/ClassCollections/ClassMyString.cpp.s"
+	C:\Softwares\Strawberry\c\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S E:\Codes\CodesOnWin\CodesOnWin\Cpps\CppStudy\ClassCollections\ClassMyString.cpp -o CMakeFiles\main.dir\ClassCollections\ClassMyString.cpp.s
+
 # Object files for target main
 main_OBJECTS = \
 "CMakeFiles/main.dir/MainCppStudy.cpp.obj" \
-"CMakeFiles/main.dir/ClassCollections/ClassMyBinaryTree.cpp.obj"
+"CMakeFiles/main.dir/ClassCollections/ClassMyBinaryTree.cpp.obj" \
+"CMakeFiles/main.dir/ClassCollections/ClassMyComplex.cpp.obj" \
+"CMakeFiles/main.dir/ClassCollections/ClassMyString.cpp.obj"
 
 # External object files for target main
 main_EXTERNAL_OBJECTS =
 
 main.exe: CMakeFiles/main.dir/MainCppStudy.cpp.obj
 main.exe: CMakeFiles/main.dir/ClassCollections/ClassMyBinaryTree.cpp.obj
+main.exe: CMakeFiles/main.dir/ClassCollections/ClassMyComplex.cpp.obj
+main.exe: CMakeFiles/main.dir/ClassCollections/ClassMyString.cpp.obj
 main.exe: CMakeFiles/main.dir/build.make
 main.exe: CMakeFiles/main.dir/linklibs.rsp
 main.exe: CMakeFiles/main.dir/objects1.rsp
 main.exe: CMakeFiles/main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=E:\Codes\CodesOnWin\CodesOnWin\Cpps\CppStudy\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable main.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=E:\Codes\CodesOnWin\CodesOnWin\Cpps\CppStudy\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable main.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\main.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

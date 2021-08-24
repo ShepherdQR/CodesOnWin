@@ -16,10 +16,16 @@ ctime
 thread
 -
 
-E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/ClassCollections/TestPortAvailable.hpp
+E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/ClassCollections/StudyCollection_STL_01.hpp
 iostream
 -
-WinSock2.h
+vector
+-
+iterator
+-
+algorithm
+-
+functional
 -
 
 E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/MainCppStudy.cpp
@@ -27,8 +33,8 @@ iostream
 -
 ./ClassCollections/StudyCollection_01.hpp
 E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/ClassCollections/StudyCollection_01.hpp
-./ClassCollections/TestPortAvailable.hpp
-E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/ClassCollections/TestPortAvailable.hpp
+./ClassCollections/StudyCollection_STL_01.hpp
+E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/ClassCollections/StudyCollection_STL_01.hpp
 vector
 -
 cstring

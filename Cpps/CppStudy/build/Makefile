@@ -168,6 +168,60 @@ ClassCollections/ClassMyBinaryTree.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/ClassCollections/ClassMyBinaryTree.cpp.s
 .PHONY : ClassCollections/ClassMyBinaryTree.cpp.s
 
+ClassCollections/ClassMyComplex.obj: ClassCollections/ClassMyComplex.cpp.obj
+
+.PHONY : ClassCollections/ClassMyComplex.obj
+
+# target to build an object file
+ClassCollections/ClassMyComplex.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/ClassCollections/ClassMyComplex.cpp.obj
+.PHONY : ClassCollections/ClassMyComplex.cpp.obj
+
+ClassCollections/ClassMyComplex.i: ClassCollections/ClassMyComplex.cpp.i
+
+.PHONY : ClassCollections/ClassMyComplex.i
+
+# target to preprocess a source file
+ClassCollections/ClassMyComplex.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/ClassCollections/ClassMyComplex.cpp.i
+.PHONY : ClassCollections/ClassMyComplex.cpp.i
+
+ClassCollections/ClassMyComplex.s: ClassCollections/ClassMyComplex.cpp.s
+
+.PHONY : ClassCollections/ClassMyComplex.s
+
+# target to generate assembly for a file
+ClassCollections/ClassMyComplex.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/ClassCollections/ClassMyComplex.cpp.s
+.PHONY : ClassCollections/ClassMyComplex.cpp.s
+
+ClassCollections/ClassMyString.obj: ClassCollections/ClassMyString.cpp.obj
+
+.PHONY : ClassCollections/ClassMyString.obj
+
+# target to build an object file
+ClassCollections/ClassMyString.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/ClassCollections/ClassMyString.cpp.obj
+.PHONY : ClassCollections/ClassMyString.cpp.obj
+
+ClassCollections/ClassMyString.i: ClassCollections/ClassMyString.cpp.i
+
+.PHONY : ClassCollections/ClassMyString.i
+
+# target to preprocess a source file
+ClassCollections/ClassMyString.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/ClassCollections/ClassMyString.cpp.i
+.PHONY : ClassCollections/ClassMyString.cpp.i
+
+ClassCollections/ClassMyString.s: ClassCollections/ClassMyString.cpp.s
+
+.PHONY : ClassCollections/ClassMyString.s
+
+# target to generate assembly for a file
+ClassCollections/ClassMyString.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/ClassCollections/ClassMyString.cpp.s
+.PHONY : ClassCollections/ClassMyString.cpp.s
+
 MainCppStudy.obj: MainCppStudy.cpp.obj
 
 .PHONY : MainCppStudy.obj
@@ -207,6 +261,12 @@ help:
 	@echo ... ClassCollections/ClassMyBinaryTree.obj
 	@echo ... ClassCollections/ClassMyBinaryTree.i
 	@echo ... ClassCollections/ClassMyBinaryTree.s
+	@echo ... ClassCollections/ClassMyComplex.obj
+	@echo ... ClassCollections/ClassMyComplex.i
+	@echo ... ClassCollections/ClassMyComplex.s
+	@echo ... ClassCollections/ClassMyString.obj
+	@echo ... ClassCollections/ClassMyString.i
+	@echo ... ClassCollections/ClassMyString.s
 	@echo ... MainCppStudy.obj
 	@echo ... MainCppStudy.i
 	@echo ... MainCppStudy.s

@@ -3,13 +3,13 @@
 //  * Date: 2021-08-23 22:26:34
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2021-08-23 22:58:51
+//  * LastEditTime: 2021-08-24 23:13:19
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 #include "ClassMyString.h"
-
+#include <cstring>
 inline
-ClassMyString::ClassMyString()
+ClassMyString::ClassMyString(const char* ipString)
 :_pString(nullptr)
 {
     if(ipString){
