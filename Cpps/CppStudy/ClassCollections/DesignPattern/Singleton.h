@@ -3,7 +3,7 @@
 //  * Date: 2021-08-22 22:47:40
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2021-08-22 23:25:08
+//  * LastEditTime: 2021-09-09 21:10:47
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 #pragma once
@@ -61,6 +61,19 @@ private:
 };
 
 
+// Not good. one instance is always created, even when we do not use it.
+class SingletonC{
+public:
+    static SingletonC& getInstance(){return _singlentonC;}
+
+    ~SingletonC();
+    SingletonC(const SingletonC&)=delete;
+    SingletonC& operator=(const SingletonC&)=delete;
+
+private:
+    SingletonC();
+    static SingletonC _singlentonC;
+};
 
 
 
