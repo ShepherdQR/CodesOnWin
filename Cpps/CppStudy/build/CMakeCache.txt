@@ -107,7 +107,7 @@ CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 CMAKE_GNUtoMS:BOOL=OFF
 
 //Install path prefix, prepended onto install directories.
-CMAKE_INSTALL_PREFIX:PATH=C:/Program Files (x86)/MyBinaryTree
+CMAKE_INSTALL_PREFIX:PATH=C:/Program Files (x86)/CppStudy
 
 //Path to a program.
 CMAKE_LINKER:FILEPATH=C:/Softwares/Strawberry/c/bin/ld.exe
@@ -238,12 +238,6 @@ CppStudy_BINARY_DIR:STATIC=E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/build
 
 //Value Computed by CMake
 CppStudy_SOURCE_DIR:STATIC=E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy
-
-//Value Computed by CMake
-MyBinaryTree_BINARY_DIR:STATIC=E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/build
-
-//Value Computed by CMake
-MyBinaryTree_SOURCE_DIR:STATIC=E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy
 
 
 ########################
