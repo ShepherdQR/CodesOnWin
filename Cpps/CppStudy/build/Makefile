@@ -249,6 +249,33 @@ MainCppStudy.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/MainCppStudy.cpp.s
 .PHONY : MainCppStudy.cpp.s
 
+RayTracing/Picture.obj: RayTracing/Picture.cpp.obj
+
+.PHONY : RayTracing/Picture.obj
+
+# target to build an object file
+RayTracing/Picture.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/RayTracing/Picture.cpp.obj
+.PHONY : RayTracing/Picture.cpp.obj
+
+RayTracing/Picture.i: RayTracing/Picture.cpp.i
+
+.PHONY : RayTracing/Picture.i
+
+# target to preprocess a source file
+RayTracing/Picture.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/RayTracing/Picture.cpp.i
+.PHONY : RayTracing/Picture.cpp.i
+
+RayTracing/Picture.s: RayTracing/Picture.cpp.s
+
+.PHONY : RayTracing/Picture.s
+
+# target to generate assembly for a file
+RayTracing/Picture.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/RayTracing/Picture.cpp.s
+.PHONY : RayTracing/Picture.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -270,6 +297,9 @@ help:
 	@echo ... MainCppStudy.obj
 	@echo ... MainCppStudy.i
 	@echo ... MainCppStudy.s
+	@echo ... RayTracing/Picture.obj
+	@echo ... RayTracing/Picture.i
+	@echo ... RayTracing/Picture.s
 .PHONY : help
 
 

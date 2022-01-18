@@ -3,7 +3,7 @@
 //  * Date: 2021-01-10 10:59:00
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2021-11-03 20:38:35
+//  * LastEditTime: 2022-01-17 22:49:50
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -23,17 +23,20 @@ cd E:\Codes\CodesOnWin\CodesOnWin\Cpps\CppStudy
 
 */
 
+#include"./RayTracing/Picture.h"
 
 using namespace std;
 int main() {
 
-	// std::cout <<__cplusplus <<std::endl;
+	//std::cout <<__cplusplus <<std::endl;
 
 
 
 	//stlSort20210824();
 	//stlIO20210824();
 	//stl20210824();
+
+	Picture::rainbow(256, 256);
 
 
 

@@ -8,12 +8,15 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/ClassCollections/ClassMyComplex.cpp" "E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/build/CMakeFiles/main.dir/ClassCollections/ClassMyComplex.cpp.obj"
   "E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/ClassCollections/ClassMyString.cpp" "E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/build/CMakeFiles/main.dir/ClassCollections/ClassMyString.cpp.obj"
   "E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/MainCppStudy.cpp" "E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/build/CMakeFiles/main.dir/MainCppStudy.cpp.obj"
+  "E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/RayTracing/Picture.cpp" "E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/build/CMakeFiles/main.dir/RayTracing/Picture.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   ".././ClassCollections"
+  ".././RayTracing"
+  "../../myTools"
   )
 
 # Targets to which this target links.

@@ -3,6 +3,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/main.dir/ClassCollections/ClassMyComplex.cpp.obj"
   "CMakeFiles/main.dir/ClassCollections/ClassMyString.cpp.obj"
   "CMakeFiles/main.dir/MainCppStudy.cpp.obj"
+  "CMakeFiles/main.dir/RayTracing/Picture.cpp.obj"
   "libmain.dll.a"
   "main.exe"
   "main.exe.manifest"

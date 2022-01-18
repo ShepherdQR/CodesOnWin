@@ -13,4 +13,11 @@ CMakeFiles/main.dir/ClassCollections/ClassMyString.cpp.obj: ../ClassCollections/
 CMakeFiles/main.dir/MainCppStudy.cpp.obj: ../ClassCollections/StudyCollection_01.hpp
 CMakeFiles/main.dir/MainCppStudy.cpp.obj: ../ClassCollections/StudyCollection_STL_01.hpp
 CMakeFiles/main.dir/MainCppStudy.cpp.obj: ../MainCppStudy.cpp
+CMakeFiles/main.dir/MainCppStudy.cpp.obj: ../RayTracing/Picture.h
+
+CMakeFiles/main.dir/RayTracing/Picture.cpp.obj: ../RayTracing/Picture.cpp
+CMakeFiles/main.dir/RayTracing/Picture.cpp.obj: ../RayTracing/Picture.h
+CMakeFiles/main.dir/RayTracing/Picture.cpp.obj: ../RayTracing/stb_image.h
+CMakeFiles/main.dir/RayTracing/Picture.cpp.obj: ../RayTracing/stb_image_write.h
+CMakeFiles/main.dir/RayTracing/Picture.cpp.obj: E:/Codes/CodesOnWin/CodesOnWin/Cpps/myTools/BasicTools.hpp
 
