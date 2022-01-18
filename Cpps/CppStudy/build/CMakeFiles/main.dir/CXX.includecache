@@ -11,6 +11,10 @@ Picture.h
 E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/RayTracing/Picture.h
 ../../myTools/BasicTools.hpp
 E:/Codes/CodesOnWin/CodesOnWin/Cpps/myTools/BasicTools.hpp
+../../myTools/Vector3.h
+E:/Codes/CodesOnWin/CodesOnWin/Cpps/myTools/Vector3.h
+../../myTools/Vector4.h
+E:/Codes/CodesOnWin/CodesOnWin/Cpps/myTools/Vector4.h
 iostream
 -
 cstring
@@ -21,6 +25,10 @@ stb_image_write.h
 E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/RayTracing/stb_image_write.h
 
 E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/RayTracing/Picture.h
+functional
+-
+cstring
+-
 
 E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/RayTracing/stb_image.h
 stb_image.h
@@ -81,4 +89,12 @@ chrono
 -
 iomanip
 -
+
+E:/Codes/CodesOnWin/CodesOnWin/Cpps/myTools/Vector3.h
+cmath
+-
+iostream
+-
+
+E:/Codes/CodesOnWin/CodesOnWin/Cpps/myTools/Vector4.h
 

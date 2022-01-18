@@ -1,0 +1,1 @@
+RainBow4_20220118_233004.png: ovecColor.e[3] = 0.5 *  (int(ovecColor.x()) + int(ovecColor.y()));

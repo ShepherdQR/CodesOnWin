@@ -20,4 +20,6 @@ CMakeFiles/main.dir/RayTracing/Picture.cpp.obj: ../RayTracing/Picture.h
 CMakeFiles/main.dir/RayTracing/Picture.cpp.obj: ../RayTracing/stb_image.h
 CMakeFiles/main.dir/RayTracing/Picture.cpp.obj: ../RayTracing/stb_image_write.h
 CMakeFiles/main.dir/RayTracing/Picture.cpp.obj: E:/Codes/CodesOnWin/CodesOnWin/Cpps/myTools/BasicTools.hpp
+CMakeFiles/main.dir/RayTracing/Picture.cpp.obj: E:/Codes/CodesOnWin/CodesOnWin/Cpps/myTools/Vector3.h
+CMakeFiles/main.dir/RayTracing/Picture.cpp.obj: E:/Codes/CodesOnWin/CodesOnWin/Cpps/myTools/Vector4.h
 
