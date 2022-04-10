@@ -3,7 +3,7 @@
 //  * Date: 2022-01-17 21:45:29
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-01-18 23:25:44
+//  * LastEditTime: 2022-02-01 22:34:57
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 #pragma once
@@ -11,11 +11,19 @@
 #include <functional>
 #include <cstring>
 
+enum class TypeRay{
+    Sky = 0,
+    Sphere = 1
+};
+
 class Vector3;
 class Vector4;
 
 class Picture{
 public:
+
+    // 
+    static void sky(const double iRatio, const int iWidth, const TypeRay iTypeRay = TypeRay::Sky);
 
     static void rainbow(const int iWidth, const int iHeight);
 

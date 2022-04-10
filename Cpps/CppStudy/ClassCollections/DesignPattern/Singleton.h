@@ -3,7 +3,7 @@
 //  * Date: 2021-08-22 22:47:40
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2021-09-09 21:10:47
+//  * LastEditTime: 2022-03-30 22:47:02
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 #pragma once
@@ -47,7 +47,10 @@ private:
     
 };
 
-
+/*
+1) 返回引用，与返回指针相比，引用防止了指向别处，防止指针被覆盖别的值。
+2）引用和返回对象本身，对象可寻址，引用不可寻址。
+*/
 class SingletonB{
 public:
     static SingletonB& getInstance();

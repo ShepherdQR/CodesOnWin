@@ -3,7 +3,7 @@
 //  * Date: 2021-06-14 22:43:42
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2021-08-18 22:43:54
+//  * LastEditTime: 2022-01-31 22:58:05
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -15,6 +15,85 @@
 #include <ctime>
 #include <thread>
 using namespace std;
+#include <functional>
+
+
+
+
+
+// #include <stdio.h> #include <map> 
+// template<class Key, class Value, class Compare> 
+// std::map<Key, Value, Compare> make_map(Compare comp) {
+//      return std::map<Key, Value, Compare>(comp);
+//       }
+     
+//       int main() 
+// { 
+//     auto m = make_map<int,int>([](int x, int y) 
+//     { return x < y; }); 
+    
+//     m[1] = 11; m[2] = 22; for (auto x : m) { printf("%d->%d\n", x.first, x.second); } return 0; 
+//     }
+// //make_map 可以被返回值优化掉。
+
+
+template< class T> void funTemplate1(T args){
+    cout << args << "\t";
+}
+void funThis(){
+    funTemplate1(1);
+}
+
+void funTemplate(){cout <<"." << endl;}
+
+template<class Head, class... T> void funTemplate(Head iHead, T... args){
+    cout << iHead << "\t";
+    return funTemplate(args...);
+}
+    // if( sizeof...(args) ){
+    // }
+
+
+//template<class Head, class... T>
+
+
+void testFunction20220131(){
+
+   // template<class Head, class... T>
+    // [=]<class Head, class... T>(const int Today,
+    //     std::function<void (Head iHead, T... args) >iFunc
+    // ){
+    //     iFunc(2022, 1, Today);
+
+   
+
+    // [=] (const int Today,
+    //     std::function<void (Head iHead, T... args) >iFunc
+    // ){
+    //     iFunc(2022, 1, Today);
+
+    // }<(31, funTemplate);
+
+   
+    // auto f = [=]<class T> ( int Today,
+    //     std::function<void (T) >iFunc
+    // ){
+    //     iFunc( Today);
+
+    // };//(31, funTemplate1)
+
+    // f<int> (31,funTemplate1 );
+
+
+
+   
+  //  funTemplate(2022, 1, 31);
+
+
+
+
+}
+
 
 
 // [T00021] a problem

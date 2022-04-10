@@ -3,7 +3,7 @@
 //  * Date: 2022-01-18 21:53:43
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-01-18 23:04:53
+//  * LastEditTime: 2022-02-01 22:35:14
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -13,6 +13,11 @@
 #include <iostream>
 
 using std::sqrt;
+
+class Vector3;
+typedef Vector3 Point3;
+typedef Vector3 Color3;
+
 
 class Vector3 {
     public:
