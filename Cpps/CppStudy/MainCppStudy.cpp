@@ -3,12 +3,12 @@
 //  * Date: 2021-01-10 10:59:00
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-02-01 21:28:58
+//  * LastEditTime: 2022-04-11 21:41:10
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
 #include <iostream>
-//#include"./ClassCollections/StudyCollection_01.hpp"
+#include"./ClassCollections/StudyCollection_01.hpp"
 //#include"./ClassCollections/StudyCollection_STL_01.hpp"
 #include"./RayTracing/Picture.h"
 
@@ -36,12 +36,15 @@ cd E:\Codes\CodesOnWin\CodesOnWin\Cpps\CppStudy
 using namespace std;
 int main() {
 
-	//testFunction20220131();
+	
+	
+	#include"TestStudy.hpp"
+	
 
-	#include "TestRayTracing.hpp"
+	//#include "TestRayTracing.hpp"
 
 
-	//std::cout <<__cplusplus <<std::endl;
+	//std::cout <<__cplusplus <<std::endl;//20220411, c++17
 
 	// int x = 2;
 	// //func([=](const int& iX){return iX * iX;}(x));

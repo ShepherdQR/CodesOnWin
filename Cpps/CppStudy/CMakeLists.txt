@@ -3,13 +3,23 @@
 #  * @Date: 2021-06-14 22:17:32
 #  * @Github: https://github.com/ShepherdQR
 #  * @LastEditors: Shepherd Qirong
-#  * @LastEditTime: 2022-01-17 22:55:43
+#  * @LastEditTime: 2022-04-11 21:41:14
 #  * @Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 #************
 
 
 cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
+add_compile_options(-std=c++17)
+
 PROJECT(CppStudy)
+
+#add_compile_options(-fcoroutines)
+#set(CMAKE_CXX_STANDARD 20)
+#set(CMAKE_CXX_FLAGS "-O2 -DASIO_STANDALONE -Werror")
+#set(CMAKE_CXX_FLAGS "-pthread")
+
+
+
 
 
 include_directories(./ClassCollections)

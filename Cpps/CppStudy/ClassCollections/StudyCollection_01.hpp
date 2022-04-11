@@ -3,7 +3,7 @@
 //  * Date: 2021-06-14 22:43:42
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-01-31 22:58:05
+//  * LastEditTime: 2022-04-12 00:15:09
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -17,6 +17,147 @@
 using namespace std;
 #include <functional>
 
+
+
+#include<queue>
+void func20220411_queue_5(){
+    class pcb{
+    public:
+        pcb(int i){_=i;}
+        int _ = 0;
+    };
+
+    // function<bool(pcb*, pcb*)>
+    // auto f = [](pcb* a, pcb* b){ 
+    //     return a->_ < b->_;
+    // };
+
+   
+    //auto 
+    function<bool(pcb*, pcb*)>
+    f = [](const pcb* a, const pcb* b){ 
+        return a->_ < b->_;
+    };
+
+    struct greater{
+        bool operator() (pcb* a, pcb* b) const {
+            bool bt =  a->_ < b->_;
+            //cout <<"bt" << bt << endl;
+            }
+    };
+
+    pcb* _data[5];
+    vector<pcb> data{3,1,4,5,2};
+    int i(0);
+    for(auto _:data){
+        _data[i++] = new pcb(_);//&_;
+        cout << _._ << endl;
+    }
+    std::priority_queue<pcb*, vector<pcb*>,greater> p(_data, _data+5);
+    while(!p.empty()){
+        cout << p.top()->_; 
+        delete p.top();
+        p.pop();
+    }
+    cout << endl << "========" << endl;
+
+    vector<pcb*> vecInit;
+    std::priority_queue<pcb*, vector<pcb*>,decltype(f)> pp{f,vecInit};
+    for(auto _:data){
+        pp.push(new pcb(_));//&_
+        cout << _._ << endl;
+    }
+
+    while(!pp.empty()){
+        cout << pp.top()->_;
+        delete pp.top();
+        pp.pop();
+    }
+
+    for(auto _:vecInit){
+        cout << _->_ << endl;
+    }
+
+
+
+
+    //decltype(f)
+    // for(auto _:data){
+    //     p.push(&_);
+    //     cout << _._ << endl;
+    // }
+    
+
+
+}
+
+
+
+
+
+class A;
+class B{
+    std::unique_ptr<A> _;
+public: B();
+};
+
+class A{
+    int _=10;
+    friend  B::B();
+};
+
+B::B():_(new A()){
+    cout <<A()._ << _->_ << endl;
+}
+
+void func20220411_friend_4(){
+    B();
+}
+
+
+
+void func20220411_invoke_3(){
+    class A{
+    public:
+        f(const bool i){ std::cout << !i << std::endl;}
+    };
+    std::invoke((&A::f), A(), 0);
+    std::apply((&A::f), std::make_pair(A(), 1));
+}
+
+
+template<class Func, typename ... Args>
+void call(Func f, Args... args){
+    std::invoke(f, args...);
+}
+void func20220411(int i){ std::cout << i << std::endl;}
+
+void func20220411_invoke_2(){
+    class A{
+        ff(int i){ std::cout << ++i << std::endl;}
+    public:
+        A(int i){ std::cout << --i << std::endl;}
+        f(int i){ std::cout << ++i << std::endl;}
+    };
+    std::invoke(&func20220411, 10);
+    std::invoke((&A::f), A(3), 2);
+    cout << "========" << endl;
+    call(&func20220411, 10);
+    call((&A::f), A(3), 2);
+    std::apply((&A::f), std::make_pair(A(10), 2));
+    //std::invoke((void (A::*)(int))(&A::f), A(), 10);
+    //std::invoke((&A::ff), A(), 2);//error: declared private
+    //std::invoke((&A::A), A(2), 3);//error: taking address of constructor
+}
+
+
+
+
+
+
+void func20220411_invoke_1(){
+    std::invoke([](auto i){cout << i << endl;}, 1);
+}
 
 
 
@@ -84,13 +225,7 @@ void testFunction20220131(){
 
     // f<int> (31,funTemplate1 );
 
-
-
-   
   //  funTemplate(2022, 1, 31);
-
-
-
 
 }
 
