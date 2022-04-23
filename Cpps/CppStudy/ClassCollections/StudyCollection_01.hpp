@@ -3,7 +3,7 @@
 //  * Date: 2021-06-14 22:43:42
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-04-12 00:15:09
+//  * LastEditTime: 2022-04-12 23:07:59
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -16,6 +16,79 @@
 #include <thread>
 using namespace std;
 #include <functional>
+
+
+
+/*----------------------------------------------------------------
+
+    std::unique_ptr<struct f{f(int i){
+            cout << i << endl;
+            func20220412_function_2();
+        }
+    } f[]{1,2};>
+*/
+
+
+void g( int i = 10){
+
+    int rris = 10;
+    cout << &rris << endl;
+
+
+
+    struct f{
+        void tt(){}
+        f(int& i){
+            cout << i  << endl;
+            if(i)g(--i);
+        }
+    } f(i);
+
+
+
+    struct ff{
+        fg(int*  ii =  (int*)((void*) &ff::fg  )){
+            cout << ii  << "---";
+            cout << (int*)((void*) &fg  ) << "---";
+        }
+    } _;
+    _.fg();
+
+
+    cout << (int*)((void*) &f::tt  ) << "---";
+
+    int rri = 10;
+    cout << &rri << endl;
+
+
+
+}
+
+
+
+void func20220412_function_1(){
+
+    struct _{
+            virtual void f(int i)=0;
+        };
+
+    struct __: public _{
+        virtual void f(int i){ 
+            func20220412_function_1();
+            cout << i << endl;
+        }
+        
+    };
+
+    // void __::f(int i)
+    //     {
+    //         cout << i << endl;
+    //     } 
+
+    __().f(1);
+}
+
+
 
 
 
@@ -63,6 +136,7 @@ void func20220411_queue_5(){
 
     vector<pcb*> vecInit;
     std::priority_queue<pcb*, vector<pcb*>,decltype(f)> pp{f,vecInit};
+
     for(auto _:data){
         pp.push(new pcb(_));//&_
         cout << _._ << endl;
@@ -73,6 +147,22 @@ void func20220411_queue_5(){
         delete pp.top();
         pp.pop();
     }
+ cout << endl << "========" << endl;
+
+
+    std::priority_queue<pcb*, vector<pcb*>,decltype(f)> ppp{f};
+    for(auto& _:data){
+        ppp.push(&_);
+        cout << _._ << endl;
+    }
+
+     while(!ppp.empty()){
+        cout << ppp.top()->_;
+        ppp.pop();
+    }
+
+
+
 
     for(auto _:vecInit){
         cout << _->_ << endl;

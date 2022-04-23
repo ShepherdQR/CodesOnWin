@@ -3,7 +3,7 @@
 //  * Date: 2021-01-10 10:59:00
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-04-11 21:41:10
+//  * LastEditTime: 2022-04-22 21:56:18
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -58,9 +58,23 @@ int main() {
 
 
 
+	void f(int i);
+
+	f(10);
+
+
+	  cout << (int*)((void*) &f  ) << "---";
+
+
 
 
     std::cout << "\nProgram ends." << std::endl;
 	//system("pause");
 	return 0;
+}
+
+
+void f(int i)
+{
+	cout << i << endl;
 }
