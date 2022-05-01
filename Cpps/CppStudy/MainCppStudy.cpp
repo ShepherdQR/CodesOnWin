@@ -3,7 +3,7 @@
 //  * Date: 2021-01-10 10:59:00
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-04-22 21:56:18
+//  * LastEditTime: 2022-04-24 21:35:00
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -59,11 +59,8 @@ int main() {
 
 
 	void f(int i);
-
 	f(10);
-
-
-	  cout << (int*)((void*) &f  ) << "---";
+	//cout << (int*)((void*) &f  ) << "---";
 
 
 
@@ -76,5 +73,5 @@ int main() {
 
 void f(int i)
 {
-	cout << i << endl;
+	//cout << i << endl;
 }

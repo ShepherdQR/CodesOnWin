@@ -3,7 +3,7 @@
 //  * Date: 2021-06-14 22:43:42
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-04-12 23:07:59
+//  * LastEditTime: 2022-04-24 21:36:36
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -16,6 +16,33 @@
 #include <thread>
 using namespace std;
 #include <functional>
+
+
+
+void func20220424_DEFINE(){
+
+    bool b = true;
+
+    class A{
+        bool _;
+    public:
+        A(bool ib){_ = ib;}
+
+    };
+
+
+
+    // if(b){
+    //     else{
+    //         cout << "false" << endl;
+    //     }
+    //     cout << "true" << endl;
+    // }
+
+}
+
+
+
 
 
 
