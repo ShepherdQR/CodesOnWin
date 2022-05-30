@@ -8,6 +8,7 @@
 */
 
 #include <iostream>
+#include"./ClassCollections/AlgorithmStudy.hpp"
 #include"./ClassCollections/StudyCollection_01.hpp"
 //#include"./ClassCollections/StudyCollection_STL_01.hpp"
 #include"./RayTracing/Picture.h"
@@ -36,6 +37,9 @@ cd E:\Codes\CodesOnWin\CodesOnWin\Cpps\CppStudy
 using namespace std;
 int main() {
 
+	std::cout <<__cplusplus <<std::endl;//20220411, c++17
+	std::cout << "Hi<" << std::endl;
+
 	
 	
 	#include"TestStudy.hpp"
@@ -44,7 +48,7 @@ int main() {
 	//#include "TestRayTracing.hpp"
 
 
-	//std::cout <<__cplusplus <<std::endl;//20220411, c++17
+
 
 	// int x = 2;
 	// //func([=](const int& iX){return iX * iX;}(x));
@@ -52,20 +56,18 @@ int main() {
 
 	//return 0;
 
-	//stlSort20210824();
-	//stlIO20210824();
-	//stl20210824();
 
 
 
-	void f(int i);
-	f(10);
+
+	//void f(int i);
+	//f(10);
 	//cout << (int*)((void*) &f  ) << "---";
 
 
 
 
-    std::cout << "\nProgram ends." << std::endl;
+    std::cout << "\n>Bye." << std::endl;
 	//system("pause");
 	return 0;
 }

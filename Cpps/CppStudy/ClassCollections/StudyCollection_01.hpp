@@ -29,9 +29,6 @@ void func20220424_DEFINE(){
         A(bool ib){_ = ib;}
 
     };
-
-
-
     // if(b){
     //     else{
     //         cout << "false" << endl;
@@ -42,7 +39,55 @@ void func20220424_DEFINE(){
 }
 
 
+auto func20220530_a(int i=6){
+    struct f{
+        f(){
+            if(pf) delete[] pf;
+            pf = new f(_i);
+            []{printf("Repete.\n");}();
+            //cout <<"Repete i times." << endl;
+        }
 
+    
+        f(int i):_i(i){
+            if(pf) delete pf;
+            pf = new f[_i]();
+            
+        }
+        f* pf = nullptr;
+        int _i = 0;
+        
+    } _(i);
+}
+
+
+
+// auto func20220530_1(int i=6){
+//     struct f{
+//         f(){
+//             delete[] pf;
+//             pf = new f(_i, nullptr);
+//             //[]{printf("Repete.\n");}();
+//             //cout <<"Repete i times." << endl;
+//         }
+
+    
+//         f(int& i,  std::function<void(void)> iif):_i(i),ff(iif){
+//             delete pf;
+//             cout << "hh" << endl;
+//             pf = new f[_i]();
+            
+//             ff();
+//             std::invoke(iif);
+//             iif();
+//         }
+//         f* pf;
+//         int _i;
+
+//         std::function<void(void)> ff;
+        
+//     } _(i, std::move([]{printf("Repete.\n");}));
+// }
 
 
 
@@ -58,9 +103,10 @@ void func20220424_DEFINE(){
 
 void g( int i = 10){
 
-    int rris = 10;
-    cout << &rris << endl;
-
+    []{
+        int rris = 10;
+        cout <<"[01] " <<  &rris << endl;
+    }();
 
 
     struct f{
@@ -71,24 +117,18 @@ void g( int i = 10){
         }
     } f(i);
 
+    // struct ff{
+    //     fg(int*  ii =  (int*)((void*) &ff::fg  )){
+    //         cout << ii  << "---";
+    //         cout << (int*)((void*) &fg  ) << "---";
+    //     }
+    // } _;
+    // _.fg();
 
-
-    struct ff{
-        fg(int*  ii =  (int*)((void*) &ff::fg  )){
-            cout << ii  << "---";
-            cout << (int*)((void*) &fg  ) << "---";
-        }
-    } _;
-    _.fg();
-
-
-    cout << (int*)((void*) &f::tt  ) << "---";
+    // cout << (int*)((void*) &f::tt  ) << "---";
 
     int rri = 10;
     cout << &rri << endl;
-
-
-
 }
 
 
