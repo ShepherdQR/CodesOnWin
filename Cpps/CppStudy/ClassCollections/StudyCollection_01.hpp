@@ -9,6 +9,7 @@
 
 // for example [T00019] thread //[good]
 //              number  brief      describation
+#pragma once
 
 #include <numeric>
 #include <vector>

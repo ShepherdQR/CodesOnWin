@@ -13,7 +13,13 @@ cd E:\Codes\CodesOnWin\CodesOnWin\Cpps\CppStudy
 .\run.bat
 
 */
-    func20220530_a();
+    //P2,1-40
+
+    //Algorithm_Search::test();
+    //Algorithm_Sort::test();
+    algorithm002();
+    //algorithm001();
+    //func20220530_a();
     //func20220424_DEFINE();
     //stlSort20210824();
 	//stlIO20210824();

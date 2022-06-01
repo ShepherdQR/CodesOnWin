@@ -9,6 +9,8 @@
 
 #include <iostream>
 #include"./ClassCollections/AlgorithmStudy.hpp"
+#include"./ClassCollections/Algorithm_Sort.hpp"
+#include"./ClassCollections/Algorithm_Search.hpp"
 #include"./ClassCollections/StudyCollection_01.hpp"
 //#include"./ClassCollections/StudyCollection_STL_01.hpp"
 #include"./RayTracing/Picture.h"
