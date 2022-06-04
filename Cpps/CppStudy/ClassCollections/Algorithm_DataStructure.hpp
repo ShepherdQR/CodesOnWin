@@ -3,7 +3,7 @@
 //  * Date: 2022-06-03 20:31:04
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-06-04 10:55:31
+//  * LastEditTime: 2022-06-04 20:47:02
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -17,6 +17,11 @@ using namespace std;
 
 namespace Algorithm_DataStructure
 {
+    /**
+     1)HashTable, 增删改查时间复杂度是O(1)，常数时间比较大。基础类型按值传递；非急促类型内部按引用传递。
+     2）OredredTable，按Key维持有序，key需要可以比较。增删改查时间复杂度是O(logN)红黑树、AVL树、Size-Balance-Tree、跳表。
+
+     */
 
 
 
@@ -29,6 +34,111 @@ namespace Algorithm_DataStructure
             cout << cur << ", ";
         }cout << endl;
     }
+
+    class SinglyLinkedList{
+
+        struct SinglyLinkedList_Node{
+            int data;
+            SinglyLinkedList_Node* pNext=nullptr;
+        }* _pHead = nullptr;
+
+    public:        
+
+        SinglyLinkedList(const vector<int>& ivec){
+            if(ivec.size()>0){
+                _pHead= new SinglyLinkedList_Node;
+                _pHead->data = ivec[0];
+            }
+            SinglyLinkedList_Node* pCur = _pHead;
+            for(int i=1;i!=ivec.size();++i){
+                SinglyLinkedList_Node* pTemp = new SinglyLinkedList_Node;
+                pTemp->data = ivec[i];
+                pCur->pNext = pTemp;
+                pCur = pTemp;
+            }
+        }
+
+        ~SinglyLinkedList(){
+            SinglyLinkedList_Node* pCur = _pHead;
+            while(pCur){
+                SinglyLinkedList_Node* pTemp = pCur;
+                pCur = pCur->pNext;
+                delete pTemp;
+            }
+        }
+
+        void reverse(){
+            SinglyLinkedList_Node* pCur = _pHead;
+            SinglyLinkedList_Node* pPrevious = nullptr;
+            while(pCur){
+                SinglyLinkedList_Node* pTemp = pCur->pNext;
+                pCur->pNext = pPrevious;
+                pPrevious = pCur;
+                pCur = pTemp;
+            }
+            _pHead = pPrevious;
+        }
+
+        void display(){
+            SinglyLinkedList_Node* pCur = _pHead;
+            while(pCur){
+                cout << pCur->data << ", ";
+                pCur = pCur->pNext;
+            }cout << endl;
+        }
+
+        static vector<int> algorithm_1_IntersectionOf2List(const SinglyLinkedList& ia, const SinglyLinkedList& ib){
+
+            vector<int> ovec;
+
+            SinglyLinkedList_Node* pa = ia._pHead;
+            SinglyLinkedList_Node* pb = ib._pHead;
+
+            while(pa && pb){
+                if(pa->data<pb->data){
+                    pa = pa->pNext;
+                }
+                else if(pa->data>pb->data){
+                    pb = pb->pNext;
+                }
+                else{
+                    ovec.emplace_back(pa->data);
+                    pa = pa->pNext;
+                    pb = pb->pNext;
+                }
+            }
+            while(pa){
+                pa = pa->pNext;
+                ovec.emplace_back(pa->data);
+            }
+            while(pb){
+                pb = pb->pNext;
+                ovec.emplace_back(pb->data);
+            }
+            
+            return ovec;
+        }
+    };
+
+    auto test_SinglyLinkedList(){
+        SinglyLinkedList a({1,2,3,4,5});
+        a.display();
+        a.reverse();
+        a.display();
+
+
+        Algorithm_DataStructure::display(
+            SinglyLinkedList::algorithm_1_IntersectionOf2List(
+                SinglyLinkedList({1,2,3,4,5}),  SinglyLinkedList({0,2,3,3,5})
+            )
+        );
+
+    }
+
+
+
+
+
 
     class Heap{
     public:
@@ -142,11 +252,8 @@ namespace Algorithm_DataStructure
             }
         }
     };
-
-
-    auto test(){
+    auto test_Heap(){
         Heap(Heap::Type::MaxHeap, {5,3,6,7,7}).display();//77563
-
 
         Heap hp(Heap::Type::MaxHeap, {9,7,8,6,5,4,3,1});
         hp.pop();

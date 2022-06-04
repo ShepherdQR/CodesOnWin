@@ -3,7 +3,7 @@
 //  * Date: 2021-06-14 22:43:42
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-06-03 20:19:45
+//  * LastEditTime: 2022-06-04 22:22:20
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -16,18 +16,149 @@
 #include <ctime>
 #include <thread>
 #include <functional>
-#include <random>
+#include <tuple>
+
 using namespace std;
 
 
+
+
+std::string func20220604_5A(){}
+std::string& func20220604_5B(){}
+decltype(auto) func20220604_5AA(){
+    return func20220604_5A();
+}
+decltype(auto) func20220604_5BB(){
+    return func20220604_5B();
+}
+
+// TEST auto add(auto x, auto y)
+namespace func20220604_4{
+
+    struct AA{
+        auto add(auto x, auto y){
+            return x+y;
+        }
+    };
+
+    struct BB: AA{
+        auto add(auto x, auto y){
+            return x+y+y;
+        }
+    };
+
+    template<typename T, typename U>
+    auto add2(T t, U u) ->decltype(t+u){
+        return t+u;
+    }
+
+    template<typename T, typename U>
+    auto add3(T t, U u){
+        return t+u;
+    }
+
+    auto add(auto x, auto y){
+        return x+y;
+    }
+
+    auto func20220604_4(){
+        cout << add(1,2) << endl;//[3]
+        cout << add(1.1,2.2) << endl;//[3.3]
+
+        struct A{
+            int val = 0;
+            A(int iVal):val(iVal){}
+            A operator+(const A& ia){
+                return A(val + ia.val);
+            }
+        };
+
+        cout << BB().AA::add(A(1),A(2)).val << endl;//[3]
+        cout << add2(A(1),A(2)).val << endl;//[3]
+        cout << add3(A(1),A(2)).val << endl;//[3]
+    }
+}
+
+auto func20220604_3(){
+    auto [x,y,z] = []{return std::make_tuple(1,3.14,"hi");}();
+    cout << x << " " << y << " " << z << endl;
+
+    auto arr = new auto(10);
+    cout <<typeid(arr).name() << *arr << endl;
+    delete arr;
+
+    // struct A{
+    //     int add(auto x, auto y){
+    //         return x+y;
+    //     }
+    // };
+
+
+}
+
+
+template<typename T>
+auto displayTypeInformation(const T& iVal){
+    if constexpr(std::is_integral<T>::value){
+        return iVal+1;
+    }else if constexpr(std::is_null_pointer<T>::value){
+        static int cur(0);
+        return &cur;
+    }else{
+        return iVal+0.04;
+    }
+}
+
+constexpr int fibonacci(const int n){
+    if(n==1 || n == 2){
+        return 1;
+    }
+    return fibonacci(n-1)+ fibonacci(n-2);
+}
+auto func20220604_2(){
+    cout << fibonacci(5) << endl;
+
+    cout << displayTypeInformation(5)<< endl;
+    cout << *displayTypeInformation(nullptr)<< endl;
+    cout << displayTypeInformation(3.1)<< endl;
+}
+
+
+
+auto func20220604_1(){
+    //1. char* str = "hello";//warning: ISO C++ forbids converting a string constant to 'char*'
+    //std::cout << str << std::endl;
+
+    //2. use static_cast, reinterpret_cast, const_cast
+
+    //3. 
+    auto lambdaAdd = [](int a, int b){ return a + b; };
+    [_ = std::ref(std::cout << lambdaAdd(1,2))]{
+        _.get()<< std::endl;
+    }();
+
+    std:cout << std::is_same<decltype(NULL), decltype(nullptr)>::value << std::endl;//0
+    cout << std::is_same<decltype(NULL), decltype(0)>::value << std::endl;//0
+    cout << std::is_same<decltype(NULL), decltype((void*)0)>::value << std::endl;//0
+
+    int a = 2;
+    int p[a];
+    for(auto cur:{0,1,2}){
+        p[cur] = cur;
+    }
+    for(auto cur:{0,1,2,3,4}){
+        cout << p[cur] << endl;
+    }
+}
+
+
+#include <random>
 auto func20220603(){
     default_random_engine e(time(0));
     for(auto t:{1,2,3,4,5}){
         cout << e()%10<< endl;
     }
 }
-
-
 
 void func20220424_DEFINE(){
 

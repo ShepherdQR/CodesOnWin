@@ -7,13 +7,24 @@ using namespace std;
 
 namespace Algorithm_Sort
 {
+    /**
+     *          Time        Space       static
+    select      O(N^2)      O(1)        N
+    bubble      O(N^2)      O(1)        Y
+    Inserction  O(N^2)      O(1)        Y
+    Merge       O(NlogN)    O(N)        Y
+    Fast        O(NlogN)    O(logN)     N
+    Heap        O(NlogN)    O(1)        N
+    1)基于比较的排序，时间上目前NlogN最小；要保持稳定space需要O(N)
+    2）工程改进：a）综合排序，小样本用O(N^2)的，大样本用O(NlogN)；b）基础类型用快排，自定义类型用归并保证稳定性。
+    */
 
     class Base{
     public:
 
-        void test(){
+        void test(const vector<int> ivec = {1,3,2,5,4}){
             cout << typeid(*this).name() << endl;
-            display(solve({1,3,2,5,4}));
+            display(solve(ivec));
         }
 
     protected:
@@ -32,6 +43,71 @@ namespace Algorithm_Sort
             }cout << endl;
         }  
 
+    };
+
+    class Radix: public Base{
+        vector<int> solve(const vector<int>& ivec){
+            vector<int> ovec = ivec;
+            if(ivec.size()<2)
+            {
+                return ovec;
+            }
+
+            int maxNum = ivec[0];
+            for(int i=1;i<ivec.size();++i){
+                if(maxNum<ivec[i]){
+                    maxNum = ivec[i];
+                }
+            }
+
+            const int radix = 10;
+            int numberBucket(0);
+            while(maxNum){
+                maxNum /=radix;
+                ++numberBucket;
+            }//cout << "==" << numberBucket <<endl;
+
+            vector<int> vecLoop = ovec;
+
+            //遍历各个元素的个位、十位、百位...
+            for(int i=0;i!=numberBucket;++i){
+
+                vector<int> vecLoopLast(vecLoop.size(),0);
+                vector<int> vecCount(radix,0);
+                //从左到右统计落入各个桶的数量             
+                for(int j=0;j!=vecLoop.size();++j){
+                    vecLoopLast[j] = vecLoop[j]%radix;
+                    vecCount[vecLoopLast[j]] +=1;
+                    vecLoop[j]/=radix;
+                }
+
+                //将各个桶K的等于K的数量变成小于等于K的数量
+                int sum(0);
+                for(auto& cur: vecCount){
+                    sum += cur;
+                    cur = sum;
+                }//display(vecCount);
+
+                //从右向左，第j个元素的最低位的k时，将其移动到--vecCount[k]
+                vector<int> vecBucketIndex(vecLoop.size(),0);
+                for(int j=vecLoop.size()-1;j>=0;--j){
+                    vecBucketIndex[--(vecCount[vecLoopLast[j]])] = j ;
+                }
+
+                //处理完一轮后，更新数组
+                vector<int> outTemp1(vecLoop.size(),0);
+                vector<int> outTemp2(vecLoop.size(),0);
+                for(int i=0;i!=vecLoop.size();++i){
+                    outTemp1[i] = vecLoop[vecBucketIndex[i]];
+                    outTemp2[i] = ovec[vecBucketIndex[i]];
+                }
+                vecLoop = outTemp1;
+                ovec = outTemp2;
+                //display(ovec);
+            }
+
+            return ovec;
+        }
     };
 
 
@@ -175,7 +251,8 @@ namespace Algorithm_Sort
 
     auto test(){
 
-        Quick().test();
+        Radix().test({10,13,1,66,4,121});
+        //Quick().test();
         //Merge().test();
         //Insertion().test();
     }
