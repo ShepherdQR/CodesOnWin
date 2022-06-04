@@ -1,5 +1,6 @@
 
 #pragma once
+#include <ctime>
 #include <vector>
 #include <iostream>
 using namespace std;
@@ -9,9 +10,15 @@ namespace Algorithm_Sort
 
     class Base{
     public:
-        virtual void test() = 0;
+
+        void test(){
+            cout << typeid(*this).name() << endl;
+            display(solve({1,3,2,5,4}));
+        }
 
     protected:
+        virtual vector<int> solve(const vector<int>& ivec){return ivec;};
+
         template<typename T>
         void _swap(T& a, T& b){
             T c = a;
@@ -19,11 +26,64 @@ namespace Algorithm_Sort
             b = c;
         }
 
+        void display(const vector<int>& ivec){
+            for(auto cur:ivec){
+                cout << cur << ", ";
+            }cout << endl;
+        }  
+
     };
 
 
+    class Quick: public Base{
+
+        vector<int> solve(const vector<int>& ivec){
+            vector<int> ovec = ivec;
+            if(ivec.size()>1)
+            {
+                quick(ovec, 0, ovec.size()-1);
+            }
+            return ovec;
+        }
+
+        void quick(vector<int>& iovec, const int il, const int ir){
+            if(il>=ir){
+                return;
+            }
+
+            srand(time(0));
+            int indexElem = rand()%(ir-ir+1)+il;
+            swap(iovec[indexElem], iovec[ir]);
+
+            auto [l, r] = partition(iovec, il, ir);
+            quick(iovec, il,l-1);
+            quick(iovec, r+1,ir);
+        }
+
+        std::pair<int, int> partition(vector<int>& iovec, const int il, const int ir){
+            //分为 < = > 三个子数组，
+            int number = iovec[ir];
+            int ml = il;// 1st of =
+            int mr = ir;// last of =
+
+            for(int i= ml;i!=mr;++i){
+                if(iovec[i] < number){
+                    swap(iovec[ml++], iovec[i]);
+                }
+                else if(iovec[i]> number){
+                    swap(iovec[mr--], iovec[i--]);
+                }
+                //display(iovec);
+                //cout << i << ": " << ml << "--" << mr << endl;
+            }
+            return {ml,mr};
+        }
+    };
+
+
+
     class Insertion: public Base{
-    public:
+   
         vector<int> solve(const vector<int>& ivec){
             vector<int> ovec = ivec;
             if(ivec.size()<2)
@@ -48,16 +108,12 @@ namespace Algorithm_Sort
             return ovec;
         }
 
-        void test(){
-            for(auto cur: solve({1,3,2,5,4})){
-                cout << cur << ", ";
-            }cout << endl;
-        }
     };
+
 
     // 比较的信息，以整体有序的部分的形式保存，因而优于O(N^2)
     class Merge: public Base{
-    public:
+
         vector<int> solve(const vector<int>& ivec){
             vector<int> ovec = ivec;
             if(ivec.size()>1)
@@ -67,14 +123,6 @@ namespace Algorithm_Sort
             return ovec;
         }
 
-        void test(){
-            cout << typeid(*this).name() << endl;
-            for(auto cur: solve({1,3,2,5,4})){
-                cout << cur << ", ";
-            }cout << endl;
-        }
-
-    private:
         // T(N) = 2* T(N/2) + O(N), so O(N*logN)
         void _binary(vector<int>& ivec, const int l, const int r){
             if(l==r)
@@ -125,13 +173,10 @@ namespace Algorithm_Sort
     };
 
 
-
-
-
-
     auto test(){
 
-        Merge().test();
+        Quick().test();
+        //Merge().test();
         //Insertion().test();
     }
 

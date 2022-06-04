@@ -3,7 +3,7 @@
 //  * Date: 2021-06-14 22:43:42
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-04-24 21:36:36
+//  * LastEditTime: 2022-06-03 20:19:45
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -15,8 +15,17 @@
 #include <vector>
 #include <ctime>
 #include <thread>
-using namespace std;
 #include <functional>
+#include <random>
+using namespace std;
+
+
+auto func20220603(){
+    default_random_engine e(time(0));
+    for(auto t:{1,2,3,4,5}){
+        cout << e()%10<< endl;
+    }
+}
 
 
 

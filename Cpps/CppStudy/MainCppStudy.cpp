@@ -3,12 +3,13 @@
 //  * Date: 2021-01-10 10:59:00
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-04-24 21:35:00
+//  * LastEditTime: 2022-06-03 20:53:33
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
 #include <iostream>
 #include"./ClassCollections/AlgorithmStudy.hpp"
+#include"./ClassCollections/Algorithm_DataStructure.hpp"
 #include"./ClassCollections/Algorithm_Sort.hpp"
 #include"./ClassCollections/Algorithm_Search.hpp"
 #include"./ClassCollections/StudyCollection_01.hpp"

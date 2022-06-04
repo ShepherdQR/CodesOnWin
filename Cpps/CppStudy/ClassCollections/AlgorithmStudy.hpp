@@ -3,15 +3,153 @@
 //  * Date: 2021-12-05 22:48:01
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2021-12-08 22:06:39
+//  * LastEditTime: 2022-06-03 22:55:45
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 #pragma once
 
 #include <vector>
 #include <iostream>
+#include <algorithm>
+#include<tuple>
 using namespace std;
 
+auto display(const vector<int>& ivec){
+    for(auto cur:ivec){
+        cout << cur << ", ";
+    }cout << endl;
+}
+
+auto algorithm004(){
+    //给定数组A，该数组排好序后的数组为B，A中的每个元素在排序后数组B中的序号之差不大于K，求排序该数组。
+    //利用堆排序合适，维护一个k+1的heap，从左到右滑动。
+
+    class A{
+        vector<int> solution(const vector<int>& ivec, const int iNum){
+            if(ivec.size()<2 || iNum<1){
+                return ivec;
+            }
+
+            vector<int> ovec;
+            ovec.reserve(ivec.size());
+
+            vector<int> heap;
+            heap.reserve(iNum+1);
+            for(int i=0; i<=iNum;++i){
+                heap.push_back(ivec[i]);
+            }
+            //default is maxHeap
+            // set std::greater<int>() make a minHeap
+            std::make_heap(heap.begin(), heap.end(),std::greater<int>());
+            int indexCur(iNum+1);
+            while(indexCur<ivec.size()){
+                ovec.push_back(heap.front());
+                heap[0] = ivec[indexCur++];
+                std::make_heap(heap.begin(), heap.end(),std::greater<int>());
+            }
+
+            for(int i=0;i<=iNum;++i){
+                ovec.push_back(heap.front());
+                std::pop_heap(heap.begin(),heap.end());
+                heap.pop_back();
+                std::make_heap(heap.begin(), heap.end(),std::greater<int>());
+            }
+            return ovec;
+        }
+
+    public:
+        auto test(){
+            display(solution({4, 1, 5, 2, 6, 3, 9, 7, 8},3));
+        }
+    };
+
+    A().test();
+}
+
+auto algorithm003(){
+    //荷兰国旗问题
+    //1）给定数组和一个数A，使得小于等于A的数在数组左侧，其余的数在右侧。
+    //2）给定数组和一个数A，划分为小于、等于、大于共3个子集。
+
+    class A{
+        //这里返回的inedx指向左边的最后一个元素
+        std::pair<vector<int>, int> solution(const vector<int>& ivec, const int iNum){
+            vector<int> ovec = ivec;
+            int index(-1);
+            int sz = ovec.size();
+            // 遍历的过程中，不断收集左子集合，
+            //收集时index指示集合边界，
+            //先将当前值和边界下一个值交换，然后边界右扩
+            for(int i=0;i!=sz;++i){
+                if(ovec[i]<=iNum){
+                    swap(ovec[++index], ovec[i]);
+                }
+            }
+            return  {ovec, index};
+        }
+
+        std::tuple<vector<int>, int,int> solution2(const vector<int>& ivec, const int iNum){
+            vector<int> ovec = ivec;
+            int sz = ovec.size();
+            int indexL(-1);
+            int indexR(sz);
+            // 遍历的过程中，不断收集左子集合，
+            //收集时index指示集合边界，
+            //满足L：当前值和L边界右一个值交换，然后L边界右扩
+            //满足M：不做事情
+            //满足R：当前值和R边界左一个值交换，然后R边界左扩
+
+            //该slide方法暂时不需要
+            auto slide = [](vector<int>& iovec, int il, int ir, bool isLeft){
+                int sz = iovec.size();
+                if(0<il || il>=sz || il>ir || ir>=sz)
+                {
+                    return;
+                }
+                if(isLeft)
+                {
+                    for(int i = ir;i>il;--i){
+                        swap(iovec[i], iovec[i-1]);
+                    }
+                }
+                else{
+                    for(int i = il;i<ir;++i){
+                        swap(iovec[i], iovec[i+1]);
+                    }
+                }
+            };
+
+
+            for(int i=0;i!=indexR;++i){
+                if(ovec[i]<iNum){
+                    ////slide(ovec,indexL, i,true );
+                    ////++indexL;
+                    swap(ovec[++indexL], ovec[i]);
+                }
+                else if(ovec[i]>iNum){
+                    ////slide(ovec,i,indexR, false );
+                    ////--indexR;
+                    swap(ovec[--indexR], ovec[i--]);
+                }
+                //display(ovec);
+                //cout << indexL <<"--" << indexR<<"--" << i <<endl;
+            }
+            return  {ovec, indexL, indexR};
+        }
+    public:
+        auto test(){
+            auto result = solution({3,2,5,6,1, 7,0,3},3);
+            display(result.first);
+            cout << result.second << endl;
+
+            auto [result2, l, r] = solution2({3,2,5,6,1, 7,0,3},3);
+            display(result2);
+            cout << l << ", " << r << endl;
+        }
+    };
+
+    A().test();
+}
 
 auto algorithm002(){
     // 对数组中每个元素a，将a左边比a小的数加起来称为a的“小和”，求数组所有元素小和之和。
