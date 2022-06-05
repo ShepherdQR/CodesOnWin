@@ -3,7 +3,7 @@
 //  * Date: 2021-06-14 22:43:42
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-06-04 22:22:20
+//  * LastEditTime: 2022-06-05 23:59:47
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -19,6 +19,48 @@
 #include <tuple>
 
 using namespace std;
+
+namespace func20220605{
+
+
+    template<typename... Ts>
+    class B{
+        public:
+        B(Ts... args){
+            cout << sizeof...(args) << endl;
+        }
+    };
+    auto func_3(){
+        B<int, vector<int>> b1(1,{0,1});//2
+        B<> b2;//0
+    }
+
+
+    template<typename T, typename U>
+    class A{
+        public:
+        T t;
+        U u;
+    };
+
+    template<typename T>
+    using A1 = A<std::vector<T>, std::string>;
+
+    auto func_2(){
+        A1<bool> a{{false, false}, "hi"};
+        cout << a.t[1] << endl;
+    }
+
+
+
+
+    auto func20220605_1(){
+    //template class std::vector<bool>; // force instantiation
+    //extern template class std::vector<double>; // should not instantiation in current file
+
+    }
+
+}
 
 
 
