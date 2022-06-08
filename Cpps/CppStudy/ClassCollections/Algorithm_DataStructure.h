@@ -3,7 +3,7 @@
 //  * Date: 2022-06-03 20:31:04
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-06-04 20:47:02
+//  * LastEditTime: 2022-06-08 23:24:52
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -23,13 +23,7 @@ namespace Algorithm_DataStructure
 
      */
 
-
-
-
-
-
-
-    auto display(const vector<int>& ivec){
+    inline auto display(const vector<int>& ivec){
         for(auto cur:ivec){
             cout << cur << ", ";
         }cout << endl;
@@ -44,6 +38,7 @@ namespace Algorithm_DataStructure
 
     public:        
 
+
         SinglyLinkedList(const vector<int>& ivec){
             if(ivec.size()>0){
                 _pHead= new SinglyLinkedList_Node;
@@ -57,6 +52,8 @@ namespace Algorithm_DataStructure
                 pCur = pTemp;
             }
         }
+
+        SinglyLinkedList(std::initializer_list<int> ilist):SinglyLinkedList(std::vector<int>(ilist)){}
 
         ~SinglyLinkedList(){
             SinglyLinkedList_Node* pCur = _pHead;
@@ -87,52 +84,40 @@ namespace Algorithm_DataStructure
             }cout << endl;
         }
 
-        static vector<int> algorithm_1_IntersectionOf2List(const SinglyLinkedList& ia, const SinglyLinkedList& ib){
+        static vector<int> algorithm_1_IntersectionOf2List(const SinglyLinkedList& ia, const SinglyLinkedList& ib);
 
-            vector<int> ovec;
-
-            SinglyLinkedList_Node* pa = ia._pHead;
-            SinglyLinkedList_Node* pb = ib._pHead;
-
-            while(pa && pb){
-                if(pa->data<pb->data){
-                    pa = pa->pNext;
-                }
-                else if(pa->data>pb->data){
-                    pb = pb->pNext;
-                }
-                else{
-                    ovec.emplace_back(pa->data);
-                    pa = pa->pNext;
-                    pb = pb->pNext;
-                }
-            }
-            while(pa){
-                pa = pa->pNext;
-                ovec.emplace_back(pa->data);
-            }
-            while(pb){
-                pb = pb->pNext;
-                ovec.emplace_back(pb->data);
-            }
-            
-            return ovec;
-        }
+        static bool algorithm_2_JudgePalindrome_1(const SinglyLinkedList& ilist);
+        static bool algorithm_2_JudgePalindrome_2(const SinglyLinkedList& ilist);
     };
 
-    auto test_SinglyLinkedList(){
+    inline auto test_SinglyLinkedList(){
+        printf("Test Basic.\n");
         SinglyLinkedList a({1,2,3,4,5});
         a.display();
         a.reverse();
         a.display();
 
-
+        printf("Test Algorithm 01.\n");
         Algorithm_DataStructure::display(
             SinglyLinkedList::algorithm_1_IntersectionOf2List(
                 SinglyLinkedList({1,2,3,4,5}),  SinglyLinkedList({0,2,3,3,5})
             )
         );
 
+        printf("Test Algorithm 02_1.\n");
+        cout << SinglyLinkedList::algorithm_2_JudgePalindrome_1({1,2,3,4,5}) << ", "
+        << SinglyLinkedList::algorithm_2_JudgePalindrome_1({1,2,3,9,2,1}) << ", "
+        << SinglyLinkedList::algorithm_2_JudgePalindrome_1({1,2,3,2,1}) << endl;//0,0,1
+
+        printf("Test Algorithm 02_2.\n");
+
+        SinglyLinkedList aA2_2_a({1,2,3,4,5});
+        SinglyLinkedList aA2_2_b({1,2,3,3,2,1});
+        cout << SinglyLinkedList::algorithm_2_JudgePalindrome_2(aA2_2_a) << ", "
+        << SinglyLinkedList::algorithm_2_JudgePalindrome_2(aA2_2_b) << ", "
+        << SinglyLinkedList::algorithm_2_JudgePalindrome_2({1,2,3,2,1}) << endl;//0,1,1
+        aA2_2_a.display();
+        aA2_2_b.display();
     }
 
 
@@ -252,7 +237,7 @@ namespace Algorithm_DataStructure
             }
         }
     };
-    auto test_Heap(){
+    inline auto test_Heap(){
         Heap(Heap::Type::MaxHeap, {5,3,6,7,7}).display();//77563
 
         Heap hp(Heap::Type::MaxHeap, {9,7,8,6,5,4,3,1});
