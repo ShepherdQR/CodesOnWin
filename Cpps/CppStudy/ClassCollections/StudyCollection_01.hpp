@@ -3,7 +3,7 @@
 //  * Date: 2021-06-14 22:43:42
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-06-05 23:59:47
+//  * LastEditTime: 2022-06-25 00:02:21
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -139,31 +139,7 @@ auto func20220604_3(){
 }
 
 
-template<typename T>
-auto displayTypeInformation(const T& iVal){
-    if constexpr(std::is_integral<T>::value){
-        return iVal+1;
-    }else if constexpr(std::is_null_pointer<T>::value){
-        static int cur(0);
-        return &cur;
-    }else{
-        return iVal+0.04;
-    }
-}
 
-constexpr int fibonacci(const int n){
-    if(n==1 || n == 2){
-        return 1;
-    }
-    return fibonacci(n-1)+ fibonacci(n-2);
-}
-auto func20220604_2(){
-    cout << fibonacci(5) << endl;
-
-    cout << displayTypeInformation(5)<< endl;
-    cout << *displayTypeInformation(nullptr)<< endl;
-    cout << displayTypeInformation(3.1)<< endl;
-}
 
 
 
@@ -202,24 +178,7 @@ auto func20220603(){
     }
 }
 
-void func20220424_DEFINE(){
 
-    bool b = true;
-
-    class A{
-        bool _;
-    public:
-        A(bool ib){_ = ib;}
-
-    };
-    // if(b){
-    //     else{
-    //         cout << "false" << endl;
-    //     }
-    //     cout << "true" << endl;
-    // }
-
-}
 
 
 auto func20220530_a(int i=6){
@@ -502,75 +461,6 @@ void func20220411_invoke_1(){
 
 
 
-// #include <stdio.h> #include <map> 
-// template<class Key, class Value, class Compare> 
-// std::map<Key, Value, Compare> make_map(Compare comp) {
-//      return std::map<Key, Value, Compare>(comp);
-//       }
-     
-//       int main() 
-// { 
-//     auto m = make_map<int,int>([](int x, int y) 
-//     { return x < y; }); 
-    
-//     m[1] = 11; m[2] = 22; for (auto x : m) { printf("%d->%d\n", x.first, x.second); } return 0; 
-//     }
-// //make_map 可以被返回值优化掉。
-
-
-template< class T> void funTemplate1(T args){
-    cout << args << "\t";
-}
-void funThis(){
-    funTemplate1(1);
-}
-
-void funTemplate(){cout <<"." << endl;}
-
-template<class Head, class... T> void funTemplate(Head iHead, T... args){
-    cout << iHead << "\t";
-    return funTemplate(args...);
-}
-    // if( sizeof...(args) ){
-    // }
-
-
-//template<class Head, class... T>
-
-
-void testFunction20220131(){
-
-   // template<class Head, class... T>
-    // [=]<class Head, class... T>(const int Today,
-    //     std::function<void (Head iHead, T... args) >iFunc
-    // ){
-    //     iFunc(2022, 1, Today);
-
-   
-
-    // [=] (const int Today,
-    //     std::function<void (Head iHead, T... args) >iFunc
-    // ){
-    //     iFunc(2022, 1, Today);
-
-    // }<(31, funTemplate);
-
-   
-    // auto f = [=]<class T> ( int Today,
-    //     std::function<void (T) >iFunc
-    // ){
-    //     iFunc( Today);
-
-    // };//(31, funTemplate1)
-
-    // f<int> (31,funTemplate1 );
-
-  //  funTemplate(2022, 1, 31);
-
-}
-
-
-
 // [T00021] a problem
 void testFunc20210817()
 {	
@@ -583,13 +473,7 @@ void testFunc20210817()
 }
 
 
-// [T00020] vector
-void testFunc20210811(){
-    	int size =6;
-	vector<int> vecOut(size);
-	for(int& cur:vecOut)
-	cout << cur << endl;
-}
+
 
 
 // [T00019] thread //[good]
@@ -1061,70 +945,3 @@ void funcRefactoring20210617()
 }
 
 
-// [T00003] Refactor. Finding the missing number.
-int funcShotOne20210615(std::vector<int>* ipVec){
-  return (ipVec->size()-1)*ipVec->size()/2 - accumulate(ipVec->begin(),ipVec->end(),0); 
-}
-void testFuncShotOne20210615()
-{
-    int numSize = 100;
-    std::vector<int> vecNum;
-    for(int i = 0; i<numSize; ++i)
-        vecNum.push_back(i);
-    vecNum[11] = 0;
-
-    srand(time(0));
-    for(int i = 0; i < numSize; ++i)
-        swap(vecNum[ i + rand()%(numSize-i) ], vecNum[i]);
-
-    for(int i = 0; i<numSize; ++i)
-            std::cout << vecNum[i] << "\t";
-
-    std::cout << "\nThe missing number is: " << funcShotOne20210615(&vecNum)  << std::endl;
-}
-
-
-// [T00002] Refactor. Using array of pointers. //[good]
-void funcRun(void*)
-{
-    std::cout << "Game Starts..." << std::endl;
-}
-void funcEnd(void*)
-{
-    std::cout << "Game Ends..." << std::endl;
-}
-void funcIn(void*)
-{
-    char *pStrChoices[4] =
-        {(char*)"Game Starts.", (char*)"Game Ends.", (char*)"Invalid Number, try again."};
-    void(*pFunc[3])(void*) = {funcRun, funcEnd, funcIn};
-    char input(0);
-
-    if (std::cin >> input){
-        input = ((input >= 48) && (input <= 50)) ? input - 48 : 2;
-        std::cout << "Your choice: " << pStrChoices[input] << std::endl;
-        (*pFunc[input])(nullptr);
-    }
-}
-void funcRefactoring20210614()
-{
-    funcIn(nullptr);
-}
-
-
-// [T00001] Test IO 
-void funcTestVector20210614()
-{
-    vector<vector<int>> matrix;
-	int valX(0), valY(0);
-
-	while(cin>>valX >> valY){
-		vector<int> vectorTemp;
-		vectorTemp.push_back(valX);
-		vectorTemp.push_back(valY);
-		matrix.push_back(vectorTemp);
-	}
-
-	for(auto vectorCur:matrix)
-		cout << vectorCur[0] << "\t" << vectorCur[1] << endl;
-}

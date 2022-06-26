@@ -3,7 +3,7 @@
 //  * Date: 2021-08-14 17:49:00
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2021-08-24 23:37:04
+//  * LastEditTime: 2022-06-24 23:45:43
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -52,3 +52,41 @@ void stlSort20210824()
 
 //advance(p,n) do n times ++p
 // distance(first, last) 
+
+
+
+
+
+namespace studyVector{
+
+    // [T00002] initialization
+    void testFunc20210811(){
+        int size = 6;
+        vector<int> vecOut(size);
+        for(const auto& cur:vecOut)
+            cout << cur << endl;//six zeros
+    }
+
+
+    // [T00001] Test IO 
+    void funcTestVector20210614()
+    {
+        vector<vector<int>> matrix;
+        int valX(0), valY(0);
+
+        while(cin>>valX >> valY){
+            vector<int> vectorTemp;
+            vectorTemp.push_back(valX);
+            vectorTemp.push_back(valY);
+            matrix.push_back(vectorTemp);
+        }
+
+        for(auto vectorCur:matrix)
+            cout << vectorCur[0] << "\t" << vectorCur[1] << endl;
+    }
+
+    
+}
+
+
+

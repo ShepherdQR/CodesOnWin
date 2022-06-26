@@ -3,7 +3,7 @@
 //  * Date: 2021-01-10 10:59:00
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-06-08 21:39:50
+//  * LastEditTime: 2022-06-26 20:58:29
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -13,8 +13,13 @@
 #include"./ClassCollections/Algorithm_Sort.hpp"
 #include"./ClassCollections/Algorithm_Search.hpp"
 #include"./ClassCollections/StudyCollection_01.hpp"
-//#include"./ClassCollections/StudyCollection_STL_01.hpp"
-#include"./RayTracing/Picture.h"
+#include"./ClassCollections/StudyCollection_STL_01.hpp"
+//#include"./RayTracing/Picture.h"
+
+#include "./ClassCollections/CasesCollection_01.hpp"
+#include "./ClassCollections/StudyCollection_02_Template.hpp"
+#include "./ClassCollections/StudyCollection_03_Basic.hpp"
+
 
 #include <vector>
 #include <cstring>
