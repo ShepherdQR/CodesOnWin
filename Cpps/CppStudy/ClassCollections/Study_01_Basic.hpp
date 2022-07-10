@@ -3,7 +3,7 @@
 //  * Date: 2022-06-26 20:57:45
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-06-26 22:22:22
+//  * LastEditTime: 2022-06-29 21:26:11
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -15,6 +15,11 @@ using namespace std;
 
 
 namespace study20220626{
+
+    auto func_5(){
+        const char* s = "hi";//c++ const char[3]
+        //char *s = "hi";//c char[3]
+    }
 
     auto func_4(){
         size_t a = 10, *pA = nullptr;

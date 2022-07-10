@@ -3,12 +3,19 @@
 #  * @Date: 2021-06-14 22:17:32
 #  * @Github: https://github.com/ShepherdQR
 #  * @LastEditors: Shepherd Qirong
-#  * @LastEditTime: 2022-04-11 21:41:14
+#  * @LastEditTime: 2022-07-10 22:21:30
 #  * @Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 #************
 
 
 cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
+
+# export CXX=C:/Softwares/llvm/llvm1406/bin/clang++
+
+# SET(CMAKE_C_COMPILER "C:/Softwares/llvm/llvm1406/bin/clang.exe")
+# SET(CMAKE_CXX_COMPILER "C:/Softwares/llvm/llvm1406/bin/clang++exe")
+# SET (CMAKE_CXX_FLAGS                "-Wall -std=c++2b")
+
 add_compile_options(-std=c++17)
 
 PROJECT(CppStudy)

@@ -3,7 +3,7 @@
 //  * Date: 2021-07-25 19:49:16
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-06-26 22:14:09
+//  * LastEditTime: 2022-06-29 21:07:42
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -20,9 +20,10 @@ cd E:\Codes\CodesOnWin\CodesOnWin\Cpps\CppStudy
     //Algorithm_DataStructure::test_SinglyLinkedList();
     //Algorithm_Sort::test();
     //algorithm003();
+    template_Variadic::func_1();
 
 
-    study20220626::func_4();
+    //study20220626::func_4();
     //func20220624();
     //case0002_ThreeSelection::funcRefactoring20210614();
     //studyVector::testFunc20210811();
