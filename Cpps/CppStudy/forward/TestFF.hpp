@@ -3,7 +3,7 @@
 //  * Date: 2022-07-10 22:23:22
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-07-13 00:09:54
+//  * LastEditTime: 2022-07-13 22:58:50
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -19,7 +19,7 @@ cd E:\Codes\CodesOnWin\CodesOnWin\Cpps\CppStudy\forward
 
 
 
-    Basic::func_5();
+    Basic::func_7();
     //Basic::func_1();
 
 

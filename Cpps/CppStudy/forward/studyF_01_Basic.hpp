@@ -3,20 +3,107 @@
 //  * Date: 2022-07-10 22:08:32
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-07-13 00:23:39
+//  * LastEditTime: 2022-07-13 23:46:23
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 #pragma once
 
 #include<iostream>
+#include<type_traits>
 #include<memory>
 #include<vector>
 #include<array>
+#include<string>
+//#import <algorithm>//error: #import of type library is an unsupported Microsoft feature
+#include <algorithm>
+#include<set>
 using namespace std;
 
 //clang -std=c++2b
-//151
+//171
 namespace Basic{
+
+    auto func_9(){
+        struct S{
+            // in c++17, the bug is, with "S() = delete",  S still can be created with {1,2} or {.i=2}
+            //S() = delete;//error: no matching constructor for initialization of 'S'
+            int i, j;
+        };
+
+        S s{1,2};
+    }
+
+
+
+    auto func_8( std::vector<int> vec={1,2,3,5,5,6}){
+       
+        // old-style
+        //vec.erase(std::remove(vec.begin(),vec.end(), 5));
+        
+        std::erase(vec, 10);//new erase: move to the end + erase
+        // the erase operates ont the whole comtainer, like vector, list, etc...
+
+    }
+
+
+    constexpr double func_7_2(double angle){
+        if(std::is_constant_evaluated()){
+            return 5.;//do the slow things that doesn't rely on inline assembly
+        }else{
+            return 6.;// to the fast things that dose use inline assembly
+        }
+    }
+
+    constexpr auto func_7_1(){
+        struct S{
+            [[nodiscard]] constexpr virtual int f()const = 0;
+        };
+
+        struct S1 : public S{
+            [[nodiscard]] constexpr virtual int f()const override{
+                return 1;
+            }
+        };
+        struct S2 : public S{
+            [[nodiscard]] constexpr virtual int f()const override{
+                return 2;
+            }
+        };
+
+        constexpr auto l = []{
+            const S1 s1,s2,s3;
+            const S2 s4,s5;
+            const std::array<const S*,5> data{&s1,&s2,&s3,&s4,&s5};
+            int sum = 0;
+            for(const auto* elem: data){
+                sum +=elem->f();
+            }
+            return sum;
+        };
+
+        constexpr auto ll = l();
+        return ll;
+     
+    }
+    auto func_7(){
+        
+        std::cout << func_7_1() << std::endl;//7
+
+        auto z2 = func_7_2(1.);std::cout << z2 << std::endl;//6
+        constexpr auto z3 = func_7_2(1.);std::cout << z3 << std::endl;//5
+    }
+
+    auto func_6(){
+        struct S{
+            std::string key, val;
+        };
+
+        std::set<S, decltype([](const auto&l, const auto&r){
+            return l.key < r.key;
+        }
+        )
+        > mySet;
+    }
 
 
     auto func_5(){
@@ -32,9 +119,9 @@ namespace Basic{
         // );
 
         // lambda has default constructor
-        auto file=std::unique_ptr<FILE, decltype([](FILE*f){fclose(f);})>(
-            fopen("TestTxt.txt", "w")
-        );
+        // auto file=std::unique_ptr<FILE, decltype([](FILE*f){fclose(f);})>(
+        //     fopen("TestTxt.txt", "w")
+        // );
 
     }
 
