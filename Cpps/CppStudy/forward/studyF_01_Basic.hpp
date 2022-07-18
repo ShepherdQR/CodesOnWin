@@ -3,7 +3,7 @@
 //  * Date: 2022-07-10 22:08:32
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-07-13 23:46:23
+//  * LastEditTime: 2022-07-18 23:21:43
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 #pragma once
@@ -15,13 +15,139 @@
 #include<array>
 #include<string>
 //#import <algorithm>//error: #import of type library is an unsupported Microsoft feature
+#include <functional>
 #include <algorithm>
 #include<set>
 using namespace std;
 
 //clang -std=c++2b
-//171
+//193
 namespace Basic{
+
+    // gcc 12.1
+    // constexpr auto func_14_2_getVal(){
+    //     return std::vector<int>{};
+    // }
+    // constexpr auto func_14_2_getSize(){
+    //     return func_14_2_getVal().size();
+    // }
+    // template<std::size_t Size>
+    // constexpr auto func_14_2_data(){
+    //     auto value = func_14_2_getVal();
+    //     std::array<int, Size> data;
+    //     std::copy(begin(value), end(value), begin(data.begin()), end(data.end()));
+    //     return data;
+    // }
+
+    constexpr auto func_14_1(){
+        int* i = new int{};
+        delete i;
+        // the allocated memory must be freed in the constexpr context.
+        
+        //return i;//error: ‘Basic::func_14_1()’ is not a constant expression because it refers to a result of ‘operator new’
+        //return *i;//error: ‘Basic::func_14_1()’ is not a constant expression because allocated storage has not been deallocated
+        return 2;
+    }
+
+    auto func_14(){
+        constexpr auto val = func_14_1();
+
+        //constexpr auto size = func_14_2_getSize();
+        //constexpr auto value = func_14_2_data<size>();
+    }
+
+
+
+    // tested in https://godbolt.org/ the 
+    constexpr auto func_13_1(auto data){
+        std::sort(begin(data), end(data));
+        return data;
+    }
+    constexpr auto func_13_2(){
+        constexpr auto ss = func_13_1(std::array{1,3,2,4});
+        static_assert(std::is_sorted(begin(ss), end(ss)));
+        return ss;
+    }
+    auto func_13(){
+        for(auto i:func_13_2()){
+            cout <<  i << ", ";
+        }
+    }
+
+    auto func_12(){
+        struct A{
+        };
+        
+        struct B1_1: A{
+            int i = 1;
+            //[[no_unique_address]] A _;
+            A _;
+        };
+
+        struct B1_2: A{
+            int i = 1;
+            [[no_unique_address]] A _;
+        };
+
+        struct B2: A{
+            int i = 1;//4
+        };
+
+        struct B3_1{
+            int i = 1;
+            [[no_unique_address]] A _;//4
+        };
+
+        struct B3_2{
+            int i = 1;
+            A _;
+        };
+
+
+        cout << sizeof(B1_1) << endl;
+        cout << sizeof(B1_2) << endl;
+        cout << sizeof(B2) << endl;
+        cout << sizeof(B3_1) << endl;
+        cout << sizeof(B3_2) << endl;
+
+    }
+
+    auto func_11(){
+        struct Data{
+            int i{},j{};
+            auto operator<=>(const Data&)const = default;
+            //bool operator<(const Data& iD)const{ return i< iD.i;}
+        };
+
+        std::set<Data> d;
+        d.insert({1,2});
+
+        int a[3]={21,2,3};
+        int b[2] = {4,5};
+        cout << (2+b[1])[a-1] << endl;
+        cout << (2)[a-1] << endl;
+    }
+
+    // parameter pack expansion
+    template<typename C, typename... Args>
+    auto bind_v(C ic, Args... args){
+        //return [=](){
+        return [_ic = std::move(ic), ..._args = std::move(args)](){
+            return _ic(_args...);
+        };
+    }
+
+    auto func_10(){
+        auto l = [](int i, int j,int k){return i+j+k;};
+        const auto bound1 = bind_v(l, 2,3, 4);
+        cout << bound1() << endl;
+
+        auto f2 = std::bind_front(l, 2,3);
+        cout << f2(4) << endl;
+
+
+
+    }
 
     auto func_9(){
         struct S{

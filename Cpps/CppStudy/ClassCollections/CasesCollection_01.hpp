@@ -3,7 +3,7 @@
 //  * Date: 2022-06-24 23:16:39
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-06-24 23:58:42
+//  * LastEditTime: 2022-07-18 21:56:31
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -22,7 +22,95 @@ using namespace std;
 //#include <tuple>
 
 
+namespace EBO{
+    template<typename R, typename F, typename G>
+    class composed_fg
+    {
+    public:
+        composed_fg(const F& f, const G& g)
+        : f(f)
+        , g(g)
+        {}
 
+        template<typename T>
+        R operator ()(const T& t) const
+        {
+            return f(g(t));
+        }
+    private:
+        F f;
+        G g;
+    };
+
+    //结构选择，将类结构的可变部分放入公共基类或基类目标并使用一个元程序在它们之间选择
+
+     
+#include <type_traits>
+ 
+using namespace std;
+ 
+template<typename F, bool F_empty, typename G, bool G_empty>
+struct storage;
+ 
+template<typename F, typename G>
+struct storage<F, false, G, false>
+{
+    storage(F const& f, G const& g) : f_(f), g_(g) {}
+    F const& f() { return f_; }
+    G const& g() { return g_; }
+private:
+    F f_;
+    G g_;
+};
+ 
+template<typename F, typename G>
+struct storage<F, false, G, true> : private G
+{
+    storage(F const& f, G const& g) : G(g), f_(f) {}
+    F const& f() { return f_; }
+    G const& g() { return *this; }
+private:
+    F f_;
+};
+ 
+template<typename F, typename G>
+struct storage<F, true, G, true> : private F, private G
+{
+    storage(F const& f, G const& g) : F(f), G(g) {}
+    F const& f() { return *this; }
+    G const& g() { return *this; }
+};
+ 
+template<typename F, typename G>
+struct storage<F, true, G, false> : private F
+{
+    storage(F const& f, G const& g) : F(f), g_(g) {}
+    F const& f() { return *this; }
+    G const& g() { return g_; }
+ 
+private:
+    G g_;
+};
+ 
+template<typename R, typename F, typename G>
+struct compose_fg : storage<F, is_empty<F>::value, G, is_empty<G>::value>
+{
+    using base = storage<F, is_empty<F>::value, G, is_empty<G>::value>;
+    compose_fg(F const& f, G const& g) : base(f, g)
+    {
+ 
+    }
+ 
+    template<typename T>
+    R operator()(T const& x) const
+    {
+        F const& f_ = this->f();
+        G const& g_ = this->g();
+ 
+        return f_(g_(x));
+    }
+};
+}
 
 namespace case0002_ThreeSelection{
     // case0002_ThreeSelection::funcRefactoring20210614()
