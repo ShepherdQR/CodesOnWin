@@ -3,7 +3,7 @@
 //  * Date: 2022-06-24 23:37:40
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-06-29 21:19:53
+//  * LastEditTime: 2022-07-23 22:39:12
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 _Pragma("once");
@@ -16,51 +16,6 @@ _Pragma("once");
 #include <tuple>
 
 using namespace std;
-
-
-
-
-namespace template_Variadic{
-
-    template<typename... Ts> class A1;
-    class A1<int, std::vector<double> >;
-
-
-    // 1. recursive template
-    template<typename T>
-    void f1(T t){
-        cout << t << " " << std::endl;
-    }
-    template<typename T, typename... Ts>
-    void f1(T t, Ts... args){
-        cout << t;
-        f1(args...);
-    }
-
-    // 2. variable parameter template
-    template<typename T, typename... Ts>
-    void f2(T t, Ts... args){
-        cout << t;
-        if constexpr (sizeof...(args)>0){
-            f2(args...);
-        }
-    }
-
-
-    
-    auto func_1(){
-        f1(1," hi.\n");
-        f2(2," hi.\n");
-
-    }
-
-
-}
-
-
-
-
-
 
 
 namespace study20220626{
