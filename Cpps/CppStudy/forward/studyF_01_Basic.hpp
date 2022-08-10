@@ -3,7 +3,7 @@
 //  * Date: 2022-07-10 22:08:32
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-07-23 23:49:39
+//  * LastEditTime: 2022-08-10 21:45:07
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 #pragma once
@@ -26,11 +26,16 @@
 #include <iomanip>
 #include<cmath>
 #include<numbers>
+//#include<cstdint>
 
 
 //clang -std=c++2b
 //230
 namespace Basic{
+
+    // 隐式类型转换：高等级->低等级，有符号->无符号。
+
+
 
     using namespace std;
 
@@ -38,6 +43,79 @@ namespace Basic{
         //[final] forbids the decorated class or member funciton from being inherited or voerloaded.
         // [=default, =delete] decorates the A(),~A(), operator=, A(A&), etc.
         // enum class A: unsigned int{};
+
+        // std::terminate() 
+        // 
+
+    }
+
+
+
+    auto func_28(){
+        using f1 = void(char);
+        [](f1 f){
+            f('a');
+        }([](char a){
+            puts(&a);
+        });//a
+    }
+
+
+    auto func_27(){
+
+        // use mutable, the value of v1 is remembered via each call.
+        auto l = [ v1 = 1]()mutable{
+            ++v1;
+            printf("%d",v1);
+        };
+
+        l();//2
+        l();//3
+    }
+
+    
+    auto func_26(){
+        enum class A : int{
+        //enum class A : bool{// error: enumerator value ‘2’ is outside the range of underlying type ‘bool’
+            a1, a2, a3, a4, a5
+        };
+
+        using enum A;
+        cout << static_cast<int>(a1) << endl;
+        cout << static_cast<int>(a3) << endl;
+    }
+
+    class BitParrern{
+    public:
+        std::uint64_t expected{};
+        std::uint64_t mask{0xFFFFFFFFFFFFFFFF};
+    private:
+        template<std::size_t Size>
+        explicit constexpr BitParrern(const char (&input)[Size]){
+            std::uint64_t curBit = (1<< (Size -2));
+            for(const char val :input){
+                if(val == 0){
+                    return;
+                }
+
+                if(val == '1'){
+                    expected |= curBit;
+                }else if (val == '0'){
+
+                }else if (val == 'x'){
+                    mask &= -curBit;
+                }else{
+                    throw std::logic_error("Invalid.");
+                }
+                curBit >>=1;
+            }
+        }
+    };
+
+    
+    auto func_25(){
+
+        //static_assert(0b1101010 == BitParrern("11xxx10"));
 
     }
 
