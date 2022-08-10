@@ -3,7 +3,7 @@
 //  * Date: 2022-07-19 21:40:02
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-07-23 22:57:55
+//  * LastEditTime: 2022-08-10 23:05:28
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -34,6 +34,14 @@ namespace Template{
     auto func_999(){
 
     }
+
+
+
+    auto func_7(){
+
+
+    }
+
 
     auto func_6(){
         std::map<std::string, long long int> m{
