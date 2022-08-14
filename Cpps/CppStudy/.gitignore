@@ -1,2 +1,5 @@
 build/
 forward/*.exe
+*.o
+forward/build
+forward/gcm.cache
