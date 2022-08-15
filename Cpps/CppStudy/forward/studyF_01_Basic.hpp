@@ -3,7 +3,7 @@
 //  * Date: 2022-07-10 22:08:32
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-08-13 19:27:10
+//  * LastEditTime: 2022-08-15 22:45:04
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 #pragma once
@@ -61,6 +61,39 @@ namespace Basic{
     }
 
     auto func_30(){
+
+        std::string str{"hi"};
+
+        auto l = [](auto&& istr){ 
+            std::string str{"11"};
+            std::string st2{"1111"};
+            str = std::move(istr);
+            puts(str.c_str());//output is istr
+            puts(istr.c_str());//output is str
+        };
+        l(str);// hi; 11
+        puts(str.c_str());//11
+
+        std::string&& rrstr{[]{return std::string{"aa"};}()};
+        l(rrstr);// aa; 11
+        puts(rrstr.c_str());//11
+
+
+
+
+
+
+        struct A{
+            int _{0};
+        };
+        A a1{1};
+        [](auto&& iA){ 
+            A a2{2};
+            a2 = std::move(iA);
+            printf("%d\n",a2._);//1
+        }(a1);
+        printf("%d\n",a1._);//1
+
 
     }
 

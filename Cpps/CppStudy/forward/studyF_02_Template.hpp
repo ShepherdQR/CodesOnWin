@@ -3,7 +3,7 @@
 //  * Date: 2022-07-19 21:40:02
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-08-10 23:05:28
+//  * LastEditTime: 2022-08-15 23:32:02
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -17,11 +17,12 @@
 #include<vector>
 #include<array>
 #include<string>
-#include <functional>
-#include <algorithm>
+#include<functional>
+#include<algorithm>
 #include<set>
 #include<span>
 #include<map>
+#include<variant>
 
 
 
@@ -36,8 +37,59 @@ namespace Template{
     }
 
 
+    
 
-    auto func_7(){
+    template <size_t n, typename... T>
+    constexpr std::variant<T...> func_7_tupleIndex_I(
+        const std::tuple<T...> &tp1, size_t i){
+        if constexpr (n >= sizeof...(T))
+        {
+            throw std::out_of_range("out of range.\n");
+        }
+        if (i == n)
+        {
+            return std::variant<T...>{
+                std::in_place_index<n>, std::get<n>(tp1)};
+        }
+        return func_7_tupleIndex_I<
+            (n < sizeof...(T) - 1 ? n + 1 : 0)>(tp1, i);
+    }
+
+    template<typename... T> 
+    constexpr std::variant<T...> func_7_tupleIndex(
+        const std::tuple<T...>& tp, size_t i
+    ){
+        return func_7_tupleIndex_I<0>(tp,i);
+    }
+
+    template<typename T0, typename... Ts> 
+    std::ostream& operator<<(std::ostream & s,
+        std::variant<T0, Ts...> const &v
+    ){
+        std::visit([&](auto&& x){s<< x;}, v);
+        return s;
+    }
+
+    auto func_7(){// runtime index of std::tuple
+        auto t{std::make_tuple(1,2,'a',true)};
+        int i{2};
+        std::cout << func_7_tupleIndex(t,i) << std::endl;
+
+        auto t2{std::make_tuple(1,2,'a',true)};
+
+        auto newT{std::tuple_cat(t, std::move(t2))};
+
+        auto lambdaLength = []<typename T>(T& itp){
+            return std::tuple_size<T>::value;
+        };
+
+        for(int i{0};i!=lambdaLength(newT);++i){
+            std::cout << func_7_tupleIndex(newT,i) << std::endl;
+        }
+
+
+
+
 
 
     }
