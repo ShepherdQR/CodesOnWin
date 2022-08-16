@@ -3,7 +3,7 @@
 //  * Date: 2022-06-24 23:37:40
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-07-23 22:39:12
+//  * LastEditTime: 2022-08-16 21:53:10
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 _Pragma("once");
@@ -113,41 +113,3 @@ auto func20220604_2(){
 }
 
 
-// [T0003] Todo
-#include <map>
-template<class Key, class Value, class Compare> 
-std::map<Key, Value, Compare> make_map(Compare comp) {
-     return std::map<Key, Value, Compare>(comp);
-}
-auto func20220624()
-{ 
-    auto m = make_map<int,int>([](int x, int y) 
-    { return x < y; }); 
-    
-    m[1] = 11; m[2] = 22; 
-    for (auto x : m) { 
-        printf("%d->%d\n", x.first, x.second); 
-    } 
-}
-//make_map 可以被返回值优化掉。
-
-
-// [T0002] Args... args
-void funTemplate(){cout <<"." << endl;}
-template<class Head, class... T> void funTemplate(Head iHead, T... args){
-    cout << iHead << "\t";
-    return funTemplate(args...);
-}
-auto func20220624_2(){
-    funTemplate(1,"hi", 2.1);
-}
-
-
-// [T0001] simpleTemplate
-template< class T> void funTemplate1(T args){
-    cout << args << "\t";
-}
-void func20220624_funThis(){
-    funTemplate1(1);
-    funTemplate1("hi");
-}

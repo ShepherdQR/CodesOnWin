@@ -3,7 +3,7 @@
 //  * Date: 2022-07-19 21:40:02
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-08-15 23:32:02
+//  * LastEditTime: 2022-08-16 21:51:41
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -36,6 +36,45 @@ namespace Template{
 
     }
 
+
+
+    template<typename Key, typename Value, typename Compare>
+    auto func_10_MakeMap(Compare x){
+        return std::map<Key, Value, Compare>(x);
+    }
+    auto func_10(){
+        ////20220624    make_map 可以被返回值优化掉。
+        auto m = func_10_MakeMap<int, int>([](int x, int y){
+            return x > y;
+        });
+        m[1] = 11; m[2] = 22; m[3] = 33;
+        for (auto x : m) { 
+            printf("%d->%d\n", x.first, x.second); 
+        } // 2->22      \n      1->11
+        
+    }
+
+
+    void func_9_T(){
+        printf(".\n");
+    }
+    template<typename T, typename... Ts>
+    void func_9_T(T t, Ts... ts){
+        std::cout << t << "\t";
+        return func_9_T(ts...);
+    }
+    auto func_9(){//20220624    Args... args
+        func_9_T(1,"hi", true, std::string{"hello"});
+    }
+
+    auto func_8(){
+        //20220624  simple template
+        auto l = []<typename T>(T it){
+            std::cout << it << std::endl;
+        };
+        l(1);
+        l(std::string{"hi"});
+    }
 
     
 
