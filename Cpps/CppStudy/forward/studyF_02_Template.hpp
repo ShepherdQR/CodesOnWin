@@ -3,7 +3,7 @@
 //  * Date: 2022-07-19 21:40:02
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-08-16 21:51:41
+//  * LastEditTime: 2022-08-18 23:34:32
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -36,6 +36,15 @@ namespace Template{
 
     }
 
+
+    template<typename T, typename ...Args>
+    std::unique_ptr<T> func_11_make_unique( Args&& ...args )
+    {
+        return std::unique_ptr<T>( new T( std::forward<Args>(args)... ) );
+    }
+
+
+  
 
 
     template<typename Key, typename Value, typename Compare>

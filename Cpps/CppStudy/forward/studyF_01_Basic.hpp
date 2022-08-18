@@ -3,7 +3,7 @@
 //  * Date: 2022-07-10 22:08:32
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-08-15 22:45:04
+//  * LastEditTime: 2022-08-18 23:29:45
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 #pragma once
@@ -59,6 +59,138 @@ namespace Basic{
 
 
     }
+
+    auto func_33(){
+
+        struct A{
+            A(char ic):_ic(ic){}
+            char _ic{'_'};
+            virtual ~A(){printf("\t%c\n", _ic);}
+        };
+
+        struct B2;
+        struct B1 : A{
+            using A::A;
+            std::shared_ptr<B2> sp{nullptr};
+        };
+        struct B2 : A{
+            using A::A;
+            std::weak_ptr<B1> wp;
+        };
+
+
+        // set sp to wp frist, or last, dose not matter
+        {
+            auto sp1 = std::make_shared<B1>('1');
+            auto sp2 = std::make_shared<B2>('2');
+            sp2->wp = sp1;
+            sp1->sp = sp2;
+        }// 2 1
+
+        {
+            auto sp1 = std::make_shared<B1>('1');
+            auto sp2 = std::make_shared<B2>('2');
+            sp1->sp = sp2;
+            sp2->wp = sp1;
+        }// 2 1
+
+
+    }
+
+    auto func_32(){
+        
+        printf("unique_ptr\n");
+
+
+        {
+            struct AA{
+                int aa{11};
+            };
+
+            struct MyDeletor{
+                void operator()(AA *pt) const{
+                    if (pt){
+                        printf("hi\n");
+                        delete pt;
+                        pt = nullptr;
+                    }
+                }
+            };
+
+            std::unique_ptr<AA,MyDeletor> p1(new AA(22), MyDeletor());
+            std::cout << p1->aa << std::endl;
+            
+        }
+
+        {
+            // auto lDeletor = [](int* ip) {
+            //     if (ip){
+            //         printf("hi\n");
+            //         delete ip;
+            //         ip = nullptr;
+            //     }
+            // };
+
+            // std::unique_ptr<int,lDeletor> p1(new int(22), lDeletor());
+            // std::cout << *p1 << std::endl;
+           
+        }
+
+        {
+            
+            if( struct A{
+                    void f(int i){
+                        printf("\tF%d\n", i);
+                    }
+                };
+                auto p1{std::make_unique<A>()})
+            {
+                p1->f(1);//  F1
+
+                auto l = [&p1, p2{std::move(p1)}]mutable {
+                    puts("hello\n");
+                    if(p1){
+                        p1->f(11);
+                        p2 = std::move(p1);
+                    }
+                    else if(p2){
+                        p2->f(22);
+                        p1 = std::move(p2);
+                    }
+                };
+                l();//  F22
+                l();//  F11
+            }
+        }
+
+
+    }
+
+    auto func_31(){
+
+        // shared_ptr
+        {
+            printf("shared_ptr\n");
+            auto p1 = std::make_shared<int>(11);
+            std::cout << p1.use_count() << std::endl;//1
+            auto p2 = p1;
+            std::cout << p2.use_count() << std::endl;//2
+
+            p2.reset();
+            std::cout << p1.use_count() << std::endl;//1
+            std::cout << p2.use_count() << std::endl;//0
+
+            //std::cout << *p2 << std::endl;//crush
+            p2.reset();
+
+            p1.reset();
+            std::cout << p1.use_count() << std::endl;//0
+
+        }
+
+    }
+
+
 
     auto func_30(){
 
