@@ -3,7 +3,7 @@
 //  * Date: 2022-07-10 22:08:32
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-08-18 23:29:45
+//  * LastEditTime: 2022-09-03 21:16:39
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 #pragma once
@@ -26,6 +26,7 @@
 #include <iomanip>
 #include<cmath>
 #include<numbers>
+#include<regex>
 //#include<cstdint>
 
 
@@ -55,8 +56,90 @@ namespace Basic{
         reference collapsing rule: only T is r, then only T&& is r too.
         */
 
+       /* ===========
+        regular expression
+
+        $       match end
+
+        (,)     marks the start and end of a subexpression
+
+        *       matches the previous subexpression 0 or more times.     [For example, foo* matches fo and foooo. * is equivalent to {0,}.]
+        
+        +       matches the previous subexpression 1 or more times       [For example, foo+ matches foo and foooo but does not match fo. + is equivalent to {1,}.]  
+
+        .       matches any single character except the new line \n
+        [       the beginning of a bracket expresion.
+        
+        ?       matches the previous subexpression 1 or more times, or indicates a non-greedy qualifier.        [For example, Your(s)? can match Your in Your or Yours. ? is equivalent to {0,1}.]
+
+        \       Marks the next character as either a special character, or a literal character, or a backward reference, or an octal escape character. For example, n Matches the character n. \n matches newline characters. The sequence \\ Matches the '\' character, while \( matches the '(' character.
+        ^       Matches the beginning of the input string, unless it is used in a square bracket expression, at which point it indicates that the set of characters is not accepted.
+        {       the beginning of a qualifier expression.
+        \|      Indicates a choice between the two.
+        {n}     n is a non-negative integer. Matches the determined n times. For example, o{2} cannot match o in for, but can match two o in foo.
+        {n,}    n is a non-negative integer. Match at least n times. For example, o{2,} cannot match o, but matches all o in foooooo. o{1,} is equivalent to o+. o{0,} is equivalent to o*.
+        {n,m}   m and n are non-negative integers, where n is less than or equal to m. Matches at least n times and matches up to m times. For example, o{1,3} will match the first three o in foooooo. o{0,1} is equivalent to o?. Note that there can be no spaces between the comma and the two numbers.
+
+       */
 
 
+
+
+    }
+
+    auto func_35(){
+
+       std::string str[]{"foo.txt", "bar.txt", "a1.txt", "AA.txt", "ab.tex"};
+       std::regex my_regex("[a-z]+\\.txt");
+       std::smatch base_match;
+       for(const auto& cur: str){
+            std::cout << cur << "\t\t" << std::regex_match(cur, my_regex) << std::endl;//11000
+
+            if(std::regex_match(cur, base_match, my_regex)){
+                auto sz{base_match.size()};
+                std::cout << sz << std::endl;
+                if(sz==1){
+                    std::string base = base_match[1].str();
+                    std::cout << "[0, 1]\t" << base_match[0].str() << ", " << base << std::endl;
+                }
+            }
+       }
+        /********************************
+            foo.txt         1
+            1
+            [0, 1]  foo.txt,
+            bar.txt         1
+            1
+            [0, 1]  bar.txt,
+            a1.txt          0
+            AA.txt          0
+            ab.tex          0
+       */
+    }
+
+
+
+
+
+    auto func_34(){
+        
+        auto p = std::make_unique<int>(11);
+        auto _1 = [&p][[nodiscard]]->int&{
+            //int pa = *p;// warning: ignoring return value of ‘Basic::func_34()::<lambda()>’, declared with attribute ‘nodiscard’ [-Wunused-result]
+            static int pa = *p;
+            return pa;
+        }();
+
+        auto _2 = /***/(std::move([&p][[nodiscard]]->int* /*&*/{
+            //int pa = *p;// warning: ignoring return value of ‘Basic::func_34()::<lambda()>’, declared with attribute ‘nodiscard’ [-Wunused-result]
+            auto p1 = p.get();
+            return p1;
+        }()));
+
+
+
+
+        printf("%d\n", *p);
 
     }
 

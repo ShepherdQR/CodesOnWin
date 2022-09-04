@@ -3,13 +3,14 @@
 //  * Date: 2022-07-10 22:03:35
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-08-18 22:09:03
+//  * LastEditTime: 2022-09-03 21:21:40
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
 //import studyF_Module;
 #include<iostream>
-#include"studyF_01_Basic.hpp"
+//#include"studyF_01_Basic.hpp"
+#include"studyF_01_Basic_2.hpp"
 //#include"studyF_02_Template.hpp"
 //#include"studyF_03_STL.hpp"
 

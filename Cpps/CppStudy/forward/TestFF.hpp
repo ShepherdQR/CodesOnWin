@@ -3,7 +3,7 @@
 //  * Date: 2022-07-10 22:23:22
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-08-18 23:25:11
+//  * LastEditTime: 2022-09-03 21:40:31
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -23,7 +23,7 @@ cd e: && cd Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/forward
 
     //Template::func_10();
     //template_Variadic::func_1();
-    Basic::func_33();
+    Basic::func_37();
 
     //STL::func_8();
 
