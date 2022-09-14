@@ -3,7 +3,7 @@
 //  * Date: 2022-01-17 21:55:53
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-02-01 22:38:26
+//  * LastEditTime: 2022-09-15 00:03:41
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -12,6 +12,7 @@
 #include "../../myTools/Vector3.h"
 #include "../../myTools/Vector4.h"
 #include "../../myTools/Ray.h"
+#include "../../myTools/BSpline.h"
 
 #include <iostream>
 #include <cstring>
@@ -114,6 +115,32 @@ const TypeRay iTypeRay /*= TypeRay::Sky*/)
         };
 
         Picture::_picture(image_width, image_height, lambdaPositionColor4, "Sphere");
+
+
+    }
+
+    else if(TypeRay::BSpline == iTypeRay){
+
+        //BSpline bs({{10,0, 10},{20,0, 90} ,{40, 0,20},{60,0, 80},{80,0,5}},4);
+        //BSpline bs({{10,1, -10},{20,2, -90} ,{40, 3,-20},{60,4, -80},{80,5,-5}},4);
+        BSpline bs({{-0.5,-0.5,-1},{-0.2,0.2,-1} ,{0.1,-0.3,-1},{0.3, 0.0,-1},{0.5, 0.4,-1}},4);
+        //BSpline bs({{0.10,0.10,-10},{0.20,0.90,-10} ,{0.40, 0.20,-10},{0.60,0.80,-10},{0.80,0.05,-10}},3);
+
+        for(auto cur: *bs._uplistPoint){
+            std::cout << cur << std::endl;
+        }
+
+        auto lambdaPositionColor5 = [&](const int i, const int j){
+
+            double u = double(i) / (image_width - 1);
+            double v = double(j) / (image_height - 1);
+            Ray ray(origin, lower_left_corner + u*horizontal + v*vertical - origin);
+            Vector3 ovecColor = ray.BSpline(bs._uplistPoint)* 255;
+
+            return ovecColor;
+        };
+
+        Picture::_picture(image_width, image_height, lambdaPositionColor5, "BSpline");
 
 
     }

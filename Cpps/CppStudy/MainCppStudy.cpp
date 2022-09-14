@@ -3,7 +3,7 @@
 //  * Date: 2021-01-10 10:59:00
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-08-13 22:26:45
+//  * LastEditTime: 2022-09-14 22:16:08
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -14,7 +14,7 @@
 #include"./ClassCollections/Algorithm_Search.hpp"
 
 #include"./ClassCollections/StudyCollection_01.hpp"
-//#include"./RayTracing/Picture.h"
+#include"./RayTracing/Picture.h"
 
 #include "./ClassCollections/Study_01_Basic.hpp"
 #include "./ClassCollections/Study_02_Template.hpp"
@@ -50,10 +50,10 @@ int main() {
 
 	
 	
-	#include"TestStudy.hpp"
+	//#include"TestStudy.hpp"
 	
 
-	//#include "TestRayTracing.hpp"
+	#include "TestRayTracing.hpp"
 
 
 

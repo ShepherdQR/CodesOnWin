@@ -3,11 +3,12 @@
 //  * Date: 2022-01-19 21:36:50
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-09-06 23:01:33
+//  * LastEditTime: 2022-09-15 00:12:26
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
 #include"Vector3.h"
+#include<memory>
 
 #pragma once
 
@@ -28,6 +29,8 @@ class Ray {
         Color3 sky();
 
         Color3 sphere(const Vector3& iCenter,  const double iRadus);
+
+        Color3 BSpline(std::shared_ptr<std::vector<Vector3> > iuplistPoint);
 
 
         
@@ -74,8 +77,6 @@ Color3 Ray::sphere(const Vector3& iCenter,  const double iRadus)
 
         */
 
-
-
         double hitP(-1.);
         //return Vector3{1,0,0};
         hitP = (-b - sqrt(discriminant) ) / (/*2.0**/a);
@@ -85,8 +86,37 @@ Color3 Ray::sphere(const Vector3& iCenter,  const double iRadus)
         }
     }
 
-
-    
     return Ray::sky();
 
 }
+
+
+Color3 Ray::BSpline(std::shared_ptr<std::vector<Vector3> > iuplistPoint)
+{
+    if(iuplistPoint)
+    {
+        //auto a = _direction.length_squared();//dot(_direction, _direction);
+
+        for(const auto& ptCur: *iuplistPoint)
+        {
+            Vector3 oc = _origin - ptCur;
+
+            Vector3 oDiff = oc - _direction;
+
+            double bb = oDiff.length_squared();
+           // std::cout << oDiff << std::endl;
+            if(bb<0.01)
+            {
+                return {1.0, 1.0, 1.0};
+            }
+
+        }
+        
+    }
+
+
+
+
+    return Ray::sky();
+}
+
