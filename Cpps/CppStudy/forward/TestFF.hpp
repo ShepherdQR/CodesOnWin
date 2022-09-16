@@ -3,7 +3,7 @@
 //  * Date: 2022-07-10 22:23:22
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-09-03 21:40:31
+//  * LastEditTime: 2022-09-16 23:54:44
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -23,7 +23,8 @@ cd e: && cd Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/forward
 
     //Template::func_10();
     //template_Variadic::func_1();
-    Basic::func_37();
+    Basic::func_41();
+    //Thread::func_5();
 
     //STL::func_8();
 
@@ -34,7 +35,14 @@ cd e: && cd Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/forward
 
 
 
+/* =========== Good Book
+Effective Modern C++
 
+Google C++ Style Guide [doloaded onto desktop]
+
+
+
+*/
 
 
 

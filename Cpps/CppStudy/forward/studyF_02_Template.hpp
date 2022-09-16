@@ -3,7 +3,7 @@
 //  * Date: 2022-07-19 21:40:02
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-08-18 23:34:32
+//  * LastEditTime: 2022-09-17 00:13:11
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -134,11 +134,6 @@ namespace Template{
         for(int i{0};i!=lambdaLength(newT);++i){
             std::cout << func_7_tupleIndex(newT,i) << std::endl;
         }
-
-
-
-
-
 
     }
 
