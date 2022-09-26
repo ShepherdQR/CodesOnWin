@@ -3,7 +3,7 @@
 //  * Date: 2022-09-03 21:20:32
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-09-16 23:48:57
+//  * LastEditTime: 2022-09-26 23:29:34
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -27,6 +27,24 @@ namespace Basic{
 
         */
 
+    }
+
+    auto func_42(){
+
+        // use of a->b && a->b->c, only on idempotent function
+        // idempotent function: f(f(x)) == f(x)
+
+        struct A{
+             std::unique_ptr<int> f(){
+                ++a;
+                return std::make_unique<int>(1);
+            }
+            int a{11};
+        };
+
+        if(A a, *a1{&a};a1 && a1->f() && *(a1->f()) == 1){
+            printf("%d\n", a1->a);
+        }
     }
 
     auto func_41(){
