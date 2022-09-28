@@ -3,7 +3,7 @@
 //  * Date: 2022-07-10 22:03:35
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-09-26 23:20:43
+//  * LastEditTime: 2022-09-27 20:33:08
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -20,9 +20,9 @@
 
 //#include"studyF_ThreadPool.hpp"
 
-int main(){
+auto main()->int{
 
-    std::cout <<__cplusplus <<std::endl;//20220411, c++17
+    std::cout <<__cplusplus <<std::endl;//[20220411, c++17][20220927, 202100]
 	std::cout << "Hi<" << std::endl;
 
     #include"TestFF.hpp"

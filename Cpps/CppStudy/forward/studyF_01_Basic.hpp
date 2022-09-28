@@ -3,7 +3,7 @@
 //  * Date: 2022-07-10 22:08:32
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-09-26 23:20:18
+//  * LastEditTime: 2022-09-28 21:58:50
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 #pragma once
@@ -61,6 +61,12 @@ namespace Basic{
         {n}     n is a non-negative integer. Matches the determined n times. For example, o{2} cannot match o in for, but can match two o in foo.
         {n,}    n is a non-negative integer. Match at least n times. For example, o{2,} cannot match o, but matches all o in foooooo. o{1,} is equivalent to o+. o{0,} is equivalent to o*.
         {n,m}   m and n are non-negative integers, where n is less than or equal to m. Matches at least n times and matches up to m times. For example, o{1,3} will match the first three o in foooooo. o{0,1} is equivalent to o?. Note that there can be no spaces between the comma and the two numbers.
+
+
+        function declaration, or function prototype, or function haders.
+        Function signature is used to denote the combination of the fuction name and is parameter list, but without the return type.
+
+        The [[nodiscard]] attribute can be used on classes, functions, and enumerations.
 
        */
 
