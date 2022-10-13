@@ -3,7 +3,7 @@
 //  * Date: 2022-09-03 21:20:32
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-09-28 22:12:01
+//  * LastEditTime: 2022-10-13 23:23:04
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -21,6 +21,7 @@
 
 #include <cmath>
 #include <compare>
+#include <algorithm>
 
 namespace Basic{
 
@@ -34,6 +35,113 @@ namespace Basic{
 
         */
 
+    }
+
+
+    auto f_func_49_1(int&)       -> int{return 42;};
+    auto f_func_49_1(int const&) -> double{return 3.14;};
+    auto func_49(){
+        // https://en.cppreference.com/w/cpp/compiler_support
+
+        {   // [23:1] [P1102R2] [Make () more optional for lambdas]
+
+            std::string strCur {"abc"};
+            auto noSean = [sLocal = std::move(strCur)] mutable {
+                sLocal += "d";
+                std::cout << sLocal << '\n'; 
+            };
+            noSean();
+
+        }
+
+        {   // [23:2] [P2036R3] [Change scope of lambda trailing-return-type][no compiler support yet]
+
+            //This paper proposes that name lookup in the trailing-return-type of a lambda first consider that lambda’s captures before looking further outward. 
+            //That is, treat the trailing-return-type like the function body rather than treating it like a function parameter.
+
+
+            //  Today, both lambdas return int.
+            {
+                //auto f_func_49_1(int&)       -> int{return 42;};
+                //auto f_func_49_1(int const&) -> double{return 3.14;};
+                int i{};
+
+                auto should_capture = [=]() -> decltype(f_func_49_1(i)) {
+                    return f_func_49_1(i);
+                };
+                auto should_not_capture = [=]() -> decltype(f_func_49_1(i)) {
+                    return 42;
+                };
+                std::cout << should_capture() << std::endl; //3 [should return 3.14]
+                std::cout << should_not_capture() << std::endl; //42 [ill-formed]
+            }
+        }
+
+        {   // [23:3] [P2173R1][Attributes on lambdas]
+
+            auto l=[][[nodiscard]]{return 42;};
+            l(); //warning: ignoring return value
+            auto fetch = l();
+            
+        }
+
+        {   // [20:1] [P0409R2][Allow lambda-capture [=, this]]
+            // [=, *this] by value
+            // [=, this] by reference
+
+            struct A{
+                int _a{};
+            public:
+                A(){
+                    auto l = [=,*this]mutable{printf("%d\n",++_a);};   
+                    l();                                //1
+                    l();                                //2
+                    printf("%d\n",_a);                  //0
+                    [=,this]{printf("%d\n",++_a);}();   //1
+                    printf("%d\n",_a);                  //1
+                }
+            } _;
+        }
+
+    }
+
+    class A_func_48{
+    public:
+        static  constexpr int a[2]{1,2};
+        int b[2]{};
+        int c[a[1]]{3,4};
+        double d[4] = {1,2};
+        double e[4] = {1,2.0};
+        std::array<int,3> f{1,2,3};
+        std::vector<int> g{1,2,3};
+    };
+    auto func_48(){
+
+        auto l = [](const auto& t){std::cout << t << "\t";};
+        A_func_48 a;
+        std::ranges::for_each(a.a,l);std::cout << std::endl;
+        std::ranges::for_each(a.b,l);std::cout << std::endl;
+        std::ranges::for_each(a.c,l);std::cout << std::endl;
+        std::ranges::for_each(a.d,l);std::cout << std::endl;
+        std::ranges::for_each(a.e,l);std::cout << std::endl;
+        std::ranges::for_each(a.f,l);std::cout << std::endl;
+        std::ranges::for_each(a.g,l);std::cout << std::endl;
+        /* ===========
+            1       2
+            0       0
+            3       4
+            1       2       0       0
+            1       2       0       0
+            1       2       3
+            1       2       3
+        */
+    }
+
+    auto func_47(){
+        union f{
+            auto g(int i)->void{printf("%d\n", i);}
+        };
+        //f::g(42);
     }
 
     auto func_46_1(int i){
