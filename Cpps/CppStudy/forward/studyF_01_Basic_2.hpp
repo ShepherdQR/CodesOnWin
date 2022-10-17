@@ -3,7 +3,7 @@
 //  * Date: 2022-09-03 21:20:32
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-10-13 23:23:04
+//  * LastEditTime: 2022-10-17 23:17:09
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -37,13 +37,66 @@ namespace Basic{
 
     }
 
+ 
+
+
+    namespace P0315R4_4{
+        //static decltype([]{}) f();//declared ‘static’ but never defined [-Wunused-function]
+        //static decltype([]{}) g();//declared ‘static’ but never defined [-Wunused-function]
+        //static decltype(g()) g();//declared ‘static’ but never defined [-Wunused-function]
+        [[maybe_unused]] static void h(decltype([]{})*){}
+        [[maybe_unused]] static void h(decltype([]{})*){}
+        //h(nullptr);//error: expected constructor, destructor, or type conversion before ‘(’ token
+        
+        using A = decltype([]{});
+        static auto i(A*)->void;
+        [[maybe_unused]] static auto i(A*)->void{}
+        //static void i(A*){}//error: redefinition
+        //i(nullptr);//error: expected constructor, destructor, or type conversion before ‘(’ token
+
+        template<typename T>
+        using B = decltype([]{});
+        [[maybe_unused]] static void j(B<char16_t>*){}
+        [[maybe_unused]] static void j(B<char32_t>*){}
+        //j(nullptr);//error: expected constructor, destructor, or type conversion before ‘(’ token
+
+        template<int N> static void k(decltype([]{return 0;}()));
+        template<int N> static void k(decltype([]{return 0;}()));
+        template<int N> static void k(int);
+
+        struct lambda{auto operator()()const{return 0;}};
+        template<int N> static void k(decltype(lambda{}()));
+        template<int N> static void k(decltype(lambda{}()));
+        template<int N> static void k(int);
+
+        template <auto> struct foo{};
+        extern foo<+[](){}>  x;
+
+        [[maybe_unused]] void f(int i) {
+            [[maybe_unused]] auto lambda = [=]{ return i; }; // captures i
+            static_assert(sizeof(int) == sizeof([=]{ return i; }));
+        }
+
+        [[maybe_unused]] auto ff(int i) -> decltype([ii = i](auto g) { return g(ii); });
+
+        template<typename T>
+        void f(T t) requires requires{
+            []{typename T::invalid foo;};
+        };
+
+        template<typename T>
+        void f(T t) requires requires{
+            [](auto a){typename decltype(a)::invalid foo;}(t);
+        };
+
+    }
 
     auto f_func_49_1(int&)       -> int{return 42;};
     auto f_func_49_1(int const&) -> double{return 3.14;};
     auto func_49(){
         // https://en.cppreference.com/w/cpp/compiler_support
 
-        {   // [23:1] [P1102R2] [Make () more optional for lambdas]
+        {   // [23:1/3] [P1102R2] [Make () more optional for lambdas]
 
             std::string strCur {"abc"};
             auto noSean = [sLocal = std::move(strCur)] mutable {
@@ -54,7 +107,7 @@ namespace Basic{
 
         }
 
-        {   // [23:2] [P2036R3] [Change scope of lambda trailing-return-type][no compiler support yet]
+        {   // [23:2/3] [P2036R3] [Change scope of lambda trailing-return-type][no compiler support yet]
 
             //This paper proposes that name lookup in the trailing-return-type of a lambda first consider that lambda’s captures before looking further outward. 
             //That is, treat the trailing-return-type like the function body rather than treating it like a function parameter.
@@ -77,15 +130,16 @@ namespace Basic{
             }
         }
 
-        {   // [23:3] [P2173R1][Attributes on lambdas]
+        {   // [23:3/3] [P2173R1][Attributes on lambdas]
 
             auto l=[][[nodiscard]]{return 42;};
-            l(); //warning: ignoring return value
+            //l(); //warning: ignoring return value
             auto fetch = l();
+            std::cout << fetch << std::endl;
             
         }
 
-        {   // [20:1] [P0409R2][Allow lambda-capture [=, this]]
+        {   // [20:1/7] [P0409R2][Allow lambda-capture [=, this]]
             // [=, *this] by value
             // [=, this] by reference
 
@@ -101,6 +155,161 @@ namespace Basic{
                     printf("%d\n",_a);                  //1
                 }
             } _;
+        }
+
+        {   // [20:2/7] [P0428R2][template-parameter-list for generic lambdas]
+            /* ===========
+                []<typename T>(T x) {  }
+                []<typename T>(T* p) {  }
+                []<typename T, int N>(T (&a)[N]) {  }
+            */
+
+            std::cout << "20:2" << std::endl;
+            // There 3 reasons
+            {   // 1. to simply "pattern matching"
+
+                auto f_old = [](auto ivec){
+                    using T = typename decltype(ivec)::value_type;
+                    std::cout << (std::is_same<T, int>::value) << std::endl;
+                };
+
+                f_old(std::vector<int>{});
+                f_old(std::vector<double>{});
+
+ 
+                auto f_New = []<typename T>(std::vector<T> ivec){
+                    std::cout << (std::is_same<T, int>::value) << std::endl;
+                };
+
+                f_New(std::vector<int>{});
+                f_New(std::vector<double>{});                            
+            }
+
+            {   // 2. retrieve the type of the parameter of a generic lambda
+                [[maybe_unused]] auto f_Old = [](auto const& x,
+                    typename std::decay_t<decltype(x)>::difference_type n){
+                    using T = std::decay_t<decltype(x)>;
+                    T copy = x;
+                    T::static_function();
+                    using It [[maybe_unused]] = typename T::iterator;
+                };
+
+                [[maybe_unused]] auto f_New = []<typename T>(T const& x,
+                    typename T::difference_type n){
+                    T copy = x;
+                    T::static_function();
+                    using It [[maybe_unused]] = typename T::iterator;
+                };
+            }
+
+            {   // 3. perfect forwarding also needs to use decltype
+                [[maybe_unused]] auto f_Old = [](auto&& ...args){
+                    return foo(std::forward<decltype(args)>(args)...);
+                };
+
+                [[maybe_unused]] auto f_New = []<typename ...T>(T&& ...args){
+                    return foo(std::forward<T>(args)...);
+                };
+
+            }
+		
+        }
+
+        {   // [20:3/7] [P0315R4][Lambdas in unevaluated contexts]
+
+            // 1. a concern is that lambda-expressions might then be able to appear in the signature of functions with external linkage, which would require implementations to generate a name for the associated closure type.
+
+            {   // 2. Another similar problem is that of lambda-expressions appearing in the signature of function templates. There are two ways this could happen. First, a lambda expression could appear not by itself, but indirectly, by being part of an expression which references a template parameter.  The other situation we would like to avoid is for implementations to have to figure out that the two following expressions are equivalent, either for linkage purposes (in different translation units) or for redeclaration purposes (in the same translation unit).
+                [[maybe_unused]] auto l = []<int N>(const char (*s)[([]{},N)]){};
+
+            }
+
+            {   // 3.
+                /* ===========
+                // the inline function calls func with a closure type that is supported to be unique.
+                // foo and bar modify the same cnt variable.
+                // a.h
+                template<typename T>
+                int func(){
+                    static int cnt = 0;
+                    return cnt++;
+                }
+                inline int f(){ return func<decltype([]{})>();}
+
+                // translation unit 1:
+                #include "a.h"
+                int foo(){return f();}
+
+                // translation unit 2:
+                #include "a.h"
+                int bat(){return f();}
+                */
+
+                [[maybe_unused]] auto l = []<typename T>{
+                    static int cnt = 0;
+                    return cnt++;
+                };
+            }
+
+            {   // 4.
+                using namespace P0315R4_4;
+                /* ===========
+                // foo.h
+                template <auto> struct foo{};
+                //In both cases, this should be an ODR violation.
+                extern foo<+[](){}>  x1;
+                inline foo<+[](){}>  x2;
+                
+
+                // translation unit 1:
+                #include "a.h"
+                                
+                // translation unit 2:
+                #include "a.h"
+
+                */
+                
+            }
+
+        }
+
+        {   // [20:4/7] [P0588R1][DR: Simplifying implicit lambda capture]
+
+            int arr[2];
+            [[maybe_unused]] auto [y, z] = arr;
+
+        }
+
+        {   // [20:5/7] [P0624R2][Default constructible and assignable stateless lambdas]
+	
+        }
+
+        {   // [20:6/7] [P0780R2][Pack expansion in lambda init-capture]
+        
+        }
+
+        {   // [20:7/7] [P1091R3, P1381R1][Lambda capture and storage class specifiers of structured bindings]
+        	
+        }
+        
+        {   // [17:1/2] [P0018R3][Lambda capture of *this]
+        			
+        }   
+
+        {   // [17:2/2] [P0170R1][constexpr lambda expressions]
+        			
+        }
+
+        {   // [14:1/2] [N3648][Initialized/Generalized lambda captures (init-capture)]
+        	
+        }   
+
+        {   // [14:2/2] [N3649][Generic lambda expressions]
+        
+        }
+
+        {   // [11:1/1] [N2550, N2658, N2927][Lambda expressions]
+        	
         }
 
     }
