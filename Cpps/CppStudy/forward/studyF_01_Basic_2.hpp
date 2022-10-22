@@ -3,7 +3,7 @@
 //  * Date: 2022-09-03 21:20:32
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-10-17 23:17:09
+//  * LastEditTime: 2022-10-22 23:56:02
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -22,6 +22,9 @@
 #include <cmath>
 #include <compare>
 #include <algorithm>
+#include <map>
+#include <optional>
+
 
 namespace Basic{
 
@@ -37,8 +40,17 @@ namespace Basic{
 
     }
 
- 
+    namespace P0588R1{
 
+        template<bool B>
+        auto f(int n)->void{
+            [=](auto a){
+                if constexpr(B && sizeof(a)>4){
+                    (void)n;
+                }
+            }(0);//// captures n regardless of the value of B and sizeof(int)
+        }
+    }
 
     namespace P0315R4_4{
         //static decltype([]{}) f();//declared ‘static’ but never defined [-Wunused-function]
@@ -90,6 +102,12 @@ namespace Basic{
         };
 
     }
+
+    namespace P1091R3{
+
+        //template <auto Var> constexpr auto[x1,y1] = Var; // ill formed. //error: expected unqualified-id before ‘[’ token
+    }
+
 
     auto f_func_49_1(int&)       -> int{return 42;};
     auto f_func_49_1(int const&) -> double{return 3.14;};
@@ -275,20 +293,134 @@ namespace Basic{
 
         {   // [20:4/7] [P0588R1][DR: Simplifying implicit lambda capture]
 
-            int arr[2];
-            [[maybe_unused]] auto [y, z] = arr;
+            [[maybe_unused]] auto l1 = []{
+                float x{0.0};
+                [[maybe_unused]] float&r = x;
+                [[maybe_unused]] auto l2 = [=]{ 
+                    decltype(x) y1{1};
+                    ++y1;
+                    decltype((x)) y2{2}; // l2 is not mutable, so y2 is const float&
+                    //++y2;//error: increment of read-only reference ‘y2’
 
+                    decltype(r) r1{y1};//[P0588R1]says r1 has type float&
+                    r1 = y2;
+
+                    decltype((r)) r2{y1};//[P0588R1]says r2 has type float const&
+                    r2 = y2;
+                };
+            };
+
+            using namespace P0588R1;
+
+            {   // error: odr-use of non-odr-usable structured binding y
+                int arr[2]{1,2};
+                [[maybe_unused]] auto [y,z] = arr;
+                struct local{
+                    [[]]
+                    std::optional<int> p(){
+                        //return y;// error: use of local variable with automatic storage from containing function
+                        return std::nullopt;
+                    }
+                };
+            }
         }
 
         {   // [20:5/7] [P0624R2][Default constructible and assignable stateless lambdas]
+            // Louis Dionne, Member of the C++ Standards Committee, Boost, and author of Hana.
 	
+            auto greater1 = [](auto x, auto y){return x>y;};
+            std::map<std::string, int, decltype(greater1)> map1,map2;
+            map1 = map2;
+            
         }
 
         {   // [20:6/7] [P0780R2][Pack expansion in lambda init-capture]
+            // move all parameters in a parameter pack in lambda init-capture, c++17 needs to use the help of tuple.
+            // this proposal simplify the codes by including [...args = std::move(args)]{...}
+
+            [[maybe_unused]]auto f1 = []<typename F, typename... Args>
+            (F f, Args... args){
+                [[maybe_unused]]auto g1 = [f, args...]{
+                    return std::invoke(f, args...);
+                };
+                [[maybe_unused]] auto g2 = [f = std::move(f), ...args = std::move(args)]{
+                    return std::invoke(f, args...);
+                };
+                [[maybe_unused]] auto g3 = [f = std::move(f), tup = std::make_tuple(std::move(args)...)]{
+                    return std::apply([&f](const auto&... args){
+                        return f(args...);
+                    }, tup);
+                };
+
+                [[maybe_unused]]auto g31 = [f = std::move(f), tup = std::make_tuple(std::move(args)...)]{
+                    return std::apply([&f](const auto&... args){
+                        return f(args...);
+                    }, tup);
+                };
+
+                [[maybe_unused]]auto g4 = [f= std::move(f), ...args = std::move(args) ]{
+                    return std::apply(f, args...);
+                };
+            };
         
         }
 
         {   // [20:7/7] [P1091R3, P1381R1][Lambda capture and storage class specifiers of structured bindings]
+
+            {   //P1091R3
+                // linkage, extern, static and thread_local, inline, constexpr, lambda captures, [[maybe_unused]], template, impact
+                int arr[]{1,2};
+                [[maybe_unused]]auto[x,y] = arr;// the object has a name like _ZDC1x2yE
+
+                //constexpr auto[a1] = std::tuple<int>(1);//error: structured binding declaration cannot be ‘constexpr’
+
+                [[maybe_unused]]constexpr auto a2 = std::tuple<int>(1);
+                //constexpr const int& a3 = std::get<0>(a2);/// ill-formed today, 20221022 msvc, gcc, clang, the latest version of theses compliers do not support constexpr structured bingding.
+
+                const int var1{1};
+                [[maybe_unused]]const int& ref1{var1};
+                //static_assert(ref1 == 1);// error: non-constant condition for static assertion
+
+                constexpr int var2{2};
+                [[maybe_unused]]const int& ref2{var2};
+                //static_assert(ref2 == 2);// error: non-constant condition for static assertion
+
+            }
+                        
+            {   //P1381R1
+                //auto [a] = []{return 1;}();// error: cannot decompose non-array non-class type ‘int’
+                struct A{int a{};};
+                auto [a] = A();
+                [[maybe_unused]] auto l=[a]{};//captures 'a'
+
+                {   // capture structed bingdings by reference has some problems
+                    struct A{int a:1{1};};
+                    [[maybe_unused]] auto [a] = A();
+                    //std::cout << [&a]{return a;}() << std::endl;//error: cannot bind bit-field ‘a’ to ‘int&’
+                }
+                {
+                    struct Foo { int a : 1; };
+                    [[maybe_unused]] auto f = [](int&){};
+                    [[maybe_unused]] Foo foo;
+                    //f(foo.a); // ill-formed, reference to bit-field // error: cannot bind bit-field ‘foo.Basic::func_49()::Foo::a’ to ‘int&’
+                }
+                
+                {
+                    struct Foo { int a : 1; int b; };
+                    auto[a, b] = Foo();
+
+                    {   //cannot bind bit-field ‘a’ to ‘int&’
+                        //auto f1 = [&] { return a; };      // still ill-formed with this proposal 
+                        //auto f2 = [&a = a] { return a; }; // always was ill-formed; no change
+                        //auto f3 = [&a] { return a; };     // still ill-formed with this proposal
+                    }
+
+                    [[maybe_unused]] auto g1 = [&] { return b; };      // previously ill-formed; well-formed with this proposal
+                    [[maybe_unused]] auto g2 = [&b = b] { return b; }; // always was well-formed; no change
+                    [[maybe_unused]] auto g3 = [&b] { return b; };     // previously ill-formed; well-formed with this proposal
+                }
+                
+            }
         	
         }
         

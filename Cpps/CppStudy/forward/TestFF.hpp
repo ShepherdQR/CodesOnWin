@@ -3,13 +3,19 @@
 //  * Date: 2022-07-10 22:23:22
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-10-13 22:22:44
+//  * LastEditTime: 2022-10-23 00:09:53
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
 // testFF means test forward function
 
 /* ===========
+-std=c++2b -O0
+
+/std:c++latest
+/std:c++20
+
+
 e:
 cd E:\Codes\CodesOnWin\CodesOnWin\Cpps\CppStudy\forward
 .\run.bat

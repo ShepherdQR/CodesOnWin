@@ -3,7 +3,7 @@
 //  * Date: 2022-06-24 23:37:40
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-08-16 21:53:10
+//  * LastEditTime: 2022-10-23 00:42:29
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 _Pragma("once");
@@ -111,5 +111,4 @@ auto func20220604_2(){
     cout << *displayTypeInformation(nullptr)<< endl;
     cout << displayTypeInformation(3.1)<< endl;
 }
-
 
