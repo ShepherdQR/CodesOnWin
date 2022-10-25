@@ -3,7 +3,7 @@
 //  * Date: 2022-09-03 21:20:32
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-10-22 23:56:02
+//  * LastEditTime: 2022-10-25 23:23:08
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -24,7 +24,7 @@
 #include <algorithm>
 #include <map>
 #include <optional>
-
+#include <assert.h>
 
 namespace Basic{
 
@@ -106,6 +106,153 @@ namespace Basic{
     namespace P1091R3{
 
         //template <auto Var> constexpr auto[x1,y1] = Var; // ill formed. //error: expected unqualified-id before ‘[’ token
+    }
+
+    namespace P0170R1{
+
+        // 1. 
+        constexpr int f1(int n){
+            return [n]{return n+42;}();
+        }
+        //static_assert(f(0) == 421,"Yes");//error: static assertion failed: Yes
+        static_assert(f1(0) == 42,"This is supposed to be 42.");
+    
+        // 2.
+        constexpr auto f2=[](int n,int m){
+            auto L=[=]{return n;};
+            auto R=[=]{return m;};
+            return[=]{return L()+R();};
+        };
+        static_assert(f2(3,4)()==7,"");
+    
+        // 3.
+        auto f3_1 = [](int n)constexpr{return n;};
+        constexpr int id_1 = f3_1(3);
+    
+        auto f3_2 = [](int n){return n;};
+        constexpr int id_2 = f3_2(3);
+
+        constexpr int(*pf3_2)(int) = f3_2;
+        static_assert(pf3_2(42) == f3_2(42));
+
+        // 4.
+        auto g1 = [](auto v){return [=]{return v;};};
+        auto g2 = [](auto m1)constexpr{
+            auto ret = m1();
+            return [=](auto m2) mutable{
+                auto m1Val = m1();
+                auto plus = [=](auto m2Val)mutable constexpr
+                {return m1Val += m2Val;};
+                ret = plus(m2());
+                return g1(ret);
+            };
+        };
+
+        // 5.
+        auto ID = [](auto a){return a;};
+        struct NonLitreal{
+            constexpr 
+            NonLitreal(int n):n(n){}
+            int n{};
+        };
+        static_assert(ID(3) == 3);
+        static_assert(NonLitreal(3).n == 3);// If the constructor is not constexpr, we have error: non-constant condition for static assertion
+        static_assert(ID(NonLitreal{3}).n == 3);// error: non-constant condition for static assertion,, error: temporary of non-literal type ‘Basic::P0170R1::NonLitreal’ in a constant expression
+
+        // 6. 
+        auto Fwd = [](auto f, auto parm){return f(parm);};
+        auto C = [](auto x){return x;};
+        static_assert(Fwd(C,42)==42);
+        [[maybe_unused]]auto NC = [](auto x){static decltype(x) xx; return xx;};
+        //static_assert(Fwd(NC,42)==42);// error: non-constant condition for static assertion
+
+        // 7. 
+        [[maybe_unused]]constinit static int nnn{0};
+        [[maybe_unused]] auto l_ODR = []{
+            [[maybe_unused]]const int n{0};
+            [[maybe_unused]]constexpr const int nn{0};
+            [[maybe_unused]] auto l = [=]{
+                [[maybe_unused]]constexpr int t1 = n;
+                //[[maybe_unused]]constexpr int t2 = *&n;//error: lambda capture of ‘n’ is not a constant expression
+                [[maybe_unused]]constexpr int t3 = *&t1;
+                //[[maybe_unused]]constexpr int t4 = *&nn;//error: lambda capture of ‘n’ is not a constant expression
+                //[[maybe_unused]]constexpr int t5 = *&nnn;//error: the value of ‘Basic::P0170R1::nnn’ is not usable in a constant expression
+
+            };
+        };
+
+        // 8.
+        auto f8 = [](auto v){return [=]{return v;};};
+        auto bind = [](auto f1){
+            return [=](auto f2){return f1(f2());};
+        };
+        static_assert(bind(f8)(f8(42))() == f8(42)());
+
+        constexpr auto zero = g1(0);
+        constexpr auto one = g1(1);
+        static_assert(g2(one)(zero)() == one());
+
+         auto test(){
+            std::cout << "P0170R1" << std::endl;
+            std::cout << zero() << std::endl;//0
+            std::cout << one() << std::endl;//1
+
+            []{
+                auto f = [](auto v){return [=]{return v;};};
+                auto g = [f = f](auto f1)constexpr{
+                    return [=, ret = f1()](auto f2)mutable{
+                        auto val_1 = f1();
+
+                        auto add = [=](auto valAdded)mutable constexpr{
+                            return val_1 = val_1 + val_1+ valAdded;
+                        };
+                        ret = add(f2());
+                        return f(ret);
+                    };
+                };
+
+                constexpr auto f0 = f(0);
+                constexpr auto f1 = f(1);
+                
+                std::cout << g(f0)(f1)() << std::endl;//1
+
+            }();
+
+            if(20221025){
+                {
+                    auto adapter = [](auto v1){
+                        return [=](auto v2){
+                            return [=]{
+                                v1();
+                                v2();
+                            };
+                        };
+                    };
+
+                    auto l1 = []{std::cout << "hi ";};
+                    auto l2 = []{std::cout << "hello ";};
+                    auto l3 = []{std::cout << "11" << std::endl;};
+
+                    constexpr auto adapter_l = adapter(l1);
+                    constexpr auto adapter_2 = adapter(l2);
+                    adapter_l(l3)();// hi 11
+                    adapter_2(l3)();// hello 11
+                }
+
+                {
+                    auto l = [](auto i){
+                        return [=](auto T)constexpr{
+                            decltype(T()) t(i);
+                            std::cout << "This " << t << std::endl;
+                        };
+                    };
+                    l(1)( []->int{return{};});       // This 1
+                    l(2)( []->double{return{};});    // This 2
+                    l(91)( []->char{return{};});      // This [
+                    
+                }
+            }
+        }
     }
 
 
@@ -425,19 +572,159 @@ namespace Basic{
         }
         
         {   // [17:1/2] [P0018R3][Lambda capture of *this]
-        			
+            struct A{
+                int x{1};
+                A(){
+                    puts("P0018R3");
+                    [&]{x = x+1;}();//transformed to (*this).x
+                    printf("%d\n", x);//2
+
+                    //[=]{x = x+1;}();// transformed to (*this).x 
+                    // warning: implicit capture of ‘this’ via ‘[=]’ is deprecated in C++20 [-Wdeprecated]
+                    //printf("%d\n", x);//3
+
+                    [=, *this]mutable{x = x+1;}();
+                    printf("%d\n", x);//2
+
+                    std::cout << "==" << [this]{
+                        return [*this]mutable{x +=1;return x;}();
+                    }() << std::endl; // ==3
+                    printf("%d\n", x);//2
+
+                }
+            } a{};
+
+            if(20221025){     
+                struct B{
+                    int val{42};
+                    std::future<int> spawn(){
+
+                        int way = 0;
+                        if(way == 0){
+                            return std::async([=, *this]{return val;});
+                        }
+                        if(way == 1){
+                            // same as way == 0
+                            return std::async([=, this]{return val;});
+                        }
+                        if(way == 2){
+                            // same as way == 0
+                            return std::async([=, temp = *this]{return temp.val;});
+                        }
+                        return {};
+                    }
+                };
+                auto l = []->std::future<int>{
+                    B b;
+                    return b.spawn();
+                };
+
+                std::future f = l();
+                f.wait();
+                auto value{f.get()};
+                assert(42 == value);
+                std::cout << value<< std::endl; // 42
+            }
+	
         }   
 
         {   // [17:2/2] [P0170R1][constexpr lambda expressions]
-        			
+        	using namespace P0170R1;
+            P0170R1::test();
         }
 
         {   // [14:1/2] [N3648][Initialized/Generalized lambda captures (init-capture)]
-        	
-        }   
+            /* ===========
+                capture: 
+                    simple-capture
+                    init-capture
+
+                simple-capture:
+                    identifier
+                    & identifier
+                    this
+
+                init-capture:
+                    identifier initializer
+                    & identifier initializer
+            */
+
+
+        	int x = 4;
+            auto y = [&r = x, x = x+1]()->int {
+                r += 2;
+                return x+2;
+            }();  // Updates ::x to 6, and initializes y to 7.
+            std::cout << "x: " << x << std::endl;
+            std::cout << "y: " << y << std::endl;
+        }
 
         {   // [14:2/2] [N3649][Generic lambda expressions]
-        
+            /* ===========
+                struct Closure{
+                    template <class T>
+                    auto operator()(T t) const { ... }
+                    template <class T>
+                    static auto lambda_call_operator_invoker(T a){
+                        // forwards execution to operator()(a) and therefore has
+                        // the same return type deduced
+                        ...
+                    }
+
+                    template <class T>
+                    using fptr_t =decltype(lambda_call_operator_invoker(declval<T>())) (*)(T);
+
+                    template <class T>
+                    operator fptr_t<T>() const{
+                        return &lambda_call_operator_invoker;
+                    }
+                };
+
+
+                void f(int, const int (&)[2] = {})    { }   // #1
+                void f(const int&, const int (&)[1])  { }   // #2
+
+                void test() {
+                    const int x = 17;
+                    auto g = [](auto a) {
+                        f(x);  // OK: calls #1, does not capture x
+                    };
+
+                    auto g2 = [=](auto a) {
+                        int selector[sizeof(a) == 1 ? 1 : 2]{};
+                        f(x, selector);  // OK: is a dependent expression, so captures x
+                    };
+                }
+
+
+            */
+
+            {   // 1.
+                auto vglambda = [](auto printer)
+                {
+                    return [=](auto &&...ts) { // OK: ts is a  function parameter pack
+                        printer(std::forward<decltype(ts)>(ts)...);
+                        return [=]()
+                        { printer(ts...); };
+                    };
+                };
+
+                auto p = vglambda([](auto v1, auto v2, auto v3)
+                                { std::cout << v1 << v2 << v3; });
+                auto q = p(1, 'a', 3.14);   // OK: outputs 1a3.14
+                q();                        // OK: outputs 1a3.14
+            }
+
+            {   // 2.
+                //void f1(int (*)(int))   { }
+                //auto glambda = [](auto a) { return a; };
+                //f1(glambda);  // OK
+                [[maybe_unused]]int& (*fpi)(int*) = [](auto* a) -> auto& { return *a; }; // OK
+            }
+
+
+
+                           
         }
 
         {   // [11:1/1] [N2550, N2658, N2927][Lambda expressions]
