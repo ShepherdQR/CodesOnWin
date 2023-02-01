@@ -3,7 +3,7 @@
 //  * Date: 2022-07-10 22:08:32
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-09-28 21:58:50
+//  * LastEditTime: 2023-02-01 21:14:07
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 #pragma once
@@ -17,8 +17,6 @@
 namespace Basic{
 
     // 隐式类型转换：高等级->低等级，有符号->无符号。
-
-
 
     using namespace std;
 

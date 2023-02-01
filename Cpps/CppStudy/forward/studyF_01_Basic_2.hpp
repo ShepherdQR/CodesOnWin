@@ -3,7 +3,7 @@
 //  * Date: 2022-09-03 21:20:32
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-10-25 23:23:08
+//  * LastEditTime: 2023-02-01 21:20:35
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -38,6 +38,13 @@ namespace Basic{
 
         */
 
+    }
+
+    auto func_50(){
+        int* p1{nullptr};
+        [[maybe_unused]] int& r1 = *p1; // this works
+        //r1 = 10; // crush
+        puts("hi20230201");
     }
 
     namespace P0588R1{
@@ -452,8 +459,8 @@ namespace Basic{
                     decltype(r) r1{y1};//[P0588R1]says r1 has type float&
                     r1 = y2;
 
-                    decltype((r)) r2{y1};//[P0588R1]says r2 has type float const&
-                    r2 = y2;
+                    [[maybe_unused]] decltype((r)) r2{y1};//[P0588R1]says r2 has type float const&
+                    //r2 = y2; // clang error: cannot assign to variable 'r2' with const-qualified type 'decltype((r))'
                 };
             };
 
@@ -533,7 +540,8 @@ namespace Basic{
                 //static_assert(ref2 == 2);// error: non-constant condition for static assertion
 
             }
-                        
+
+            #ifndef __clang__ // clang15.0 = 202101, this version not support this yet
             {   //P1381R1
                 //auto [a] = []{return 1;}();// error: cannot decompose non-array non-class type ‘int’
                 struct A{int a{};};
@@ -553,7 +561,7 @@ namespace Basic{
                 }
                 
                 {
-                    struct Foo { int a : 1; int b; };
+                    struct Foo { int a : 1; int b{}; };
                     auto[a, b] = Foo();
 
                     {   //cannot bind bit-field ‘a’ to ‘int&’
@@ -568,7 +576,8 @@ namespace Basic{
                 }
                 
             }
-        	
+        	#endif
+
         }
         
         {   // [17:1/2] [P0018R3][Lambda capture of *this]

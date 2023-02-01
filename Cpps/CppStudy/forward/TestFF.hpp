@@ -3,7 +3,7 @@
 //  * Date: 2022-07-10 22:23:22
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-10-23 00:09:53
+//  * LastEditTime: 2023-02-01 21:23:09
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -16,20 +16,24 @@
 /std:c++20
 
 
+
+//[20230201: clang15.0, __cplusplus = 202101]
 e:
 cd E:\Codes\CodesOnWin\CodesOnWin\Cpps\CppStudy\forward
 .\run.bat
 
 
+//[20230201: gcc11.30, __cplusplus = 202100]
 cd e: && cd Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/forward
 ./run.sh
+
 */
 
 
 
     //Template::func_10();
     //template_Variadic::func_1();
-    Basic::func_49();
+    Basic::func_50();
     //Thread::func_5();
 
     //STL::func_8();

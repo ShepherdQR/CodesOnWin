@@ -3,7 +3,7 @@
 //  * Date: 2022-07-10 22:03:35
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-09-27 20:33:08
+//  * LastEditTime: 2023-02-01 21:15:19
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -22,6 +22,21 @@
 
 auto main()->int{
 
+
+    // bool ibCompile_YESGNUC11_3__and_NOclang15_0{false};
+    // #ifndef __clang__
+    //     ibCompile_YESGNUC11_3__and_NOclang15_0 = true;
+    // #else
+
+    // #ifdef __clang_major__ // __clang_major__   __clang_minor__
+    //     ibCompile_YESGNUC11_3__and_NOclang15_0 = bool(__clang_major__>15);
+    // #endif
+
+    // #endif
+    // std::cout << ibCompile_YESGNUC11_3__and_NOclang15_0 << std::endl;
+    
+
+    // [20230201, clang15.0 = 202101, gcc11.30 = 202100]
     std::cout <<__cplusplus <<std::endl;//[20220411, c++17][20220927, 202100]
 	std::cout << "Hi<" << std::endl;
 
