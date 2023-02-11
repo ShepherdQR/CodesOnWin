@@ -3,7 +3,7 @@
 //  * Date: 2022-07-10 22:08:32
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-09-03 21:16:39
+//  * LastEditTime: 2023-02-11 21:16:14
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 #pragma once
@@ -40,7 +40,7 @@ namespace Basic{
 
     using namespace std;
 
-    auto func_999(){
+    auto func_999_Mark1(){
         //[final] forbids the decorated class or member funciton from being inherited or voerloaded.
         // [=default, =delete] decorates the A(),~A(), operator=, A(A&), etc.
         // enum class A: unsigned int{};

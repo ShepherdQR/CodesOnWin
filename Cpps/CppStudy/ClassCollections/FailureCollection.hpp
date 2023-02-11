@@ -3,14 +3,29 @@
 //  * Date: 2022-06-24 23:42:58
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-06-25 00:01:13
+//  * LastEditTime: 2023-02-11 20:50:07
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
 
 
 
-
+// [T00007] using. Failed test.
+class AutoRelease20210703{
+    public:
+    void display(){std::cout << "Hello." << std::endl;}
+    ~AutoRelease20210703(){std::cout << "Release" << std::endl;}
+};
+void testUSING20210703()
+{
+    // using (AutoRelease20210703 pClassTemp = new AutoRelease20210703)
+	// {
+	// 	if(pClassTemp)
+	// 	{
+	// 		pClassTemp->display();
+	// 	}
+	// }
+}
 
 
 

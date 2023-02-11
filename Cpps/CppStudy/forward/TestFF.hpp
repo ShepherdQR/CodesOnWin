@@ -3,7 +3,7 @@
 //  * Date: 2022-07-10 22:23:22
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-02-01 21:23:09
+//  * LastEditTime: 2023-02-11 23:08:22
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -33,7 +33,7 @@ cd e: && cd Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/forward
 
     //Template::func_10();
     //template_Variadic::func_1();
-    Basic::func_50();
+    Basic::func_59();
     //Thread::func_5();
 
     //STL::func_8();
@@ -45,9 +45,11 @@ cd e: && cd Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/forward
 
 
 /* =========== Good Book
-Effective C++【V2OK】
+Effective C++【V2-OK】
 Effective STL【】
 Effective Modern C++
+
+C++ 20 Get the details
 
 Google C++ Style Guide [doloaded onto desktop]
 

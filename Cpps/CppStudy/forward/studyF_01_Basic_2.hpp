@@ -3,7 +3,7 @@
 //  * Date: 2022-09-03 21:20:32
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-02-01 21:20:35
+//  * LastEditTime: 2023-02-11 21:16:40
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -29,7 +29,7 @@
 namespace Basic{
 
 
-    auto func_998(){
+    auto func_999_Mark2(){
 
         /* ===========
         msvc _MSC_VER
@@ -40,11 +40,233 @@ namespace Basic{
 
     }
 
+
+    auto func_55()
+    {
+        // const int a, auto p = &a, they are two things. the fake address of a is the same as int*
+        // [T00009] const testFuncAdd20210718_2
+        const int a = 10;
+        int* pConstModifier = (int*)&a;
+        const int  *q = &a;
+        {
+            *pConstModifier = 20;
+        }
+        std::cout <<*pConstModifier <<std::endl;//20
+
+        [](const int* p){*(int*)p = 30;}(&a);
+        std::cout <<*pConstModifier <<std::endl;//30
+
+        [](int* p){*p = 40;}(pConstModifier);
+        std::cout <<*pConstModifier <<std::endl;//40
+
+        std::cout <<a <<std::endl;//10
+        std::cout <<*pConstModifier <<std::endl;//40
+        std::cout <<*q <<std::endl;//40
+        std::cout << (&a == pConstModifier ) <<std::endl;//1
+        std::cout << (q == pConstModifier ) <<std::endl;//1
+        
+    }
+
+    namespace namespace_func_54{
+        // [T00008] sum, 20210718, that night I write a function add, which I think is the best.
+        int funcAdd(const int& iNumFirst, const int& iNumSecond)
+        {
+            return iNumFirst + iNumSecond;
+        }
+        void testFuncAdd20210718()
+        {
+            int numA(0), numB(0);
+            numA = 10;
+            numB = 20;
+            
+            int sum(0);
+            sum = funcAdd(numA, numB);
+            std::cout << sum << std::endl;
+        }
+
+        void test_20230211(){
+            auto lambdaAdd = [](auto&& iFirst, auto&& iSecond){ return iFirst + iSecond; };
+
+            int numA{10};
+            int numB{20};
+
+            auto sum = lambdaAdd(numA,numB);
+            std::cout << sum << std::endl;
+        }
+    }
+    void func_54(){
+        namespace_func_54::testFuncAdd20210718();
+
+        namespace_func_54::test_20230211();
+    }
+
+
+    void func_53(){
+        // static_cast create base class, dynamic_cast donot create class.
+        // [T00006] The return type of static_cast // funcTest20210702
+        struct Parent{
+            protected: virtual void displayName(){std::cout << typeid(*this).name()<< std::endl;}
+            public:Parent(){displayName();};
+        };
+        struct ChildOne: Parent{
+            ChildOne(){displayName();};
+        };
+        struct ChildTwo: Parent{
+            ChildTwo(){displayName();};
+        };
+    
+        [[maybe_unused]]Parent* pParent{};
+        [[maybe_unused]]ChildOne* pChildOne{};
+        [[maybe_unused]]ChildOne* pChildOne_2{};
+        [[maybe_unused]]ChildTwo* pChildTwo{};
+
+        std::cout << 1 << std::endl;
+        (pChildOne = static_cast<ChildOne*>(pParent))= new ChildOne;
+        //pChildOne = static_cast<ChildOne*>(new ChildOne);
+
+        std::cout << 2 << std::endl;
+        (pChildTwo = dynamic_cast<ChildTwo*>(pChildOne_2))= 
+        dynamic_cast<ChildTwo*>(pChildOne);
+
+        std::cout << 3 << std::endl;
+        std::unique_ptr<ChildOne>{pChildOne};
+        /*
+            1
+            ZN5Basic16funcTest20210702EvE6Parent
+            ZN5Basic16funcTest20210702EvE8ChildOne
+            2
+            3
+        */
+    }
+
+    namespace namespace_func_52{
+        // [T00005] Test a class type that defined into one class.
+        class MyClass20210618  
+        {  
+        public: 
+            MyClass20210618()=default;
+            MyClass20210618(int iNum):_upMyPrivateClass(new MyPrivateClass(iNum)){};
+
+            class MyPrivateClass{
+            public:
+                MyPrivateClass(){_flag = 10;}
+                MyPrivateClass(int);
+                int _flag;
+                static int _flagStatic;
+                void funcBold(){
+                    std::cout<<"funcBold" << std::endl;
+                }  
+                static void funcStatic(){ 
+                    std::cout<<"funcStatic: " <<_flagStatic << std::endl; 
+                }  
+            };
+            std::unique_ptr<MyPrivateClass> _upMyPrivateClass{};
+        }; 
+        int MyClass20210618::MyPrivateClass::_flagStatic = 2;
+        MyClass20210618::MyPrivateClass::MyPrivateClass(int iNum){_flag = iNum;}
+
+        void testFunc20210618()
+        {
+            MyClass20210618 myClass1(6), myClass2;
+            std::cout << myClass1._upMyPrivateClass->_flag<< std::endl;
+            myClass1._upMyPrivateClass->funcBold();
+            myClass1._upMyPrivateClass->funcStatic();
+
+            std::cout << myClass2._upMyPrivateClass->_flagStatic<< std::endl;
+            myClass2._upMyPrivateClass->funcBold();
+            myClass2._upMyPrivateClass->funcStatic();
+            /*
+                6
+                funcBold
+                funcStatic: 2
+                2
+                funcBold
+                funcStatic: 2
+            */
+        }
+    }
+    auto func_52(){
+        namespace_func_52::testFunc20210618();
+    }
+
+    namespace namespace_func_51{
+        // [T00004] Failed test. I wanted to transfer a pointer of a class
+        //          into a pointer of function.
+        using typeFunc = int(*)(int*);
+
+        class Void{
+        public:
+            std::shared_ptr<int> _upArrayNum;
+            Void(typeFunc):_upArrayNum{new int(0)}
+            {
+                //*this=*(Void*)ipFunc;
+            }
+        };
+
+        int funcJudger(int* iNum)
+        {
+            return *iNum<5?1:0;
+        }
+        void funcRefactoring20210617()
+        {
+            Void myFunc(funcJudger);
+
+            for(auto i=0;i<20;++i)
+                std::cout << *myFunc._upArrayNum<< std::endl;
+        }
+    }
+    auto func_51(){
+        namespace_func_51::funcRefactoring20210617();
+    }
+
     auto func_50(){
+        // 1. nullptr can *p to initialize &
         int* p1{nullptr};
         [[maybe_unused]] int& r1 = *p1; // this works
         //r1 = 10; // crush
         puts("hi20230201");
+
+        // 2. macro do replace, so ++i may applied many times.
+        auto l = [](int i){return i;};
+
+        #ifndef M1_func_50
+        #define M1_func_50(a,b) l((a)>(b)?(a):(b));
+        #endif
+        #ifndef M2_func_50
+        #define M2_func_50(aIN,bIN) auto ax = aIN; auto bx = bIN; l((ax)>(bx)?(ax):(bx));
+        #endif
+
+        {
+            {
+                int a{10};
+                auto m = 1;M1_func_50(++a,5);
+                std::cout << m << ", " << a << std::endl; // 12
+            }
+            {
+                int a{10};
+                auto m = 1;M1_func_50(++a,15);
+                std::cout << m << ", " << a << std::endl; // 11
+            }
+        }
+        {
+            {
+                int a{10};
+                auto m = 1;M2_func_50(++a,5);
+                std::cout << m << ", " << a << std::endl; // 11
+            }
+            {
+                int a{10};
+                auto m = 1;M2_func_50(++a,15);
+                std::cout << m << ", " << a << std::endl; // 11
+            }
+        }
+
+        #ifdef M1_func_50
+        #undef M1_func_50
+        #endif
+        #ifdef M2_func_50
+        #undef M2_func_50
+        #endif
     }
 
     namespace P0588R1{

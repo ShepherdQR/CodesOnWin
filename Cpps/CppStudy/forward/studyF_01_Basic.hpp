@@ -3,13 +3,14 @@
 //  * Date: 2022-07-10 22:08:32
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-02-01 21:14:07
+//  * LastEditTime: 2023-02-11 21:18:18
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 #pragma once
 
 //#include "studyF_01_Basic_1.hpp"
-#include"studyF_01_Basic_2.hpp"
+//#include"studyF_01_Basic_2.hpp"
+#include"studyF_01_Basic_3.hpp"
 
 
 //clang -std=c++2b
@@ -20,7 +21,7 @@ namespace Basic{
 
     using namespace std;
 
-    auto func_999(){
+    auto func_999_Mark0(){
         //[final] forbids the decorated class or member funciton from being inherited or voerloaded.
         // [=default, =delete] decorates the A(),~A(), operator=, A(A&), etc.
         // enum class A: unsigned int{};
