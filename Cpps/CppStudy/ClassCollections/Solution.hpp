@@ -3,13 +3,250 @@
 //  * Date: 2022-10-23 00:37:39
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-02-11 23:03:05
+//  * LastEditTime: 2023-02-12 14:31:20
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
 
 namespace LeetCode
 {
+    inline namespace Solution_9999{ //20230212
+        /**
+       
+        */
+    }
+
+
+
+
+    inline namespace Solution_35{ //20230212
+        /**
+            35. 搜索插入位置
+            给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。
+
+            请必须使用时间复杂度为 O(log n) 的算法。
+
+             
+
+            示例 1:
+
+            输入: nums = [1,3,5,6], target = 5
+            输出: 2
+            示例 2:
+
+            输入: nums = [1,3,5,6], target = 2
+            输出: 1
+            示例 3:
+
+            输入: nums = [1,3,5,6], target = 7
+            输出: 4
+             
+
+            提示:
+
+            1 <= nums.length <= 104
+            -104 <= nums[i] <= 104
+            nums 为 无重复元素 的 升序 排列数组
+            -104 <= target <= 104
+
+            来源：力扣（LeetCode）
+            链接：https://leetcode.cn/problems/search-insert-position
+            著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+
+        */
+       class Solution {
+        public:
+            
+            int searchInsert(vector<int>& nums, int target) {
+                int l = 0;
+                int r = nums.size()-1;
+                int m = (l+r)/2;
+
+                std::function<int(int,int,int)> lll = [&] (int l, int r, int m)->int{
+                    if(l == r){
+                        if(target > nums[m]){
+                            return m+1;
+                        }
+                        return m;
+                    }
+                    
+                    if(target < nums[m]){
+                        return lll(l, m, (l+m)/2);
+                    }else if(target > nums[m]){
+                        return lll(m+1,r, (m+1+r)/2);
+                    }
+                    
+                    return m;
+                };
+                return lll(l,r,m);
+            }
+        };
+    }
+
+    inline namespace Solution_27{ //20230212
+        /**
+            27. 移除元素
+            给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。
+
+            不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。
+
+            元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。
+
+             
+
+            说明:
+
+            为什么返回数值是整数，但输出的答案是数组呢?
+
+            请注意，输入数组是以「引用」方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。
+
+            你可以想象内部操作如下:
+
+            // nums 是以“引用”方式传递的。也就是说，不对实参作任何拷贝
+            int len = removeElement(nums, val);
+
+            // 在函数里修改输入数组对于调用者是可见的。
+            // 根据你的函数返回的长度, 它会打印出数组中 该长度范围内 的所有元素。
+            for (int i = 0; i < len; i++) {
+                print(nums[i]);
+            }
+             
+
+            示例 1：
+
+            输入：nums = [3,2,2,3], val = 3
+            输出：2, nums = [2,2]
+            解释：函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。你不需要考虑数组中超出新长度后面的元素。例如，函数返回的新长度为 2 ，而 nums = [2,2,3,3] 或 nums = [2,2,0,0]，也会被视作正确答案。
+            示例 2：
+
+            输入：nums = [0,1,2,2,3,0,4,2], val = 2
+            输出：5, nums = [0,1,4,0,3]
+            解释：函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。注意这五个元素可为任意顺序。你不需要考虑数组中超出新长度后面的元素。
+             
+
+            提示：
+
+            0 <= nums.length <= 100
+            0 <= nums[i] <= 50
+            0 <= val <= 100
+
+            来源：力扣（LeetCode）
+            链接：https://leetcode.cn/problems/remove-element
+            著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+       
+        */
+
+       class Solution {
+        public:
+            int removeElement(vector<int>& nums, int val) {
+
+                int indexLast = nums.size()-1;
+                while(indexLast>=0 && nums[indexLast] == val){
+                    --indexLast;
+                }
+                for(int i = indexLast;i>=0;--i){
+                    if(nums[i] == val){
+                        swap(nums[i], nums[indexLast]);
+                        --indexLast;
+                    }
+                }
+                return indexLast+1;
+
+            }
+        };
+    }
+
+    inline namespace Solution_1138{ //20230212
+        /**
+        1138. 字母板上的路径
+
+        我们从一块字母板上的位置 (0, 0) 出发，该坐标对应的字符为 board[0][0]。
+
+        在本题里，字母板为board = ["abcde", "fghij", "klmno", "pqrst", "uvwxy", "z"]，如下所示。
+
+
+        a   b   c   d   e
+        f   g   h   i   j
+        k   l   m   n   o
+        p   q   r   s   t
+        u   v   w   x   y
+        z
+
+        我们可以按下面的指令规则行动：
+
+        如果方格存在，'U' 意味着将我们的位置上移一行；
+        如果方格存在，'D' 意味着将我们的位置下移一行；
+        如果方格存在，'L' 意味着将我们的位置左移一列；
+        如果方格存在，'R' 意味着将我们的位置右移一列；
+        '!' 会把在我们当前位置 (r, c) 的字符 board[r][c] 添加到答案中。
+        （注意，字母板上只存在有字母的位置。）
+
+        返回指令序列，用最小的行动次数让答案和目标 target 相同。你可以返回任何达成目标的路径。
+
+         
+
+        示例 1：
+
+        输入：target = "leet"
+        输出："DDR!UURRR!!DDD!"
+        示例 2：
+
+        输入：target = "code"
+        输出："RR!DDRR!UUL!R!"
+         
+
+        提示：
+
+        1 <= target.length <= 100
+        target 仅含有小写英文字母。
+
+        来源：力扣（LeetCode）
+        链接：https://leetcode.cn/problems/alphabet-board-path
+        著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+
+        */
+       class Solution {
+        public:
+            string alphabetBoardPath(string target) {
+                string strOut;
+                auto xP = 0;
+                auto yP = 0;
+
+                for(auto charCur: target){
+                    auto x = (charCur-'a')/5;
+                    auto y = (charCur-'a')%5;
+
+                    if(x<xP){
+                        strOut.append(xP-x,'U');
+                    }
+                                
+                    if(y<yP){
+                        strOut.append(yP-y,'L' );
+                    }
+
+                    if(x>xP){
+                        strOut.append(x-xP,'D');
+                    }
+
+                    if(y>yP){
+                        strOut.append(y-yP,'R' );
+                    }
+                    strOut.append(1,'!');
+
+                    xP = x;
+                    yP = y;
+
+                    
+                }
+
+                return strOut;
+            }
+        };
+    }
+
+
+
+
     inline namespace Solution_2335{ //20230211
         /* =============装满杯子需要的最短总时长
             现有一台饮水机，可以制备冷水、温水和热水。每秒钟，可以装满 2 杯 不同 类型的水或者 1 杯任意类型的水。
