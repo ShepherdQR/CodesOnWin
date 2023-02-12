@@ -1,0 +1,14 @@
+algebra
+analysis
+basic
+equation
+fetchList.bat
+geometry
+list.txt
+logic
+numberTheory
+operationalResearch
+others
+probabilityTheory
+statistics
+topology
