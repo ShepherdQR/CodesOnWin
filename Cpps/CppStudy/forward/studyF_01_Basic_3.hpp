@@ -13,6 +13,17 @@ namespace Basic{
 
     }
 
+    auto func_60(){
+
+        struct A{
+            int i{0};
+            int j{11};
+        };
+
+        [[maybe_unused]]A a{0,2}, b{.j=2};
+        std::cout << b.i << std::endl;
+    }
+
     auto func_59(){ // 20230211
         // study20220626
         {   // 1. sizeof

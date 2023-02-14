@@ -28,7 +28,9 @@ namespace TestBasic{
             });
 
         std::cout << m2 << std::endl;
-        
+
+        Transformation::ElementaryTransformation::rowScaleOneRow(m2,1,10);
+        std::cout << m2 << std::endl;
     }
 
 

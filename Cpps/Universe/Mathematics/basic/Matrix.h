@@ -3,7 +3,7 @@
 //  * Date: 2023-02-12 21:19:41
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-02-12 22:34:47
+//  * LastEditTime: 2023-02-14 23:04:33
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -53,10 +53,12 @@ public:
 
     int sizeRow()const {return _Rows;}
 
-    int sizeCol()const {return _Cols;}
+    int sizeColumn()const {return _Cols;}
 
     Scalar& at(int i, int j){return _mArray[i*_Cols + j];}
 
+    //void set(int i, int j, const Scalar& ival){_mArray[i*_Cols + j] = ival;};
+   
     Scalar at(int i, int j)const {return _mArray[i*_Cols + j];}
 
 private:
@@ -68,7 +70,7 @@ template<typename Scalar, int _Rows, int _Cols>
 std::ostream& operator<<(std::ostream& os, const Matrix<Scalar, _Rows, _Cols>& iMatrix)
 {
     for(int i=0; i<iMatrix.sizeRow();++i){
-        for(int j=0; j<iMatrix.sizeCol();++j){
+        for(int j=0; j<iMatrix.sizeColumn();++j){
             os << iMatrix.at(i,j) << ", ";
         }
         os << std::endl;

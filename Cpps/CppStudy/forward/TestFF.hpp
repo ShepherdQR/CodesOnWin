@@ -3,7 +3,7 @@
 //  * Date: 2022-07-10 22:23:22
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-02-12 21:48:48
+//  * LastEditTime: 2023-02-14 22:59:24
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -29,9 +29,13 @@ cd e: && cd Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/forward
 
 */
 
-    TestBasic::func_1();
+    TestBasic::func_1(); // Matrix
 
-    //Basic::func_59();
+    //LeetCode::Solution_1234::Solution::test();
+    //LeetCode::Solution_1124::Solution::test();
+
+    
+    //Basic::func_60(); // studyF_0x
 
     //Template::func_10();
     //template_Variadic::func_1();

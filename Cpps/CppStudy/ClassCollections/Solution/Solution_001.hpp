@@ -3,18 +3,248 @@
 //  * Date: 2022-10-23 00:37:39
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-02-12 14:31:20
+//  * LastEditTime: 2023-02-14 22:27:25
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
+#include <map>
+#include <set>
+#include <stack>
 
 namespace LeetCode
 {
+    template<typename T>
+    auto display(std::vector<T> ivec){
+        for(auto cur : ivec){
+            std::cout << cur << ", " ;
+        }std::cout << std::endl;
+    }
+    using namespace std;
     inline namespace Solution_9999{ //20230212
         /**
        
         */
     }
+
+    inline namespace Solution_1124{ //20230214
+        /**
+        1124. 表现良好的最长时间段
+        给你一份工作时间表 hours，上面记录着某一位员工每天的工作小时数。
+
+        我们认为当员工一天中的工作小时数大于 8 小时的时候，那么这一天就是「劳累的一天」。
+
+        所谓「表现良好的时间段」，意味在这段时间内，「劳累的天数」是严格 大于「不劳累的天数」。
+
+        请你返回「表现良好时间段」的最大长度。
+
+         
+
+        示例 1：
+
+        输入：hours = [9,9,6,0,6,6,9]
+        输出：3
+        解释：最长的表现良好时间段是 [9,9,6]。
+        示例 2：
+
+        输入：hours = [6,6,6]
+        输出：0
+         
+
+        提示：
+
+        1 <= hours.length <= 104
+        0 <= hours[i] <= 16
+
+        来源：力扣（LeetCode）
+        链接：https://leetcode.cn/problems/longest-well-performing-interval
+        著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+        */
+        class Solution {
+        public:
+            static auto test()->void{
+                Solution s;
+                //std::vector<int> vec{9,9,6,0,6,6,9};
+                // 0,1,2, 3, 4, 5,6
+                // 1,1,-1,-1,-1,-1,1
+                // 0,1,2,1,0,-1,-2,-1
+                // out 3
+
+                std::vector<int> vec{6,6,9};
+                // -1,-1,1
+                // 0,-1,-2,-1
+
+                auto number = s.longestWPI(vec);
+                std::cout << number << std::endl;
+            }
+            int longestWPI(vector<int>& hours) {
+
+                int out{0};
+                int sz = hours.size();
+                if(!sz){
+                    return out;
+                }
+
+                vector<int> vecPre(sz+1,0);
+                std::stack<int> sIndexLower;    // index of vecPre
+                sIndexLower.push(0);
+
+                int pre{0};
+                
+                for(int i=0;i<sz;++i){
+                    pre +=hours[i]>8?1:-1;
+                    vecPre[i+1] = pre;
+
+                    if(vecPre[i+1]<vecPre[sIndexLower.top()]){
+                        sIndexLower.push(i+1);
+                        
+                    }
+                }
+
+                display(vecPre);
+
+                for(int i = sz;i>=1;--i){
+                    while(sIndexLower.size() && vecPre[sIndexLower.top()]<vecPre[i]  ){
+                        out = max(out, i - sIndexLower.top());
+                        sIndexLower.pop();
+                    }
+                }
+
+                return out;
+            }
+        };
+    }
+
+
+
+    inline namespace Solution_1234{ //20230213
+        // 同向双指针
+        /**
+        1234. 替换子串得到平衡字符串
+        有一个只含有 'Q', 'W', 'E', 'R' 四种字符，且长度为 n 的字符串。
+
+        假如在该字符串中，这四个字符都恰好出现 n/4 次，那么它就是一个「平衡字符串」。
+
+         
+
+        给你一个这样的字符串 s，请通过「替换一个子串」的方式，使原字符串 s 变成一个「平衡字符串」。
+
+        你可以用和「待替换子串」长度相同的 任何 其他字符串来完成替换。
+
+        请返回待替换子串的最小可能长度。
+
+        如果原字符串自身就是一个平衡字符串，则返回 0。
+
+         
+
+        示例 1：
+
+        输入：s = "QWER"
+        输出：0
+        解释：s 已经是平衡的了。
+        示例 2：
+
+        输入：s = "QQWE"
+        输出：1
+        解释：我们需要把一个 'Q' 替换成 'R'，这样得到的 "RQWE" (或 "QRWE") 是平衡的。
+        示例 3：
+
+        输入：s = "QQQW"
+        输出：2
+        解释：我们可以把前面的 "QQ" 替换成 "ER"。 
+        示例 4：
+
+        输入：s = "QQQQ"
+        输出：3
+        解释：我们可以替换后 3 个 'Q'，使 s = "QWER"。
+         
+
+        提示：
+
+        1 <= s.length <= 10^5
+        s.length 是 4 的倍数
+        s 中只含有 'Q', 'W', 'E', 'R' 四种字符
+
+        来源：力扣（LeetCode）
+        链接：https://leetcode.cn/problems/replace-the-substring-for-balanced-string
+        著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+        */
+
+        class Solution {
+        public:
+            static auto test()->void{
+                Solution s;
+                {
+                    auto val = s.balancedString("QQQW");
+                    std::cout << val << std::endl;
+                }
+
+            }
+            int balancedString(string s) {
+                string map = "QWER";
+                int buck[4]{};
+                int l = s.size();
+                std::vector<int> vec;
+                vec.reserve(l);
+                for(int i= 0;i<l;++i){
+                    long unsigned int j = 0;
+                    for(j = 0;j<map.size();++j){
+                        if(s[i] == map[j]){
+                            ++buck[j];
+                            break;
+                        }
+                    }
+                    vec[i] = j;
+                }
+
+                auto valid = [&]{
+                    for(auto cur: buck){
+                        if(cur> l/4.0){
+                            return false;
+                        }
+                    }
+                    return true;
+                };
+
+                if(valid()){
+                    return 0;
+                }
+
+                //std:: cout << "OK1" << std::endl;
+
+                int outMin{l};
+                for(int i= 0,j=0;i<l;++i){
+
+                    // for(auto cur: buck){
+                    //     std::cout << cur << ", ";
+                    // }std::cout << std::endl;
+
+                    //QQQW
+
+                    //int j = i;
+                    for(;!valid() && j<l;++j){
+                        // if(valid()){
+                        //     break;
+                        // }
+                        --(buck[vec[j]]);
+                    }
+
+                    if(!valid()){
+                        break;
+                    }
+
+
+                    ++(buck[vec[i]]);
+
+                    outMin = outMin<j-i?outMin : j-i;
+                }
+
+                return outMin;
+            }
+        };
+    }
+
+
+
 
 
 
