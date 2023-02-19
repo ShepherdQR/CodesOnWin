@@ -3,7 +3,7 @@
 //  * Date: 2023-02-12 21:44:08
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-02-12 22:43:56
+//  * LastEditTime: 2023-02-19 23:39:19
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -18,6 +18,25 @@ namespace TestBasic{
     auto func_999(){
 
     }
+
+    auto func_2(){
+        Matrix<double, 4,4> m({
+            {1.,2.,3.,4.},
+            {1.,2.,0.,-5.},
+            {3.,-1.,-1.,0.},
+            {1.,0.,1.,2.}
+            });
+        Matrix<double, 4,1> b({
+            {-3.},
+            {1.},
+            {1.},
+            {-1.}
+            });
+
+        auto ans = Elimination::GaussianElimination::solve_01(m,b);
+        std::cout << ans << std::endl;
+    }
+
 
     auto func_1(){
         Matrix<int, 2,3> m1;

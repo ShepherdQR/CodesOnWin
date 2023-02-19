@@ -3,13 +3,15 @@
 //  * Date: 2022-10-23 00:37:39
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-02-15 22:35:40
+//  * LastEditTime: 2023-02-19 22:58:59
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
 #include <map>
 #include <set>
 #include <stack>
+#include <queue>
+#include <numeric>
 
 namespace LeetCode
 {
@@ -20,11 +22,173 @@ namespace LeetCode
         }std::cout << std::endl;
     }
     using namespace std;
-    inline namespace Solution_9999{ //20230212
+    inline namespace Solution_9999{ //20230219
         /**
        
         */
     }
+
+        inline namespace Solution_1792{ //20230219
+        /**
+         1792. 最大平均通过率
+            一所学校里有一些班级，每个班级里有一些学生，现在每个班都会进行一场期末考试。给你一个二维数组 classes ，其中 classes[i] = [passi, totali] ，表示你提前知道了第 i 个班级总共有 totali 个学生，其中只有 passi 个学生可以通过考试。
+
+            给你一个整数 extraStudents ，表示额外有 extraStudents 个聪明的学生，他们 一定 能通过任何班级的期末考。你需要给这 extraStudents 个学生每人都安排一个班级，使得 所有 班级的 平均 通过率 最大 。
+
+            一个班级的 通过率 等于这个班级通过考试的学生人数除以这个班级的总人数。平均通过率 是所有班级的通过率之和除以班级数目。
+
+            请你返回在安排这 extraStudents 个学生去对应班级后的 最大 平均通过率。与标准答案误差范围在 10-5 以内的结果都会视为正确结果。
+
+             
+
+            示例 1：
+
+            输入：classes = [[1,2],[3,5],[2,2]], extraStudents = 2
+            输出：0.78333
+            解释：你可以将额外的两个学生都安排到第一个班级，平均通过率为 (3/4 + 3/5 + 2/2) / 3 = 0.78333 。
+            示例 2：
+
+            输入：classes = [[2,4],[3,9],[4,5],[2,10]], extraStudents = 4
+            输出：0.53485
+             
+
+            提示：
+
+            1 <= classes.length <= 105
+            classes[i].length == 2
+            1 <= passi <= totali <= 105
+            1 <= extraStudents <= 105
+
+            来源：力扣（LeetCode）
+            链接：https://leetcode.cn/problems/maximum-average-pass-ratio
+            著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+        */
+       class Solution {
+        public:
+            double maxAverageRatio(vector<vector<int>>& classes, int extraStudents) {
+
+
+                struct Data{
+                    int pass{};
+                    int total{};
+
+                    // bool operator < (const Data& right) const{
+                    //     auto left = *this;
+
+                    //     return (left.pass +1) / (left.total + 1)
+                    //     -(left.pass) / (left.total)
+                    //     <
+                    //     (right.pass +1) / (right.total + 1)
+                    //     -(right.pass) / (right.total);
+                    // }
+
+                    bool operator < (const Data& oth) const {
+                    return (long long) (oth.total + 1) * oth.total * (total - pass) < (long long) (total + 1) * total * (oth.total - oth.pass);
+                }
+                };
+
+                priority_queue<Data> q;
+                for(const auto& cur: classes){
+                    q.push({cur[0],cur[1]});
+                }
+
+                for (int i = 0; i < extraStudents; i++) {
+                    auto [pass, total] = q.top();
+                    q.pop();
+                    q.push({pass + 1, total + 1});
+                }
+
+                double res = 0;
+                for (int i = 0; i < classes.size(); i++) {
+                    auto [pass, total] = q.top();
+                    q.pop();
+                    res += 1.0 * pass / total;
+                }
+                return res / classes.size();
+
+
+
+            }
+        };
+    }
+
+
+    inline namespace Solution_2341{ //20230219
+        /**
+            2341. 数组能形成多少数对
+            给你一个下标从 0 开始的整数数组 nums 。在一步操作中，你可以执行以下步骤：
+
+            从 nums 选出 两个 相等的 整数
+            从 nums 中移除这两个整数，形成一个 数对
+            请你在 nums 上多次执行此操作直到无法继续执行。
+
+            返回一个下标从 0 开始、长度为 2 的整数数组 answer 作为答案，其中 answer[0] 是形成的数对数目，answer[1] 是对 nums 尽可能执行上述操作后剩下的整数数目。
+
+             
+
+            示例 1：
+
+            输入：nums = [1,3,2,1,3,2,2]
+            输出：[3,1]
+            解释：
+            nums[0] 和 nums[3] 形成一个数对，并从 nums 中移除，nums = [3,2,3,2,2] 。
+            nums[0] 和 nums[2] 形成一个数对，并从 nums 中移除，nums = [2,2,2] 。
+            nums[0] 和 nums[1] 形成一个数对，并从 nums 中移除，nums = [2] 。
+            无法形成更多数对。总共形成 3 个数对，nums 中剩下 1 个数字。
+            示例 2：
+
+            输入：nums = [1,1]
+            输出：[1,0]
+            解释：nums[0] 和 nums[1] 形成一个数对，并从 nums 中移除，nums = [] 。
+            无法形成更多数对。总共形成 1 个数对，nums 中剩下 0 个数字。
+            示例 3：
+
+            输入：nums = [0]
+            输出：[0,1]
+            解释：无法形成数对，nums 中剩下 1 个数字。
+             
+
+            提示：
+
+            1 <= nums.length <= 100
+            0 <= nums[i] <= 100
+
+            来源：力扣（LeetCode）
+            链接：https://leetcode.cn/problems/maximum-number-of-pairs-in-array
+            著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+        */
+        class Solution {
+        public:
+            vector<int> numberOfPairs(vector<int>& nums) {
+
+                std::unordered_map<int, bool> hash;
+
+                int outEven{0};
+                for(const auto& cur:nums){
+                    if(!hash.count(cur)){
+                        hash[cur] = false;
+                    }else
+                    {
+                        if(!hash[cur]){ // odd
+                            ++outEven;
+                        }
+                        auto bCur = hash[cur];
+
+                        hash[cur] = !bCur;
+                    }
+                }
+                std::vector<int> out;
+                out.push_back(outEven);
+                out.push_back(nums.size() - 2*outEven);
+                
+                return out;
+                
+            }
+        };
+    }
+
+
+
 
     inline namespace Solution_9999{ //20230212
         /**
