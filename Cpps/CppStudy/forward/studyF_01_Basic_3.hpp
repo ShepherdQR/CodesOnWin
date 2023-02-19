@@ -22,6 +22,8 @@ namespace Basic{
 
         [[maybe_unused]]A a{0,2}, b{.j=2};
         std::cout << b.i << std::endl;
+
+        
     }
 
     auto func_59(){ // 20230211
