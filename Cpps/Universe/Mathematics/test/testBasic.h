@@ -3,7 +3,7 @@
 //  * Date: 2023-02-12 21:44:08
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-02-19 23:39:19
+//  * LastEditTime: 2023-02-20 00:03:46
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -35,6 +35,7 @@ namespace TestBasic{
 
         auto ans = Elimination::GaussianElimination::solve_01(m,b);
         std::cout << ans << std::endl;
+        // ans: 1/12,-1/6,-7/12,-1/4
     }
 
 
