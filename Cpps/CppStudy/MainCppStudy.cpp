@@ -3,7 +3,7 @@
 //  * Date: 2021-01-10 10:59:00
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-09-14 22:16:08
+//  * LastEditTime: 2023-03-02 22:51:18
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -16,8 +16,6 @@
 #include"./ClassCollections/StudyCollection_01.hpp"
 #include"./RayTracing/Picture.h"
 
-#include "./ClassCollections/Study_01_Basic.hpp"
-#include "./ClassCollections/Study_02_Template.hpp"
 
 #include "./ClassCollections/CasesCollection_01.hpp"
 
@@ -40,7 +38,7 @@ cd E:\Codes\CodesOnWin\CodesOnWin\Cpps\CppStudy
 // 	std::cout << func(2) << std::endl;
 // }
 
-
+#include"../Universe\Mathematics\test\testBasic.h"
 
 using namespace std;
 int main() {
@@ -50,10 +48,10 @@ int main() {
 
 	
 	
-	//#include"TestStudy.hpp"
+	#include"TestStudy.hpp"
 	
 
-	#include "TestRayTracing.hpp"
+	//#include "TestRayTracing.hpp"
 
 
 

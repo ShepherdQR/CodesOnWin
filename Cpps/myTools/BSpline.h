@@ -3,7 +3,7 @@
 //  * Date: 2022-09-06 23:01:44
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-09-14 23:55:36
+//  * LastEditTime: 2023-03-02 22:10:55
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -41,13 +41,13 @@ BSpline::BSpline(std::vector<Vector3> ivecPoint, const int k)
         std::cout << " " << _vecKnot[i] << std::endl;
     }
 
-    double tLeft{_k-1}; // 4阶就是3次
-    double tRight{ivecPoint.size()+1};
+    auto tLeft = _k-1; // 4阶就是3次
+    auto  tRight = ivecPoint.size()+1;
 
     _uplistPoint = std::make_shared<std::vector<Vector3> >();
 
     int inserctionNumber{50};
-    double steps{(tRight - tLeft) / (inserctionNumber -1)};
+    double steps =(tRight - tLeft) / (inserctionNumber -1);
     for(int i = 0;i<inserctionNumber;++i){
 
         Vector3 p;

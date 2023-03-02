@@ -3,7 +3,7 @@
 //  * Date: 2021-06-14 22:43:42
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-02-11 21:13:59
+//  * LastEditTime: 2023-03-02 22:17:13
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -65,8 +65,8 @@ namespace func20220605{
 
 
 
-std::string func20220604_5A(){}
-std::string& func20220604_5B(){}
+std::string func20220604_5A(){return {};}
+std::string& func20220604_5B(){static std::string str; return str;}
 decltype(auto) func20220604_5AA(){
     return func20220604_5A();
 }
@@ -325,6 +325,7 @@ void func20220411_queue_5(){
         bool operator() (pcb* a, pcb* b) const {
             bool bt =  a->_ < b->_;
             //cout <<"bt" << bt << endl;
+                return bt;
             }
     };
 
@@ -418,7 +419,7 @@ void func20220411_friend_4(){
 void func20220411_invoke_3(){
     class A{
     public:
-        f(const bool i){ std::cout << !i << std::endl;}
+        void f(const bool i){ std::cout << !i << std::endl;}
     };
     std::invoke((&A::f), A(), 0);
     std::apply((&A::f), std::make_pair(A(), 1));
@@ -433,10 +434,10 @@ void func20220411(int i){ std::cout << i << std::endl;}
 
 void func20220411_invoke_2(){
     class A{
-        ff(int i){ std::cout << ++i << std::endl;}
+        void ff(int i){ std::cout << ++i << std::endl;}
     public:
         A(int i){ std::cout << --i << std::endl;}
-        f(int i){ std::cout << ++i << std::endl;}
+        void f(int i){ std::cout << ++i << std::endl;}
     };
     std::invoke(&func20220411, 10);
     std::invoke((&A::f), A(3), 2);

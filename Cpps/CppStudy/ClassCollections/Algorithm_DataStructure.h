@@ -3,7 +3,7 @@
 //  * Date: 2022-06-03 20:31:04
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-06-08 23:24:52
+//  * LastEditTime: 2023-03-02 22:19:52
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -152,6 +152,7 @@ namespace Algorithm_DataStructure
                 return true;
             }
             _heapify(iIndex);
+            return true;
         }
 
         void display(){
