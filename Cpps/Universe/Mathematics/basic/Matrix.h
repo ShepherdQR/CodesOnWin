@@ -3,7 +3,7 @@
 //  * Date: 2023-02-12 21:19:41
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-02-14 23:04:33
+//  * LastEditTime: 2023-03-07 22:20:31
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -25,7 +25,11 @@ struct plainArray{
 template<typename Scalar, int _Rows, int _Cols>
 class Matrix{
 public:
-    Matrix(){}
+    Matrix(){
+        for(int i = 0; i < _Rows * _Cols;++i){
+            _mArray[i] = 0;
+        }
+    }
 
     explicit Matrix(const std::initializer_list< std::initializer_list< Scalar >> & iList ){
         auto szRow = iList.size();
@@ -51,6 +55,7 @@ public:
         }
     }
 
+
     int sizeRow()const {return _Rows;}
 
     int sizeColumn()const {return _Cols;}
@@ -60,6 +65,90 @@ public:
     //void set(int i, int j, const Scalar& ival){_mArray[i*_Cols + j] = ival;};
    
     Scalar at(int i, int j)const {return _mArray[i*_Cols + j];}
+
+
+    template</*typename Scalar,*/ int _Rows2, int _Cols2>
+    Matrix<Scalar, _Rows, _Cols2>
+    operator * (const Matrix<Scalar, _Rows2, _Cols2>& iMatrix)const{
+        Matrix<Scalar, _Rows, _Cols2> out;
+        if(_Rows2 != _Rows)
+        {
+            // error
+            return out;
+        }
+
+        for(int i=0; i<_Rows;++i){
+            for(int j=0; j<_Cols2;++j){
+                Scalar cur{};
+                for(int k=0; k<_Cols;++k){
+                    cur += this->at(i,k) * iMatrix.at(k,j);
+                }
+                
+                out.at(i,j) = cur;
+            }
+        }
+        return out;
+    }
+
+
+
+    Matrix<Scalar, _Rows, _Cols>
+    operator + (const Matrix<Scalar, _Rows, _Cols>& iMatrix)const{
+        Matrix<Scalar, _Rows, _Cols> out;
+        for(int i=0; i<_Rows;++i){
+            for(int j=0; j<_Cols;++j){
+                out.at(i,j) = this->at(i,j) + iMatrix.at(i,j);
+            }
+        }
+        return out;
+    }
+
+    Matrix<Scalar, _Rows, _Cols>
+    operator - (const Matrix<Scalar, _Rows, _Cols>& iMatrix)const{
+        Matrix<Scalar, _Rows, _Cols> out;
+        for(int i=0; i<_Rows;++i){
+            for(int j=0; j<_Cols;++j){
+                out.at(i,j) = this->at(i,j) - iMatrix.at(i,j);
+            }
+        }
+        return out;
+    }
+
+    Matrix<Scalar, _Rows, _Cols>&
+    operator= (const Matrix<Scalar, _Rows, _Cols>& iMatrix){
+
+        if(&iMatrix == this){
+            return *this;
+        }
+
+        for(int i=0; i<_Rows;++i){
+            for(int j=0; j<_Cols;++j){
+                this->at(i,j) = iMatrix.at(i,j);
+            }
+        }
+        return *this;
+    }
+
+    Scalar norm(const int iBase){
+        Scalar out{};
+
+        if(iBase == 1){
+            for(int i=0; i<_Rows;++i){
+                for(int j=0; j<_Cols;++j){
+                    out +=  std::abs(this->at(i,j)) ;
+                }
+            }
+        }
+        else if(iBase == 2){
+            for(int i=0; i<_Rows;++i){
+                for(int j=0; j<_Cols;++j){
+                    out += this->at(i,j) * this->at(i,j) ;
+                }
+            }
+        }
+        
+        return out;
+    }
 
 private:
     plainArray<Scalar, _Rows * _Cols> _mArray;

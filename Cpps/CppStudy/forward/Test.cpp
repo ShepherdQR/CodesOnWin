@@ -3,7 +3,7 @@
 //  * Date: 2022-07-10 22:03:35
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-03-02 22:20:31
+//  * LastEditTime: 2023-03-07 21:04:49
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 #include<iostream>
@@ -21,8 +21,6 @@
 #include"../../myTools/Parser.h"
 
 // test Mathematics begins ...
-#include"../../Universe\Mathematics\basic\Matrix.h"
-#include"../../Universe\Mathematics\basic\Algorithm.hpp"
 #include"../../Universe\Mathematics\test\testBasic.h"
 // test Mathematics ends ...
 /////////////

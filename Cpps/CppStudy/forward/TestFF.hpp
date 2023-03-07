@@ -3,7 +3,7 @@
 //  * Date: 2022-07-10 22:23:22
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-02-19 22:56:28
+//  * LastEditTime: 2023-03-07 22:01:17
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -15,6 +15,11 @@
 /std:c++latest
 /std:c++20
 
+
+// [20230307: cmake, __cplusplus = 202101]
+e:
+cd E:\Codes\CodesOnWin\CodesOnWin\Cpps\CppStudy
+.\run.bat
 
 
 //[20230201: clang15.0, __cplusplus = 202101]
@@ -29,7 +34,7 @@ cd e: && cd Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/forward
 
 */
 
-    TestBasic::func_2(); // Matrix
+    TestBasic::func_3(); // Matrix
 
     //LeetCode::Solution_1234::Solution::test();
     //LeetCode::Solution_1124::Solution::test();

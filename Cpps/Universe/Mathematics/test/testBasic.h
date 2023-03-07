@@ -3,7 +3,7 @@
 //  * Date: 2023-02-12 21:44:08
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-03-02 22:55:30
+//  * LastEditTime: 2023-03-07 22:29:31
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -18,6 +18,25 @@ namespace TestBasic{
 
     auto func_999(){
 
+    }
+
+    auto func_3(){
+        Matrix<double, 3,3> m({
+            {8.0,   -3.0,   2.0},
+            {4.0,  11.0,   -1.0},
+            {6.0,  3.0,   12.0}
+            });
+        Matrix<double, 3,1> b({
+            {20.0},
+            {33.0},
+            {36.0}
+            });
+
+        auto ans = Iteration::JacobiIteration::solve_01(m,b);
+        std::cout << ans << std::endl;
+        // ans: [3, 2, 1]^T
+        /*
+        */
     }
 
     auto func_2(){
