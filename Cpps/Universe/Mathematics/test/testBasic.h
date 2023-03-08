@@ -3,7 +3,7 @@
 //  * Date: 2023-02-12 21:44:08
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-03-07 22:29:31
+//  * LastEditTime: 2023-03-08 21:58:19
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -18,6 +18,18 @@ namespace TestBasic{
 
     auto func_999(){
 
+    }
+
+
+    auto func_4(){
+
+        Matrix<double, 3,3> m({
+            {8.0,   -3.0,   2.0},
+            {4.0,  11.0,   -1.0},
+            {6.0,  3.0,   12.0}
+            });
+
+        std::cout << 2.0*m << std::endl;
     }
 
     auto func_3(){
@@ -36,6 +48,10 @@ namespace TestBasic{
         std::cout << ans << std::endl;
         // ans: [3, 2, 1]^T
         /*
+            [times, diff]   15      2.13186e-06
+            3,
+            2,
+            0.999999,
         */
     }
 

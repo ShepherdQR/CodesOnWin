@@ -3,7 +3,7 @@
 //  * Date: 2023-02-12 21:19:41
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-03-07 22:20:31
+//  * LastEditTime: 2023-03-08 22:01:57
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -90,7 +90,16 @@ public:
         return out;
     }
 
-
+    Matrix<Scalar, _Rows, _Cols>
+    dotProduct (const Matrix<Scalar, _Rows, _Cols>& iMatrix)const{
+        Matrix<Scalar, _Rows, _Cols> out;
+        for(int i=0; i<_Rows;++i){
+            for(int j=0; j<_Cols;++j){
+                out.at(i,j) = this->at(i,j) * iMatrix.at(i,j);
+            }
+        }
+        return out;
+    }
 
     Matrix<Scalar, _Rows, _Cols>
     operator + (const Matrix<Scalar, _Rows, _Cols>& iMatrix)const{
@@ -102,6 +111,7 @@ public:
         }
         return out;
     }
+
 
     Matrix<Scalar, _Rows, _Cols>
     operator - (const Matrix<Scalar, _Rows, _Cols>& iMatrix)const{
@@ -150,6 +160,17 @@ public:
         return out;
     }
 
+    Matrix<Scalar, _Cols, _Rows>
+    transposition ()const{
+        Matrix<Scalar, _Cols, _Rows> out;
+        for(int i=0; i<_Rows;++i){
+            for(int j=0; j<_Cols;++j){
+                out.at(j,i) = this->at(i,j);
+            }
+        }
+        return out;
+    }
+
 private:
     plainArray<Scalar, _Rows * _Cols> _mArray;
      
@@ -158,14 +179,28 @@ private:
 template<typename Scalar, int _Rows, int _Cols>
 std::ostream& operator<<(std::ostream& os, const Matrix<Scalar, _Rows, _Cols>& iMatrix)
 {
-    for(int i=0; i<iMatrix.sizeRow();++i){
-        for(int j=0; j<iMatrix.sizeColumn();++j){
+    for(int i=0; i<_Rows;++i){
+        for(int j=0; j<_Cols;++j){
             os << iMatrix.at(i,j) << ", ";
         }
         os << std::endl;
     }
 
     return os;
+}
+
+template<typename Scalar, int _Rows, int _Cols>
+Matrix<Scalar, _Rows, _Cols>
+operator*(const Scalar& iScalar, const Matrix<Scalar, _Rows, _Cols>& iMatrix)
+{
+    Matrix<Scalar, _Rows, _Cols> out = iMatrix;
+    for(int i=0; i<_Rows;++i){
+        for(int j=0; j<_Cols;++j){
+            out.at(i,j) *= iScalar;
+        }
+    }
+
+    return out;
 }
 
 

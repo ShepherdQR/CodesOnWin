@@ -28,6 +28,7 @@ namespace Algorithm_Sort
         }
 
     protected:
+
         virtual vector<int> solve(const vector<int>& ivec){return ivec;};
 
         template<typename T>
@@ -158,35 +159,6 @@ namespace Algorithm_Sort
 
 
 
-    class Insertion: public Base{
-   
-        vector<int> solve(const vector<int>& ivec){
-            vector<int> ovec = ivec;
-            if(ivec.size()<2)
-            {
-                return ovec;
-            }
-
-            auto lambdaSwap = [](int& a, int&b){
-                if(&a != &b){
-                    a = a^b;
-                    b = a^b;
-                    a = a^b;
-                }
-            };
-
-            for(int i = 1;i<ovec.size();++i){
-                for(int j = i-1; j>=0 && ovec[j]> ovec[j+1];--j){
-                    _swap(ovec[j], ovec[j+1]);
-                    //lambdaSwap(ovec[j], ovec[j+1]);
-                }
-            }
-            return ovec;
-        }
-
-    };
-
-
     // 比较的信息，以整体有序的部分的形式保存，因而优于O(N^2)
     class Merge: public Base{
 
@@ -249,12 +221,114 @@ namespace Algorithm_Sort
     };
 
 
+    class Insertion: public Base{
+
+        vector<int> solve(const vector<int>& ivec){
+            return solve20230308(ivec);
+        }
+  
+        vector<int> solve20230308(const vector<int>& ivec){
+            vector<int> ovec = ivec;
+
+            if(auto sz = ivec.size(); sz>=2){
+                for(int i = 1;i<sz;++i){
+                    auto cur = ovec[i];
+                    for(int j = i-1; j>=0;--j){
+                        if( ovec[j]> cur){
+                            ovec[j+1] = ovec[j];
+                        }else{
+                            ovec[j+1] = cur;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return ovec;
+        }
+
+        vector<int> solve1(const vector<int>& ivec){
+            vector<int> ovec = ivec;
+            if(ivec.size()<2)
+            {
+                return ovec;
+            }
+
+            auto lambdaSwap = [](int& a, int&b){
+                if(&a != &b){
+                    a = a^b;
+                    b = a^b;
+                    a = a^b;
+                }
+            };
+
+            for(int i = 1;i<ovec.size();++i){
+                for(int j = i-1; j>=0 && ovec[j]> ovec[j+1];--j){
+                    _swap(ovec[j], ovec[j+1]);
+                    //lambdaSwap(ovec[j], ovec[j+1]);
+                }
+            }
+            return ovec;
+        }
+    };
+
+
+    class Select: public Base{
+   
+        vector<int> solve(const vector<int>& ivec){
+            vector<int> ovec = ivec;
+
+            if(auto sz = ivec.size(); sz>=2){
+                for(int i = 0;i<sz;++i){
+                    auto indexMin = i;
+                    for(int j = i+1; j<sz;++j){
+                        if( ovec[j]< ovec[indexMin]){
+                            indexMin = j;
+                        }
+                    }
+                    _swap(ovec[i], ovec[indexMin]);
+                }
+            }
+
+            return ovec;
+        }
+    };
+
+    class Bubble: public Base{
+   
+        vector<int> solve(const vector<int>& ivec){
+            vector<int> ovec = ivec;
+            if(ivec.size()<2)
+            {
+                return ovec;
+            }
+
+            for(int i = 0;i<ovec.size();++i){
+                bool bvalidFlag{false};
+                for(int j = 1; j<ovec.size()-i;++j){
+                    if(ovec[j]> ovec[j-1]){
+                        _swap(ovec[j], ovec[j-1]);
+                        bvalidFlag = true;
+                    }
+                }
+                if(!bvalidFlag)
+                {
+                    break;
+                }
+            }
+            return ovec;
+        }
+    };
+
+
     auto test(){
 
-        Radix().test({10,13,1,66,4,121});
-        //Quick().test();
-        //Merge().test();
-        //Insertion().test();
+        // Bubble().test();
+        // Select().test();
+        // Radix().test({10,13,1,66,4,121});
+        // Quick().test();
+        // Merge().test();
+        // Insertion().test();
     }
 
 
