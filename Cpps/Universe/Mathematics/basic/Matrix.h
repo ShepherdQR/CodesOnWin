@@ -3,9 +3,10 @@
 //  * Date: 2023-02-12 21:19:41
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-03-08 22:01:57
+//  * LastEditTime: 2023-03-12 22:20:45
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
+#pragma once
 
 #include <iostream>
 
@@ -166,6 +167,28 @@ public:
         for(int i=0; i<_Rows;++i){
             for(int j=0; j<_Cols;++j){
                 out.at(j,i) = this->at(i,j);
+            }
+        }
+        return out;
+    }
+
+    Matrix<Scalar, 1, _Cols>
+    retrieveRow (const int iIndex)const{
+        Matrix<Scalar, 1, _Cols> out;
+        if(iIndex>=0 && iIndex<_Cols){
+            for(int j=0; j<_Cols;++j){
+                out.at(0, j) = this->at(iIndex,j);
+            }
+        }
+        return out;
+    }
+
+    Matrix<Scalar, _Rows, 1>
+    retrieveColumn (const int iIndex)const{
+        Matrix<Scalar, _Rows, 1> out;
+        if(iIndex>=0 && iIndex<_Rows){
+            for(int j=0; j<_Rows;++j){
+                out.at(j, 0) = this->at(j,iIndex);
             }
         }
         return out;

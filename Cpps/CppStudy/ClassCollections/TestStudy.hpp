@@ -3,7 +3,7 @@
 //  * Date: 2021-07-25 19:49:16
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-03-08 21:57:06
+//  * LastEditTime: 2023-03-12 23:18:26
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -15,7 +15,7 @@ cd E:\Codes\CodesOnWin\CodesOnWin\Cpps\CppStudy
 
 */
 
-    TestBasic::func_4(); // Matrix
+    TestBasic::func_5(); // Matrix. P9,P10, gaxpy 
     
     //P7,1-35
     // Algorithm_Search::test();

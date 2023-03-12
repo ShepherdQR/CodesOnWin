@@ -6,7 +6,7 @@
 //  * LastEditTime: 2023-03-07 21:09:30
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
-
+#pragma once
 
 
 namespace Universe::Transformation{

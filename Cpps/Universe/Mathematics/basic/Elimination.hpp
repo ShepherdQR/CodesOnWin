@@ -3,9 +3,10 @@
 //  * Date: 2023-03-07 21:09:57
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-03-07 21:10:47
+//  * LastEditTime: 2023-03-10 20:50:39
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
+#pragma once
 
 namespace Universe::Elimination{
 
