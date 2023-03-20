@@ -3,7 +3,7 @@
 //  * Date: 2023-03-10 20:50:39
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-03-10 20:51:26
+//  * LastEditTime: 2023-03-20 21:11:37
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 #pragma once
@@ -171,6 +171,26 @@ namespace Algorithm_Sort
     class Merge: public Base{
 
         vector<int> solve(const vector<int>& ivec){
+            return solve_Bottom2Top(ivec);
+        }
+
+
+        vector<int> solve_Bottom2Top(const vector<int>& ivec){
+            vector<int> ovec = ivec;
+
+            int sz = ivec.size();
+            for(int i=1;i<sz/2;i +=i)
+            {
+                for(int j = 0;j<sz-i ;j+=i){
+                    // std::cout << j<< ", " << j+i<< ", " << j+i+i<< ", " << std::endl;
+                    _merge(ovec, j, j+i/2, j+i);
+                }
+            }
+
+            return ovec;
+        }
+
+        vector<int> solve_Top2Bottom(const vector<int>& ivec){
             vector<int> ovec = ivec;
             if(ivec.size()>1)
             {
@@ -335,7 +355,7 @@ namespace Algorithm_Sort
         // Select().test();
         // Radix().test({10,13,1,66,4,121});
         // Quick().test();
-        // Merge().test();
+        Merge().test();
         // Insertion().test();
     }
 

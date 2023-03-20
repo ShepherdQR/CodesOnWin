@@ -3,7 +3,7 @@
 //  * Date: 2023-02-12 21:44:08
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-03-12 23:04:07
+//  * LastEditTime: 2023-03-20 21:42:31
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -22,8 +22,8 @@ namespace TestBasic{
 
     auto func_5(){
 
-        //Universe::BasicAlgorithm::test_001();
-        Universe::BasicAlgorithm::test_002();
+        //Universe::BasicAlgorithm::test_002();
+        Universe::MatrixFactory::test_001();
 
     }
 
