@@ -3,10 +3,10 @@
 //  * Date: 2022-07-10 22:08:32
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-02-11 21:18:18
+//  * LastEditTime: 2023-03-28 20:05:18
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
-#pragma once
+_Pragma("once");
 
 //#include "studyF_01_Basic_1.hpp"
 //#include"studyF_01_Basic_2.hpp"

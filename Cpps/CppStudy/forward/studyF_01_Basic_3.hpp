@@ -1,5 +1,6 @@
 
-#pragma once
+// #pragma once
+_Pragma("once");
 
 #include <iostream>
 #include <functional>
@@ -13,6 +14,65 @@ namespace Basic{
 
     }
 
+    auto func_63(){
+        // 1. display information in compile time
+        // #error "hi"
+        // static_assert(false, "hi");
+
+        // #error "hi"
+        std::cout << sizeof (unsigned int) << std::endl; // 4
+        std::cout << sizeof 4 << std::endl; // 4
+        // static_assert(true, "hi"); // no output
+        // static_assert(sizeof (unsigned int) != sizeof 4, "hi");
+
+        // 2. final disables the rePureVirtual in the derived classes.
+        class A{
+            virtual void f() = 0;
+            virtual void g() = 0;
+        };
+
+        class B:A{
+            virtual void f() final;
+            virtual void g(){};
+        };
+
+        class C:B{
+            // virtual void f() = 0; // error: declaration of 'f' overrides a 'final' function
+            virtual void g() = 0;
+        };
+
+
+    }
+
+
+
+    auto func_62(){
+        // long long, more than 64 bit
+
+        unsigned long long l1 = ULLONG_MAX;//18446744073709551615
+        long long l2 = LLONG_MAX; //9223372036854775807 
+
+        printf("%llu\n", l1);
+        printf("%lld\n", l2);
+
+
+    }
+
+
+    auto func_61_1()->const char*{
+        std::cout << __func__ << std::endl; // func_61_1
+        return __func__;
+    }
+    auto func_61(){
+
+        auto l = []{
+            return __func__;
+        };
+
+        std::cout << l() << std::endl; // operator()
+        std::cout << func_61_1() << std::endl; //func_61_1
+    }
+
     auto func_60(){
 
         struct A{
@@ -22,8 +82,6 @@ namespace Basic{
 
         [[maybe_unused]]A a{0,2}, b{.j=2};
         std::cout << b.i << std::endl;
-
-        
     }
 
     auto func_59(){ // 20230211
