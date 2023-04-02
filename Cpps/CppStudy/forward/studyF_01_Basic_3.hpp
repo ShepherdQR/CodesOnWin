@@ -14,6 +14,28 @@ namespace Basic{
 
     }
 
+    auto func_64(){
+        /*
+            p[i] 实质是*(p+i); like i[p]
+            const int a[] ; // means that each a[i] is const, can protect the value of the array as function parameter.
+            *p++ // 先取p的值，然后p++
+            主调函数动态分配好内存，将指针传入调用的函数A，A赋值。这样主调函数内部自己维护
+        */
+
+        class A{
+            // f1和f2等价
+            void f1(int*, int);
+            void f2(int[], int);
+        };
+
+        int* p = nullptr;
+        delete p;
+        free(nullptr);
+        free(0);
+        puts("hi");
+
+    }
+
     auto func_63(){
         // 1. display information in compile time
         // #error "hi"

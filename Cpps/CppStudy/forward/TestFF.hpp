@@ -3,7 +3,7 @@
 //  * Date: 2022-07-10 22:23:22
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-03-30 22:12:44
+//  * LastEditTime: 2023-04-01 23:19:20
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -40,7 +40,7 @@ cd e: && cd Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/forward
     //LeetCode::Solution_1124::Solution::test();
 
     
-    Basic::func_63(); // studyF_0x
+    Basic::func_64(); // studyF_0x
 
     //Template::func_10();
     //template_Variadic::func_1();
