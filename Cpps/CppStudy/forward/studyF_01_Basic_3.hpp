@@ -14,6 +14,99 @@ namespace Basic{
 
     }
 
+    namespace np_func_66{
+        template<typename T>
+        auto f1(T&& t){
+            if(std::is_lvalue_reference<T>::value){
+                t *= 2;
+            }
+            return t;
+        }
+
+
+    }
+    auto func_66(){
+        using namespace np_func_66;
+
+        {
+            std::cout << f1(10) << std::endl; // 10
+            int temp = 1;
+            std::cout << f1(temp) << std::endl; // 2
+        }
+
+        {
+            enum class A{a = 12,};
+            using AA = std::remove_reference<decltype(A::a)>::type;
+            AA b{A::a};
+            std::cout << static_cast<int>(b) << std::endl; // 12
+        }
+
+        {
+            struct A{bool b{false};};
+            auto l = [a = A()]mutable{
+                if(!a.b){
+                    puts("Init.");
+                }
+                std::cout << a.b << std::endl;
+                a.b = !a.b;
+            };
+
+            l(); // Init. \n 0
+            l(); // 1
+            l(); // Init. \n 0
+            std::cout << (true?l(),66:88) << std::endl; // 1 \n 66
+
+        }
+
+    }
+
+
+    auto func_65(){
+
+        /*
+            1. auto, not support auto var[], vector<auto>
+            2. wild pointer, dangling pointer
+            3. constexpr A
+        */
+
+        {
+            // auto var[]{1,2,3}; // error: 'var' declared as array of 'auto'
+
+            // vector<auto> vec{1,2,3}; //  error: 'auto' not allowed in template argument
+        }
+
+        {
+            struct A{ int i{1}; };
+            A* pA{nullptr};
+            if(auto up{std::make_unique<A>()}){
+                pA = up.get();
+                // std::string* str = static_cast<std::string*>(pA); // error: static_cast from 'A *' to 'std::string *', which are not related by inheritance, is not allowed
+                
+                std::string* str = (std::string*)pA;// wild pointer
+            }
+            pA = nullptr; // dangling pointer
+        }
+
+        {
+            constexpr int i{10};
+            constexpr struct A{
+                int i{10};
+                constexpr A():i{11}{}
+            } a;
+            std::cout << a.i << std::endl;
+        }
+
+        {
+            // if(int a[]{1,2,3};std::unique_ptr<int[]>up(5)){// error: variable declaration in condition cannot have a parenthesized initializer
+            if(int i = 3; std::unique_ptr<int[]>up{new int[i]{1,2,3}}){
+                while(i-->0){
+                    // std::cout << *(up.get()+i)<< std::endl;
+                    std::cout << i[up.get()]<< std::endl;
+                }
+            }
+        }
+    }
+
     auto func_64(){
         /*
             p[i] 实质是*(p+i); like i[p]
@@ -62,6 +155,23 @@ namespace Basic{
             // virtual void f() = 0; // error: declaration of 'f' overrides a 'final' function
             virtual void g() = 0;
         };
+
+        {
+            class A{
+                virtual void f() = 0;
+                virtual void g() = 0;
+            };
+
+            class B : A{
+                virtual void f()final{};
+                virtual void g(){};
+            };
+
+            class C : B{
+                // virtual void f() = 0; // error: declaration of 'f' overrides a 'final' function
+                virtual void g() = 0;
+            };
+        }
 
 
     }
