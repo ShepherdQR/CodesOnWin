@@ -14,6 +14,13 @@ namespace Basic{
 
     }
 
+    auto func_67(){
+        __int8 x{1};
+        std::cout << x << std::endl;
+
+    }
+
+
     namespace np_func_66{
         template<typename T>
         auto f1(T&& t){
