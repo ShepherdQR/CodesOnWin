@@ -15,8 +15,36 @@ namespace Basic{
     }
 
     auto func_67(){
-        __int8 x{1};
-        std::cout << x << std::endl;
+        __int8 x{16};
+        __int16 y{57};
+        std::cout << x << ", " << y << std::endl;
+
+        auto l = []{return *(new int{3});};
+        std::cout << l() << std::endl;
+
+        {
+            std::cout << std::endl;
+            std::cout << sizeof '\0' << std::endl;
+            std::cout << sizeof true << std::endl;
+            std::cout << sizeof 0 << std::endl;
+            std::cout << sizeof NULL << std::endl;
+            std::cout << sizeof nullptr << std::endl;
+            std::cout << sizeof 0.0 << std::endl;
+            std::cout << sizeof sizeof true << std::endl;
+        }
+
+        {
+            
+            if(class A{public:}; auto p{std::make_unique<A>()}){
+                puts("hiii");
+            }
+            if(class A{private:}; auto p{std::make_unique<A>()}){
+                puts("hiii");
+            }
+            if(class A{}; auto p{std::make_unique<A>()}){
+                puts("hiii");
+            }
+        }
 
     }
 
