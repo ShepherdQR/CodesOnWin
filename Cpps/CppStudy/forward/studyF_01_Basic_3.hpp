@@ -14,6 +14,64 @@ namespace Basic{
 
     }
 
+    namespace np_func_68{
+
+        template<typename T, int size>
+        T f1(T(&array)[size]){
+            for(int i=0;i<size;++i){
+                std::cout << i << ", ";
+            }std::cout << std::endl;
+            return array[0];
+        }
+
+        class A{};
+        void f2(int i){std::cout << i << std::endl;}
+        template<typename T> void f3(T i){
+            f2(42);
+            f2(i);
+        }
+        void f2(A i){std::cout << 20230410 << std::endl;}
+
+        // 特化
+        template<> void f3(char* i){puts("Yes.");}
+
+        // 重载
+        template<typename T> void f4(T i, int){}
+        template<typename T> void f4(T i, T j){}
+
+
+
+
+        auto test(){
+            {
+                typedef int(*pf1)(int(&)[2]);
+                typedef double(*pf2)(double(&)[2]);
+                struct A{
+                    void f(pf1 ip){int a[]{1,2}; ip(a);}
+                    void f(pf2 ip){double a[]{3.4,5.6}; ip(a);}
+                };
+
+                // A().f(f1); //error: call to member function 'f' is ambiguous
+                A().f(f1<int>); // 0, 1,
+                A().f(static_cast<pf2>(f1)); // 0, 1, ?????
+            }
+
+            {
+                f3<A>({}); // 42 \n 20230410
+                f3(A{}); // 42 \n 20230410
+            }
+            {
+                f3((char*){nullptr});//Yes.
+            }
+
+        }
+
+    }
+    auto func_68(){
+        using namespace np_func_68;
+        test();
+    }
+
     auto func_67(){
         __int8 x{16};
         __int16 y{57};
