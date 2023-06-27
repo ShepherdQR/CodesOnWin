@@ -3,7 +3,7 @@
 //  * Date: 2022-06-03 20:31:04
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-03-02 22:19:52
+//  * LastEditTime: 2023-06-27 23:24:29
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -11,9 +11,8 @@
 #include <ctime>
 #include <vector>
 #include <iostream>
-using namespace std;
 
-
+#include "SinglyLinkedList.h"
 
 namespace Algorithm_DataStructure
 {
@@ -23,105 +22,17 @@ namespace Algorithm_DataStructure
 
      */
 
-    inline auto display(const vector<int>& ivec){
+    inline auto display(const std::vector<int>& ivec){
         for(auto cur:ivec){
-            cout << cur << ", ";
-        }cout << endl;
+            std::cout << cur << ", ";
+        }std::cout << std::endl;
     }
 
-    class SinglyLinkedList{
-
-        struct SinglyLinkedList_Node{
-            int data;
-            SinglyLinkedList_Node* pNext=nullptr;
-        }* _pHead = nullptr;
-
-    public:        
-
-
-        SinglyLinkedList(const vector<int>& ivec){
-            if(ivec.size()>0){
-                _pHead= new SinglyLinkedList_Node;
-                _pHead->data = ivec[0];
-            }
-            SinglyLinkedList_Node* pCur = _pHead;
-            for(int i=1;i!=ivec.size();++i){
-                SinglyLinkedList_Node* pTemp = new SinglyLinkedList_Node;
-                pTemp->data = ivec[i];
-                pCur->pNext = pTemp;
-                pCur = pTemp;
-            }
-        }
-
-        SinglyLinkedList(std::initializer_list<int> ilist):SinglyLinkedList(std::vector<int>(ilist)){}
-
-        ~SinglyLinkedList(){
-            SinglyLinkedList_Node* pCur = _pHead;
-            while(pCur){
-                SinglyLinkedList_Node* pTemp = pCur;
-                pCur = pCur->pNext;
-                delete pTemp;
-            }
-        }
-
-        void reverse(){
-            SinglyLinkedList_Node* pCur = _pHead;
-            SinglyLinkedList_Node* pPrevious = nullptr;
-            while(pCur){
-                SinglyLinkedList_Node* pTemp = pCur->pNext;
-                pCur->pNext = pPrevious;
-                pPrevious = pCur;
-                pCur = pTemp;
-            }
-            _pHead = pPrevious;
-        }
-
-        void display(){
-            SinglyLinkedList_Node* pCur = _pHead;
-            while(pCur){
-                cout << pCur->data << ", ";
-                pCur = pCur->pNext;
-            }cout << endl;
-        }
-
-        static vector<int> algorithm_1_IntersectionOf2List(const SinglyLinkedList& ia, const SinglyLinkedList& ib);
-
-        static bool algorithm_2_JudgePalindrome_1(const SinglyLinkedList& ilist);
-        static bool algorithm_2_JudgePalindrome_2(const SinglyLinkedList& ilist);
-    };
-
-    inline auto test_SinglyLinkedList(){
-        printf("Test Basic.\n");
-        SinglyLinkedList a({1,2,3,4,5});
-        a.display();
-        a.reverse();
-        a.display();
-
-        printf("Test Algorithm 01.\n");
-        Algorithm_DataStructure::display(
-            SinglyLinkedList::algorithm_1_IntersectionOf2List(
-                SinglyLinkedList({1,2,3,4,5}),  SinglyLinkedList({0,2,3,3,5})
-            )
-        );
-
-        printf("Test Algorithm 02_1.\n");
-        cout << SinglyLinkedList::algorithm_2_JudgePalindrome_1({1,2,3,4,5}) << ", "
-        << SinglyLinkedList::algorithm_2_JudgePalindrome_1({1,2,3,9,2,1}) << ", "
-        << SinglyLinkedList::algorithm_2_JudgePalindrome_1({1,2,3,2,1}) << endl;//0,0,1
-
-        printf("Test Algorithm 02_2.\n");
-
-        SinglyLinkedList aA2_2_a({1,2,3,4,5});
-        SinglyLinkedList aA2_2_b({1,2,3,3,2,1});
-        cout << SinglyLinkedList::algorithm_2_JudgePalindrome_2(aA2_2_a) << ", "
-        << SinglyLinkedList::algorithm_2_JudgePalindrome_2(aA2_2_b) << ", "
-        << SinglyLinkedList::algorithm_2_JudgePalindrome_2({1,2,3,2,1}) << endl;//0,1,1
-        aA2_2_a.display();
-        aA2_2_b.display();
+    auto test11()->void{
+        Algorithm::DataStructure::SinglyLinkedList a{1};
+        Algorithm::DataStructure::SinglyLinkedList r5{1};
+        Algorithm::DataStructure::SinglyLinkedList::test();
     }
-
-
-
 
 
 
@@ -158,7 +69,7 @@ namespace Algorithm_DataStructure
         void display(){
             Algorithm_DataStructure::display(_vec);
         }
-        Heap(Type iType, const vector<int>& ivec){
+        Heap(Type iType, const std::vector<int>& ivec){
             _typeIsGreater = iType;
             int case_type = 1;
             if(case_type == 0){
@@ -203,7 +114,7 @@ namespace Algorithm_DataStructure
         bool _bJudgeAndSwap(const int a, const int b){
             bool bSwap = (_typeIsGreater == Type::MaxHeap)? (_vec[a]<_vec[b]):(_vec[b]>_vec[a]);
             if(bSwap){
-                swap(_vec[a], _vec[b]);
+                std::swap(_vec[a], _vec[b]);
             }
             return bSwap;
         }
@@ -246,8 +157,8 @@ namespace Algorithm_DataStructure
         hp.display();//8746513
         int sz = hp.size();
         for(int i=0;i!=sz;++i){
-            cout << hp.pop() << ", ";
-        }cout << endl;
+            std::cout << hp.pop() << ", ";
+        }std::cout << std::endl;
     }
     
 }

@@ -3,7 +3,7 @@
 //  * Date: 2022-07-10 22:03:35
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-03-07 21:04:49
+//  * LastEditTime: 2023-06-27 21:47:53
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 #include<iostream>
@@ -21,7 +21,7 @@
 #include"../../myTools/Parser.h"
 
 // test Mathematics begins ...
-#include"../../Universe\Mathematics\test\testBasic.h"
+// #include"../../Universe\Mathematics\test\testBasic.h"
 // test Mathematics ends ...
 /////////////
 /////////////
@@ -50,9 +50,7 @@ auto main()->int{
     // #endif
     // std::cout << ibCompile_YESGNUC11_3__and_NOclang15_0 << std::endl;
     
-
-    // [20230201, clang15.0 = 202101, gcc11.30 = 202100]
-    std::cout <<__cplusplus <<std::endl;//[20220411, c++17][20220927, 202100]
+    std::cout <<__cplusplus <<std::endl;
 	std::cout << "Hi<" << std::endl;
 
     #include"TestFF.hpp"

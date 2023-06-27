@@ -3,7 +3,7 @@
 //  * Date: 2022-01-17 21:55:53
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-09-15 00:03:41
+//  * LastEditTime: 2023-06-27 22:49:00
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -193,7 +193,7 @@ std::function<Vector3(const int iX, const int iY)> ifuncPositionColor, const std
         int state = stbi_write_png(outFilePath.c_str(), iWidth, iHeight, nChanel, (void*)data, 0);
         //std::cout <<state <<std::endl;
 
-        delete data;
+        delete[] data;
         data = nullptr;
     }
 }
@@ -228,11 +228,10 @@ std::function<Vector4(const int iX, const int iY)> ifuncPositionColor, const std
     int state = stbi_write_png(outFilePath.c_str(), iWidth, iHeight, nChanel, (void*)data, 0);
     //std::cout <<state <<std::endl;
 
-    if (data)
-    {
-        delete data;
+    
+        delete[] data;
         data = nullptr;
-    }
+    
 }
 
 

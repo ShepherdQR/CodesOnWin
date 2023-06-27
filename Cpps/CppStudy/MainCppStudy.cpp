@@ -3,13 +3,19 @@
 //  * Date: 2021-01-10 10:59:00
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-03-02 22:51:18
+//  * LastEditTime: 2023-06-27 23:44:47
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
 #include <iostream>
+
+
 #include"./ClassCollections/AlgorithmStudy.hpp"
-#include"./ClassCollections/Algorithm_DataStructure.h"
+
+//#include"../Universe\Mathematics\test\testBasic.h"
+#include "./Universe/Algorithm/interface/Algorithm_DataStructure.h"
+
+
 #include"./ClassCollections/Algorithm_Sort.hpp"
 #include"./ClassCollections/Algorithm_Search.hpp"
 
@@ -23,14 +29,6 @@
 #include <cstring>
 #include <stdio.h>
 #include <cmath>
-/*
-e:
-cd E:\Codes\CodesOnWin\CodesOnWin\Cpps\CppStudy
-.\run.bat
-
-*/
-
-
 
 
 // void func(std::function<int(const int&)> func)
@@ -46,8 +44,6 @@ int main() {
 	std::cout <<__cplusplus <<std::endl;//20220411, c++17
 	std::cout << "Hi<" << std::endl;
 
-	
-	
 	#include"TestStudy.hpp"
 	
 

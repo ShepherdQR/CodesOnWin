@@ -3,7 +3,7 @@
 //  * Date: 2022-07-10 22:23:22
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-04-10 21:43:06
+//  * LastEditTime: 2023-06-27 22:31:30
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -15,20 +15,20 @@
 /std:c++latest
 /std:c++20
 
-
-// [20230307: cmake, __cplusplus = 202101]
+// [20230627: cmake, cmake_3_27, __cplusplus = 202101]
+// [BASED ON clang++]
 e:
 cd E:\Codes\CodesOnWin\CodesOnWin\Cpps\CppStudy
 .\run.bat
 
 
-//[20230201: clang15.0, __cplusplus = 202101]
+//[20230627: clang16.0.0, __cplusplus = 202101] https://releases.llvm.org/
 e:
 cd E:\Codes\CodesOnWin\CodesOnWin\Cpps\CppStudy\forward
 .\run.bat
 
 
-//[20230201: gcc11.30, __cplusplus = 202100]
+//[20230627: gcc11.4.0, __cplusplus = 202100]
 cd e: && cd Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/forward
 ./run.sh
 
@@ -55,6 +55,13 @@ cd e: && cd Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/forward
 
 
 /* =========== Good Book
+
+
+[cmake https://cmake.org/cmake/help/latest/guide/tutorial/index.html]
+
+
+
+
 Effective C++【V2-OK】
 Effective STL【】
 Effective Modern C++

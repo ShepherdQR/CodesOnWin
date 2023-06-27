@@ -5,6 +5,7 @@ _Pragma("once");
 #include <iostream>
 #include <functional>
 #include <memory>
+#include <limits>
 
 namespace Basic{
 
@@ -73,8 +74,8 @@ namespace Basic{
     }
 
     auto func_67(){
-        __int8 x{16};
-        __int16 y{57};
+        int8_t x{16};
+        int16_t y{57};
         std::cout << x << ", " << y << std::endl;
 
         auto l = []{return *(new int{3});};
@@ -175,13 +176,13 @@ namespace Basic{
                 pA = up.get();
                 // std::string* str = static_cast<std::string*>(pA); // error: static_cast from 'A *' to 'std::string *', which are not related by inheritance, is not allowed
                 
-                std::string* str = (std::string*)pA;// wild pointer
+                [[maybe_unused]]std::string* str = (std::string*)pA;// wild pointer
             }
             pA = nullptr; // dangling pointer
         }
 
         {
-            constexpr int i{10};
+            [[maybe_unused]]constexpr int i{10};
             constexpr struct A{
                 int i{10};
                 constexpr A():i{11}{}
@@ -274,8 +275,8 @@ namespace Basic{
     auto func_62(){
         // long long, more than 64 bit
 
-        unsigned long long l1 = ULLONG_MAX;//18446744073709551615
-        long long l2 = LLONG_MAX; //9223372036854775807 
+        unsigned long long l1 = std::numeric_limits<unsigned long long>::max();//18446744073709551615
+        long long l2 = std::numeric_limits<long long>::max(); //9223372036854775807 
 
         printf("%llu\n", l1);
         printf("%lld\n", l2);

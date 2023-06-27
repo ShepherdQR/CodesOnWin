@@ -1,20 +1,47 @@
 /* ===========
 //  * Author: Shepherd Qirong
-//  * Date: 2022-06-08 21:36:02
+//  * Date: 2023-06-27 23:00:16
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-06-08 23:28:48
+//  * LastEditTime: 2023-06-27 23:19:13
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
+#include "../interface/SinglyLinkedList.h"
+#include <stack>
+using namespace std;
 
-#include"Algorithm_DataStructure.h"
-#include<stack>
-
-
-
-namespace Algorithm_DataStructure
+namespace Algorithm::DataStructure
 {
+
+    void SinglyLinkedList::test(){
+        puts("Test Basic.\n");
+        SinglyLinkedList a({1, 2, 3, 4, 5});
+        a.display();
+        a.reverse();
+        a.display();
+
+        printf("Test Algorithm 01.\n");
+        dumpVector(
+            SinglyLinkedList::algorithm_1_IntersectionOf2List(
+                SinglyLinkedList({1, 2, 3, 4, 5}), SinglyLinkedList({0, 2, 3, 3, 5})));
+
+        printf("Test Algorithm 02_1.\n");
+        std::cout << SinglyLinkedList::algorithm_2_JudgePalindrome_1({1, 2, 3, 4, 5}) << ", "
+             << SinglyLinkedList::algorithm_2_JudgePalindrome_1({1, 2, 3, 9, 2, 1}) << ", "
+             << SinglyLinkedList::algorithm_2_JudgePalindrome_1({1, 2, 3, 2, 1}) << std::endl; // 0,0,1
+
+        printf("Test Algorithm 02_2.\n");
+
+        SinglyLinkedList aA2_2_a({1, 2, 3, 4, 5});
+        SinglyLinkedList aA2_2_b({1, 2, 3, 3, 2, 1});
+        std::cout << SinglyLinkedList::algorithm_2_JudgePalindrome_2(aA2_2_a) << ", "
+             << SinglyLinkedList::algorithm_2_JudgePalindrome_2(aA2_2_b) << ", "
+             << SinglyLinkedList::algorithm_2_JudgePalindrome_2({1, 2, 3, 2, 1}) << std::endl; // 0,1,1
+        aA2_2_a.display();
+        aA2_2_b.display();
+    }
+
 
     vector<int> SinglyLinkedList::algorithm_1_IntersectionOf2List(const SinglyLinkedList& ia, const SinglyLinkedList& ib){
 
@@ -121,5 +148,3 @@ namespace Algorithm_DataStructure
     }
 
 }
-
-
