@@ -3,24 +3,39 @@
 //  * Date: 2022-07-10 22:23:22
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-06-27 22:31:30
+//  * LastEditTime: 2023-07-02 09:12:01
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
-
 // testFF means test forward function
 
 /* ===========
 -std=c++2b -O0
-
 /std:c++latest
 /std:c++20
 
+
+////
+/////   1. CMAKE
+////
+
+//pacman -S mingw64/mingw-w64-x86_64-clang
+// [20230702: MSYS, __cplusplus = 202100;202101]
+// [cmake3.26.4, gcc11.3.0,clang 16.0.5]
+cd e: && cd E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy
+bash ./run.sh
+
+
 // [20230627: cmake, cmake_3_27, __cplusplus = 202101]
-// [BASED ON clang++]
+// [with clang++202101, or g++202100]
 e:
 cd E:\Codes\CodesOnWin\CodesOnWin\Cpps\CppStudy
 .\run.bat
 
+
+
+////
+/////   2. RAW
+////
 
 //[20230627: clang16.0.0, __cplusplus = 202101] https://releases.llvm.org/
 e:

@@ -4,10 +4,12 @@
 @echo off
 cls
 cd build
-cmake ..
+@REM cmake -G "MSYS Makefiles" ..
+cmake -G "MinGW Makefiles" ..
 cmake --build .
-:: cmake -G "MinGW Makefiles" ..
-:: mingw32-make
+@REM cmake -G "MinGW Makefiles" ..
+@REM mingw32-make
+
 ::cmake -G "NMake Makefiles" ..
 ::nmake
 main.exe

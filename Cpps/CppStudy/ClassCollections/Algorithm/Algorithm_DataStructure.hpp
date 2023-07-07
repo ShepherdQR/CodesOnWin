@@ -3,7 +3,7 @@
 //  * Date: 2022-06-03 20:31:04
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-06-27 23:24:29
+//  * LastEditTime: 2023-07-01 21:36:44
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -21,20 +21,6 @@ namespace Algorithm_DataStructure
      2）OredredTable，按Key维持有序，key需要可以比较。增删改查时间复杂度是O(logN)红黑树、AVL树、Size-Balance-Tree、跳表。
 
      */
-
-    inline auto display(const std::vector<int>& ivec){
-        for(auto cur:ivec){
-            std::cout << cur << ", ";
-        }std::cout << std::endl;
-    }
-
-    auto test11()->void{
-        Algorithm::DataStructure::SinglyLinkedList a{1};
-        Algorithm::DataStructure::SinglyLinkedList r5{1};
-        Algorithm::DataStructure::SinglyLinkedList::test();
-    }
-
-
 
     class Heap{
     public:
@@ -67,7 +53,7 @@ namespace Algorithm_DataStructure
         }
 
         void display(){
-            Algorithm_DataStructure::display(_vec);
+            Algorithm::dumpVector(_vec);
         }
         Heap(Type iType, const std::vector<int>& ivec){
             _typeIsGreater = iType;

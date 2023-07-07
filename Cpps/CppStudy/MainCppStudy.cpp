@@ -3,17 +3,18 @@
 //  * Date: 2021-01-10 10:59:00
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-06-27 23:44:47
+//  * LastEditTime: 2023-07-02 09:13:38
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
 #include <iostream>
 
+#include"./ClassCollections/Algorithm/Algorithm.hpp"
 
 #include"./ClassCollections/AlgorithmStudy.hpp"
 
 //#include"../Universe\Mathematics\test\testBasic.h"
-#include "./Universe/Algorithm/interface/Algorithm_DataStructure.h"
+//#include "./Algorithm/Algorithm_DataStructure.h"
 
 
 #include"./ClassCollections/Algorithm_Sort.hpp"
@@ -41,7 +42,7 @@
 using namespace std;
 int main() {
 
-	std::cout <<__cplusplus <<std::endl;//20220411, c++17
+	std::cout << std::endl << std::endl <<__cplusplus <<std::endl;//20220411, c++17
 	std::cout << "Hi<" << std::endl;
 
 	#include"TestStudy.hpp"

@@ -3,7 +3,7 @@
 //  * Date: 2022-07-10 22:03:35
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-06-27 21:47:53
+//  * LastEditTime: 2023-07-02 09:13:08
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 #include<iostream>
@@ -49,8 +49,7 @@ auto main()->int{
 
     // #endif
     // std::cout << ibCompile_YESGNUC11_3__and_NOclang15_0 << std::endl;
-    
-    std::cout <<__cplusplus <<std::endl;
+    std::cout << std::endl << std::endl <<__cplusplus <<std::endl;
 	std::cout << "Hi<" << std::endl;
 
     #include"TestFF.hpp"

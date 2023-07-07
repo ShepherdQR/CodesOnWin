@@ -3,7 +3,7 @@
 //  * Date: 2021-07-25 19:49:16
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-06-27 23:24:37
+//  * LastEditTime: 2023-07-01 21:33:56
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -22,7 +22,9 @@ cd E:\Codes\CodesOnWin\CodesOnWin\Cpps\CppStudy
     //P7,1-35
     // Algorithm_Search::test();
     
-    Algorithm_DataStructure::test11();//Algorithm_DataStructure::test_Heap();
+    Algorithm::test();
+
+    //Algorithm_DataStructure::fff2();//Algorithm_DataStructure::test_Heap();
 
     // Algorithm_Sort::test();
     //algorithm003();

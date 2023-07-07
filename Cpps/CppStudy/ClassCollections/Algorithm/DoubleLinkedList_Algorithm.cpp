@@ -1,22 +1,16 @@
 /* ===========
 //  * Author: Shepherd Qirong
-//  * Date: 2022-06-08 21:36:02
+//  * Date: 2023-07-07 22:21:42
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-06-27 23:01:31
+//  * LastEditTime: 2023-07-07 22:43:04
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
+#include "DoubleLinkedList.h"
+#include <iostream>
 
 
-#include "Algorithm_DataStructure.h"
-
-
-
-
-namespace Algorithm_DataStructure
+namespace Algorithm::DataStructure
 {
 
-
 }
-
-
