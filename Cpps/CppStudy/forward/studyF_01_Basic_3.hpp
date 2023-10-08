@@ -6,6 +6,7 @@ _Pragma("once");
 #include <functional>
 #include <memory>
 #include <limits>
+#include <ranges>
 
 namespace Basic{
 
@@ -14,6 +15,8 @@ namespace Basic{
 
 
     }
+
+
 
     namespace np_func_68{
 

@@ -3,7 +3,7 @@
 //  * Date: 2022-07-10 22:23:22
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-07-02 09:12:01
+//  * LastEditTime: 2023-09-12 22:07:01
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 // testFF means test forward function
@@ -19,8 +19,8 @@
 ////
 
 //pacman -S mingw64/mingw-w64-x86_64-clang
-// [20230702: MSYS, __cplusplus = 202100;202101]
-// [cmake3.26.4, gcc11.3.0,clang 16.0.5]
+// [20230827: MSYS, __cplusplus = 202100;202101]
+// [cmake3.26.4, gcc13.1.0,clang 16.0.5]
 cd e: && cd E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy
 bash ./run.sh
 
@@ -55,11 +55,11 @@ cd e: && cd Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/forward
     //LeetCode::Solution_1124::Solution::test();
 
     
-    Basic::func_68(); // studyF_0x
+    //Basic::func_69(); // studyF_0x
 
     //Template::func_10();
     //template_Variadic::func_1();
-    //Thread::func_5();
+    Thread::func_7();
 
     //STL::func_8();
     //Module::func_1();

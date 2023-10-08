@@ -3,7 +3,7 @@
 //  * Date: 2022-09-16 21:36:04
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2022-09-16 23:10:33
+//  * LastEditTime: 2023-09-18 20:39:44
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -17,6 +17,13 @@
 #include <atomic>
 #include <iostream>
 #include <condition_variable>
+#include <memory>
+#include <limits>
+#include <ranges>
+#include <thread>
+#include <mutex>
+#include <chrono>
+#include <numeric>
 
 namespace Thread{
 
@@ -29,6 +36,195 @@ namespace Thread{
         */
 
     }
+
+    auto func_7()
+    {
+
+        if (1 & 0)
+        {
+
+            std::list<int> list;
+            std::mutex mm;
+            auto val{10};
+
+            auto l1 = [&]
+            {
+                std::lock_guard g{mm};
+                list.emplace_back(val);
+            };
+            auto l2 = [&]
+            {
+                std::scoped_lock g{mm};
+                if(std::ranges::find(list, val)!= list.end())
+                {
+                    list.erase(list.begin());
+                }
+            };
+            auto g = [&](auto&& F){
+                for(auto vv = std::views::iota(1,100)){
+                    F();
+                }
+            };
+        }
+    }
+
+    auto func_6(){
+        using namespace std::literals;
+
+        if(0 & 20230829)
+        {
+            auto i{10};
+            auto l = [&i]{ std::cout << ++i << std::endl;};
+            std::thread t{l};
+            l();
+            t.join();
+        }
+
+        if(0 & 20230829)
+        {
+            struct A{
+                auto operator()()const{
+                    puts("hi20230829");
+                }
+            };
+            std::thread t{A{}};
+            t.join();
+            std::jthread jt{A{}};
+        }
+
+        if(0 & 20230829)
+        {
+            auto i{10};
+            auto l = [&i]{ std::cout << ++i << std::endl;};
+            auto m = [](auto ii){ std::cout << ++ii << std::endl;};
+            std::jthread t1{m, std::ref(i)}; // 11
+            std::jthread t2{m, i}; // 12
+            l(); // 12
+        }
+
+        if(10 & 20230830)
+        {
+
+            if(0){
+                auto i{10};
+
+                struct A{
+                    virtual void f(){puts("hi A");}
+                };
+                struct B: public A{
+                    virtual void f(){puts("hi B");}
+                };
+
+                A a;
+                B b;
+                {std::jthread t{&A::f, &a};} // hi A
+                {std::jthread t{&A::f, &b};} // hi B
+                {std::jthread t{&B::f, &b};} // hi B
+            }
+
+            if(0){
+
+                auto l = []{
+                    for(auto i : std::views::iota(1,6)){
+                        std::cout << i << std::endl;
+                        std::this_thread::sleep_for(500ms);
+                    }
+                };
+
+                std::jthread t1{l}, t2, t3; // thread starts from here
+                puts("hi 1");
+                std::this_thread::sleep_for(1000ms);
+                t2 = std::move(t1);
+                puts("hi 2");
+                std::this_thread::sleep_for(1000ms);
+                t2 = [](auto&& i){return std::move(i);}(t2);
+                t3 = [](auto&& i){return std::move(i);}(t2);
+
+                const auto numberMax{std::thread::hardware_concurrency()}; // 8
+                std::cout << numberMax << std::endl;
+
+            }
+
+            if(0 & 1){
+                const std::vector ll{1,2,3,4,5};
+                auto head = ll.cbegin();
+                std::advance(head, 20);
+                if(head == ll.cend()){
+                    puts("hi 1");
+                }else if(head > ll.cend()){
+                    std::cout << std::distance(head, ll.cend());
+                }
+            }
+        }
+
+        if(20230904){
+
+            if(0 & 1){
+                auto l = []<typename Iterator>
+                (Iterator first, Iterator last){
+
+                    typedef typename Iterator::value_type T;
+
+                    auto ll = [](Iterator f1, Iterator f2, T& o){
+                        o = std::accumulate(f1, f2, o);
+                    };
+
+                    const auto numberThreadHardware = std::thread::hardware_concurrency();
+                    const auto numberThread = numberThreadHardware - 1;
+
+                    const auto length = std::distance(first, last);
+                    const auto blockSize = length / numberThread;
+                    // std::cout << numberThread << ", " << blockSize << std::endl;
+
+                    std::vector<T> result(numberThread);
+
+                    std::vector<std::jthread> vecThread;
+                    vecThread.reserve(numberThread);
+
+                    auto blockHead = first;
+                    for(auto i{0}; i<numberThread; ++i){
+                        auto blockTail = blockHead;
+                        std::advance(blockTail, blockSize);
+                        // vecThread[i] = std::jthread{
+                        //     ll, blockHead, blockTail, std::ref(result[i])
+                        // };
+                        vecThread.emplace_back(
+                            ll, blockHead, blockTail, std::ref(result[i])
+                        );
+                        blockHead = blockTail;
+                    }
+                    ll(blockHead, last, result[numberThread-1]);
+
+                    // for(auto& cur: vecThread){
+                    //     cur.join();
+                    // }
+
+                    // for(auto cur:result ){
+                    //     std::cout << cur << std::endl;
+                    // }
+
+                  
+                    auto out{0};
+                    return std::accumulate(result.begin(), result.end(), out);
+                };
+
+                {
+                    //std::vector<int> vv(10000);
+                    //std::iota(vv.begin(), vv.end(),0);
+
+                    auto vv = std::views::iota(1,1000);
+                    //std::cout << vv[22] << ", " << vv.size() << std::endl;
+                   
+                    std::cout << std::this_thread::get_id() << std::endl;
+                    std::cout << l(vv.begin(), vv.end()) << std::endl;
+                }
+            }
+
+        }
+
+    }
+
+
 
     auto func_5(){
 

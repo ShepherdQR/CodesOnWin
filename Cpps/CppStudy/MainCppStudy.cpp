@@ -3,7 +3,7 @@
 //  * Date: 2021-01-10 10:59:00
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-07-02 09:13:38
+//  * LastEditTime: 2023-08-19 19:55:45
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -39,6 +39,8 @@
 
 #include"../Universe\Mathematics\test\testBasic.h"
 
+
+
 using namespace std;
 int main() {
 
@@ -51,7 +53,9 @@ int main() {
 	//#include "TestRayTracing.hpp"
 
 
-
+// #define ffff ()  int
+// ffff ()  a = 3;
+// std::cout << a << std::endl;
 
 	// int x = 2;
 	// //func([=](const int& iX){return iX * iX;}(x));
