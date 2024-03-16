@@ -3,7 +3,7 @@
 //  * Date: 2022-07-10 22:23:22
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-09-12 22:07:01
+//  * LastEditTime: 2024-02-02 18:54:32
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 // testFF means test forward function
@@ -55,11 +55,13 @@ cd e: && cd Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/forward
     //LeetCode::Solution_1124::Solution::test();
 
     
-    //Basic::func_69(); // studyF_0x
+    Basic::func_69(); // studyF_0x
 
     //Template::func_10();
     //template_Variadic::func_1();
-    Thread::func_7();
+    // Thread::func_7();
+
+    //Solution::testSolution();
 
     //STL::func_8();
     //Module::func_1();

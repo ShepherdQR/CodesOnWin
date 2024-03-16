@@ -3,7 +3,7 @@
 //  * Date: 2023-07-07 22:21:53
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-07-11 21:52:09
+//  * LastEditTime: 2024-02-02 22:22:32
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -13,6 +13,7 @@
 
 namespace Algorithm::DataStructure
 {
+
     auto DoubleLinkedList::test(){
         puts("Test Basic.\n");
         std::cout << std::format("Hello {}!\n", "world");

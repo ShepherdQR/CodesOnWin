@@ -3,7 +3,7 @@
 //  * Date: 2022-09-16 21:36:04
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-09-18 20:39:44
+//  * LastEditTime: 2023-10-25 21:02:29
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -61,9 +61,9 @@ namespace Thread{
                 }
             };
             auto g = [&](auto&& F){
-                for(auto vv = std::views::iota(1,100)){
-                    F();
-                }
+                // for(auto vv = std::views::iota(1,100)){
+                //     F();
+                // }
             };
         }
     }

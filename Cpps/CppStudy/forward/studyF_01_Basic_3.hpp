@@ -16,6 +16,37 @@ namespace Basic{
 
     }
 
+    namespace np_func_69{
+        class A{
+            int _a{1};
+            friend struct B;
+        };
+
+        struct B{
+            B(){std::cout << A()._a << std::endl;}
+        };
+    }
+
+    auto func_69(){
+        
+        if(20240202) {
+            np_func_69::B _;
+        }
+
+        if(20240202) {
+            auto l = []<typename T>{
+                if(std::is_same<T, int>::value){
+                    return 2;
+                } else if(std::is_same<T, double>::value){
+                    return 3;
+                }
+            };
+
+            std::cout << l.operator()<int>() << std::endl;
+            std::cout << l.operator()<double>() << std::endl;
+        }
+    }
+
 
 
     namespace np_func_68{
