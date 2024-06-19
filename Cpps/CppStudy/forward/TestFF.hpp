@@ -3,7 +3,7 @@
 //  * Date: 2022-07-10 22:23:22
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2024-02-02 18:54:32
+//  * LastEditTime: 2024-06-19 23:47:22
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 // testFF means test forward function
@@ -25,8 +25,8 @@ cd e: && cd E:/Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy
 bash ./run.sh
 
 
-// [20230627: cmake, cmake_3_27, __cplusplus = 202101]
-// [with clang++202101, or g++202100]
+// [20240615: cmake, cmake_3_27, __cplusplus = 202101]
+// [with clang 202400, or g++202100]
 e:
 cd E:\Codes\CodesOnWin\CodesOnWin\Cpps\CppStudy
 .\run.bat
@@ -37,13 +37,13 @@ cd E:\Codes\CodesOnWin\CodesOnWin\Cpps\CppStudy
 /////   2. RAW
 ////
 
-//[20230627: clang16.0.0, __cplusplus = 202101] https://releases.llvm.org/
+//[20240516: clang18.1.6, __cplusplus = 202302] https://releases.llvm.org/
 e:
 cd E:\Codes\CodesOnWin\CodesOnWin\Cpps\CppStudy\forward
 .\run.bat
 
 
-//[20230627: gcc11.4.0, __cplusplus = 202100]
+//[20240615: gcc11.4.0, __cplusplus = 202100]
 cd e: && cd Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/forward
 ./run.sh
 
@@ -55,7 +55,8 @@ cd e: && cd Codes/CodesOnWin/CodesOnWin/Cpps/CppStudy/forward
     //LeetCode::Solution_1124::Solution::test();
 
     
-    Basic::func_69(); // studyF_0x
+    // Basic::func_71(); // studyF_0x
+    CPPWeekly::func_001();
 
     //Template::func_10();
     //template_Variadic::func_1();

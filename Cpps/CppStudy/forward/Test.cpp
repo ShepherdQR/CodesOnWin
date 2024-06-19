@@ -3,7 +3,7 @@
 //  * Date: 2022-07-10 22:03:35
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-10-25 21:04:34
+//  * LastEditTime: 2024-06-16 11:04:57
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 #include<iostream>
@@ -12,6 +12,10 @@
 ////////////
 //import studyF_Module;
 #include<iostream>
+
+#include"../ClassCollections/OO/ClassMyString.h"
+
+
 #include"studyF_01_Basic.hpp"
 
 #include"studyF_04_Thread.hpp"

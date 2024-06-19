@@ -3,7 +3,7 @@
 //  * Date: 2023-10-25 20:59:09
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-11-05 23:26:45
+//  * LastEditTime: 2024-06-15 14:45:46
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 #pragma once
@@ -48,7 +48,7 @@ public:
         auto indexMax{10};
         int indexCur{0};
         int out{0};
-        bool flagAlready{false};
+        [[maybe_unused]]bool flagAlready{false};
         bool flagSign{true};
         const int max1 = 2147483647;
         const int max11 = 214748364;

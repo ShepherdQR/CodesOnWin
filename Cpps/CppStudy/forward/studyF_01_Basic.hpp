@@ -3,7 +3,7 @@
 //  * Date: 2022-07-10 22:08:32
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-03-28 20:05:18
+//  * LastEditTime: 2024-06-19 23:46:08
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 _Pragma("once");
@@ -11,6 +11,7 @@ _Pragma("once");
 //#include "studyF_01_Basic_1.hpp"
 //#include"studyF_01_Basic_2.hpp"
 #include"studyF_01_Basic_3.hpp"
+#include"studyF_02_CPPWeekly_1.hpp"
 
 
 //clang -std=c++2b

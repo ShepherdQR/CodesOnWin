@@ -3,15 +3,15 @@
 //  * Date: 2021-08-23 22:26:34
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2021-08-23 22:58:59
+//  * LastEditTime: 2024-06-15 17:02:00
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 #pragma once
 #include <iostream>
 
-class ClassMyString{
+class __declspec(dllexport) ClassMyString{
 public:
-    ClassMyString(const char* ipString = nullptr);
+    explicit ClassMyString(const char* ipString = nullptr);
     ~ClassMyString();
 
     ClassMyString(const ClassMyString& iString);
@@ -20,11 +20,13 @@ public:
 
     char* getStr() const{ return _pString;}
 
+    static void test();
+
 private:
     char* _pString;
-
 };
 
+inline
 std::ostream& operator<<(std::ostream& os, const ClassMyString& iString)
 {
     os << iString.getStr();

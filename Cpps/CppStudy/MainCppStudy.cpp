@@ -3,7 +3,7 @@
 //  * Date: 2021-01-10 10:59:00
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-08-19 19:55:45
+//  * LastEditTime: 2024-06-16 11:33:04
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -23,8 +23,10 @@
 #include"./ClassCollections/StudyCollection_01.hpp"
 #include"./RayTracing/Picture.h"
 
-
 #include "./ClassCollections/CasesCollection_01.hpp"
+
+//#include"./forward/TestFF.hpp"
+
 
 #include <vector>
 #include <cstring>
@@ -41,13 +43,33 @@
 
 
 
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+//#include"../ClassCollections/OO/ClassMyString.h"
+#include"../ClassCollections/OO/ClassMyComplex.h"
+
+
+#include"studyF_01_Basic.hpp"
+
+#include"studyF_04_Thread.hpp"
+
+#include"../ClassCollections/Solution/Solution_002.hpp"
+//#include"studyF_02_Template.hpp"
+//#include"studyF_03_STL.hpp"
+
+#include"../../myTools/Parser.h"
+
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+
 using namespace std;
 int main() {
 
 	std::cout << std::endl << std::endl <<__cplusplus <<std::endl;//20220411, c++17
 	std::cout << "Hi<" << std::endl;
 
-	#include"TestStudy.hpp"
+	//#include"TestStudy.hpp"
+	#include"./forward/TestFF.hpp"
 	
 
 	//#include "TestRayTracing.hpp"

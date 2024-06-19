@@ -8,6 +8,7 @@ _Pragma("once");
 #include <limits>
 #include <ranges>
 
+
 namespace Basic{
 
 
@@ -16,7 +17,14 @@ namespace Basic{
 
     }
 
+    auto func_71(){
+        //ClassMyString::test();
+        namespaceClassMyComplex::test();
+    }
+
     namespace np_func_69{
+
+        struct B;
         class A{
             int _a{1};
             friend struct B;
@@ -25,6 +33,15 @@ namespace Basic{
         struct B{
             B(){std::cout << A()._a << std::endl;}
         };
+    }
+
+    auto func_70(){
+        int a = 0b0000;
+        std::cout << a << std::endl;
+        std::cout <<(a| (1<<1) )  << std::endl;
+
+
+
     }
 
     auto func_69(){

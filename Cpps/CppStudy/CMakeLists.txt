@@ -3,7 +3,7 @@
 #  * @Date: 2021-06-14 22:17:32
 #  * @Github: https://github.com/ShepherdQR
 #  * @LastEditors: Shepherd Qirong
-#  * @LastEditTime: 2023-07-02 08:56:00
+#  * @LastEditTime: 2024-06-15 16:56:19
 #  * @Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 #************
 
@@ -24,9 +24,9 @@ cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
 
 # add_compile_options(-std=c++2b)
 
-set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD 26)
 set(CMAKE_C_COMPILER "clang")
-set(CMAKE_CXX_COMPILER "clang++")
+set(CMAKE_CXX_COMPILER "clang")
 
 #set(CMAKE_C_COMPILER "gcc")
 #set(CMAKE_CXX_COMPILER "g++")
@@ -34,6 +34,23 @@ message("-- CMAKE_CXX_COMPILER: ${CMAKE_CXX_COMPILER}")
 # message("-- CMAKE_CXX_COMPILER_VERSION: ${CMAKE_CXX_COMPILER_VERSION}")
 
 PROJECT(CppStudy VERSION 1.0)
+
+
+
+#设置可执行文件到bin文件夹下
+set(EXECUTE_FILE ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${EXECUTE_FILE})
+
+# 设置静态库到lib文件夹下
+set(LIB_FILE ${CMAKE_BINARY_DIR}/lib)
+set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${LIB_FILE})
+
+
+
+add_subdirectory(
+    ./ClassCollections
+)
+
 
 #add_compile_options(-fcoroutines)
 #set(CMAKE_CXX_STANDARD 20)
@@ -53,11 +70,13 @@ PROJECT(CppStudy VERSION 1.0)
 # target_link_libraries (a b c)
 
 include_directories(./ClassCollections)
+include_directories(./ClassCollections/include)
 include_directories(./ClassCollections/Algorithm)
 include_directories(./RayTracing)
 include_directories(../myTools)
 include_directories(../Universe/Mathematics/basic)
 include_directories(../Universe/Mathematics/test)
+include_directories(./forward)
 #include_directories(./Algorithm)
 
 #include_directories(./Universe/Algorithm/src)
@@ -71,13 +90,18 @@ list (APPEND list_cpp_executable  *.cpp)
 
 # list (APPEND list_cpp_shared  ../Universe/Algorithm/src/*.cpp)
 
+list (APPEND cpp_executable  ./ClassCollections/*.h)
 list (APPEND cpp_executable  ./ClassCollections/*.cpp)
 list (APPEND cpp_executable  ./ClassCollections/Algorithm/*.cpp)
 list (APPEND cpp_executable  ./RayTracing/*.cpp)
 file(GLOB cpp_executable ${list_cpp_executable})
 
+
+
+
+
 add_executable(main ${cpp_executable} )
-# target_link_libraries(main ) #algorithm
+target_link_libraries(main test_message) #algorithm
 
 
 ################################

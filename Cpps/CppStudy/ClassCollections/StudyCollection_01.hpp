@@ -3,7 +3,7 @@
 //  * Date: 2021-06-14 22:43:42
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-03-02 22:17:13
+//  * LastEditTime: 2024-06-15 15:52:19
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -151,8 +151,8 @@ auto func20220604_1(){
 
     //3. 
     auto lambdaAdd = [](int a, int b){ return a + b; };
-    [_ = std::ref(std::cout << lambdaAdd(1,2))]{
-        _.get()<< std::endl;
+    [_2 = std::ref(std::cout << lambdaAdd(1,2))]{
+        _2.get()<< std::endl;
     }();
 
     std:cout << std::is_same<decltype(NULL), decltype(nullptr)>::value << std::endl;//0

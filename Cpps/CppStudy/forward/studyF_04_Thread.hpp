@@ -3,7 +3,7 @@
 //  * Date: 2022-09-16 21:36:04
 //  * Github: https://github.com/ShepherdQR
 //  * LastEditors: Shepherd Qirong
-//  * LastEditTime: 2023-10-25 21:02:29
+//  * LastEditTime: 2024-06-15 14:44:20
 //  * Copyright (c) 2019--20xx Shepherd Qirong. All rights reserved.
 */
 
@@ -24,6 +24,7 @@
 #include <mutex>
 #include <chrono>
 #include <numeric>
+#include <list>
 
 namespace Thread{
 
@@ -39,6 +40,7 @@ namespace Thread{
 
     auto func_7()
     {
+        using namespace std;
 
         if (1 & 0)
         {
@@ -47,12 +49,12 @@ namespace Thread{
             std::mutex mm;
             auto val{10};
 
-            auto l1 = [&]
+           [[maybe_unused]] auto l1 = [&]
             {
                 std::lock_guard g{mm};
                 list.emplace_back(val);
             };
-            auto l2 = [&]
+            [[maybe_unused]] auto l2 = [&]
             {
                 std::scoped_lock g{mm};
                 if(std::ranges::find(list, val)!= list.end())
@@ -60,7 +62,7 @@ namespace Thread{
                     list.erase(list.begin());
                 }
             };
-            auto g = [&](auto&& F){
+             [[maybe_unused]] auto g = [&](auto&& F){
                 // for(auto vv = std::views::iota(1,100)){
                 //     F();
                 // }
@@ -74,7 +76,7 @@ namespace Thread{
         if(0 & 20230829)
         {
             auto i{10};
-            auto l = [&i]{ std::cout << ++i << std::endl;};
+             auto l = [&i]{ std::cout << ++i << std::endl;};
             std::thread t{l};
             l();
             t.join();
@@ -106,7 +108,7 @@ namespace Thread{
         {
 
             if(0){
-                auto i{10};
+                [[maybe_unused]] auto i{10};
 
                 struct A{
                     virtual void f(){puts("hi A");}
@@ -182,7 +184,7 @@ namespace Thread{
                     vecThread.reserve(numberThread);
 
                     auto blockHead = first;
-                    for(auto i{0}; i<numberThread; ++i){
+                    for(size_t i{0}; i<numberThread; ++i){
                         auto blockTail = blockHead;
                         std::advance(blockTail, blockSize);
                         // vecThread[i] = std::jthread{
